@@ -1,0 +1,17 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: "Montserrat";
+  src: url("./fonts/montserrat.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Boruna";
+  src: url("./fonts/BorunaDemoVersionRegular.otf") format("opentype");
+}
+@font-face {
+  font-family: "Cerotta";
+  src: url("./fonts/CerottaPersonalUseOnly-0vW5d.otf") format("opentype");
+}
