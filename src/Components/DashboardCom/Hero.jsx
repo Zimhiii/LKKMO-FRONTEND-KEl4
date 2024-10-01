@@ -5,7 +5,7 @@ export default function Hero() {
   return (
     <div className="bg-[#F2F2F2] w-full md:rounded-b-[80px] mb-[35px] md:mb-[142px]">
       <div className="w-full flex  justify-center items-center rounded-b-md">
-        <div className="w-7/12 flex flex-col items-center">
+        <div className="w-7/12 flex flex-col items-center ">
           <h1 className="text-[16px] lg:text-[53px] md:text-[43px] font-cerotta">
             SELAMAT DATANG DI
           </h1>

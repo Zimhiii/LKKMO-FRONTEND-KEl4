@@ -5,6 +5,7 @@ import GuestLayout from "./Layouts/GuestLayout";
 import Dashboard from "./Pages/Dashboard";
 import DefaultLayout from "./Layouts/DefaultLayout";
 import TestApi from "./Pages/TestApi";
+import PaymentPage from "./Pages/PaymentPage";
 
 export const route = createBrowserRouter([
   {
@@ -18,6 +19,10 @@ export const route = createBrowserRouter([
       {
         path: "testApi",
         element: <TestApi />,
+      },
+      {
+        path: "payment",
+        element: <PaymentPage />,
       },
     ],
   },
