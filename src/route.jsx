@@ -4,6 +4,7 @@ import SignupPage from "./Pages/SignupPage";
 import GuestLayout from "./Layouts/GuestLayout";
 import Dashboard from "./Pages/Dashboard";
 import CategoryPage from "./Pages/CategoryPage";
+import ProductPage from "./Pages/ProductPage";
 import DefaultLayout from "./Layouts/DefaultLayout";
 import TestApi from "./Pages/TestApi";
 
@@ -19,6 +20,10 @@ export const route = createBrowserRouter([
       {
         path: "/category",
         element: <CategoryPage />,
+      },
+      {
+        path: "/product",
+        element: <ProductPage />,
       },
       {
         path: "testApi",
