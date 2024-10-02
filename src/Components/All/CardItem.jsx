@@ -1,8 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import { FaRegHeart } from "react-icons/fa";
 import { BiSolidCart } from "react-icons/bi";
 import { CiHeart } from "react-icons/ci";
-
 export default function CardItem({ classname = "" }) {
   return (
     <div>
@@ -13,6 +12,7 @@ export default function CardItem({ classname = "" }) {
           <div className="absolute px-[3px] py-[2px] md:p-[6px] text-[16px] md:text-[30px] top-0 -right-1 md:-top-4 md:-right-3 bg-white rounded-[6px] md:rounded-[14px] shadow-lg shadow-slate-500">
             <CiHeart className="  text-[#000000]" />
           </div>
+
           <div className="flex justify-center items-center">
             <img
               src="./cardImgEx.png"

@@ -1,9 +1,10 @@
 import React from "react";
 import Content from "../Components/CategoryComponents/Content";
-import { Outlet } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
-export default function CategoryPage() {
-  document.title = "CategoryPage";
+export default function SubCategoryPage() {
+  const { subcategory } = useParams();
+  document.title = "subCategoryPage - " + subcategory;
   return (
     <div>
       <div className="flex flex-col items-center text-center bg-[#D9D9D9] pt-[86px] pb-[64px] rounded-b-[50px]">
@@ -18,13 +19,13 @@ export default function CategoryPage() {
       </div>
       <div className="">
         <p className="font-montserrat text-[14px] ml-[39px]">
-          <span className="text-[#666666]">Kategori{">"}</span> Cosplay
+          <span className="text-[#666666]">Kategori{">"}</span> Cosplay {"> "}{" "}
+          {subcategory}
         </p>
         <div className="px-[116px]">
-          <h1 className="font-cerotta text-[61px] text-center">Cosplay</h1>
-          <Content subcategory="anime" />
-          <Content subcategory="comic" />
-          <Content subcategory="game" />
+          <h1 className="font-cerotta text-[61px] text-center">
+            {subcategory}
+          </h1>
         </div>
       </div>
     </div>

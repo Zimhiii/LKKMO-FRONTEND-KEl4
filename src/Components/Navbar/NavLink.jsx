@@ -9,7 +9,7 @@ export default function NavLink() {
           Beranda
         </Link>
 
-        <Link to="/" className="text-[20px]">
+        <Link to="/category" className="text-[20px]">
           Kategori
         </Link>
         <Link to="/" className="text-[20px]">

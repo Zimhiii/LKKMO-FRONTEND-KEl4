@@ -1,4 +1,4 @@
-import { createBrowserRouter } from "react-router-dom";
+import { createBrowserRouter, Outlet } from "react-router-dom";
 import LoginPage from "./Pages/LoginPage";
 import SignupPage from "./Pages/SignupPage";
 import GuestLayout from "./Layouts/GuestLayout";
@@ -8,6 +8,8 @@ import ProductPage from "./Pages/ProductPage";
 import DefaultLayout from "./Layouts/DefaultLayout";
 import TestApi from "./Pages/TestApi";
 import PaymentPage from "./Pages/PaymentPage";
+import SubCategoryPage from "./Pages/SubCategoryPage";
+import NotFoundPage from "./Pages/NotFoundPage";
 
 export const route = createBrowserRouter([
   {
@@ -20,8 +22,23 @@ export const route = createBrowserRouter([
       },
       {
         path: "/category",
-        element: <CategoryPage />,
+        element: (
+          <div>
+            <Outlet />
+          </div>
+        ),
+        children: [
+          {
+            path: "",
+            element: <CategoryPage />,
+          },
+          {
+            path: ":subcategory",
+            element: <SubCategoryPage />,
+          },
+        ],
       },
+
       {
         path: "/product",
         element: <ProductPage />,
@@ -53,5 +70,9 @@ export const route = createBrowserRouter([
         element: <LoginPage />,
       },
     ],
+  },
+  {
+    path: "*",
+    element: <NotFoundPage />,
   },
 ]);

@@ -16,16 +16,19 @@ export default function Footer() {
 
           <h1 className="text-[12px] md:text-[20px]">Ur Style Ur Choice</h1>
         </div>
-        <div>
+        <div className="flex flex-col items-center md:items-start">
           <h1 className="text-[12px] md:text-[20px] font-bold ">
             Segera Kunjungi Gerai Kami
           </h1>
-          <p className="flex flex-col text-[10px] md:text-[20px] items-center">
-            <span>Jalan Abianyu Gang Sirih LK II</span> <span>Jagabaya I</span>{" "}
+          <p className="flex flex-col text-[10px] md:text-[20px] items-center md:items-start md:justify-start">
+            <span className="flex flex-col justify-center items-center md:flex-row ">
+              <span>Jalan Abianyu Gang Sirih LK II</span>{" "}
+              <span>Jagabaya I</span>{" "}
+            </span>
             <span>Buka Setiap Hari</span> <span>08.00 - 17.00</span>
           </p>
         </div>
-        <div className="flex flex-col items-center">
+        <div className="flex flex-col items-center md:justify-start md:items-start">
           <h1 className="text-[12px] font-bold md:text-[20px] ">
             Temukan Kami
           </h1>
