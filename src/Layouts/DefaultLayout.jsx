@@ -5,9 +5,12 @@ import Footer from "../Pages/Footer";
 
 const DefaultLayout = () => {
   return (
-    <div>
+    <div className="relative min-h-screen flex flex-col">
       <Navbar />
-      <Outlet />
+      <div className="flex-grow">
+        <Outlet />
+      </div>
+
       <Footer />
     </div>
   );

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { FaRegHeart } from "react-icons/fa";
+import cardImg from "../../Assets/cardImgEX.png";
 import { BiSolidCart } from "react-icons/bi";
 import { CiHeart } from "react-icons/ci";
 export default function CardItem({ classname = "" }) {
@@ -15,7 +16,7 @@ export default function CardItem({ classname = "" }) {
 
           <div className="flex justify-center items-center">
             <img
-              src="./cardImgEx.png"
+              src={cardImg}
               alt="Card"
               className="w-[82px] h-[99px] md:w-[231px] md:h-[278px]  filter contrast-125 brightness-110"
             />

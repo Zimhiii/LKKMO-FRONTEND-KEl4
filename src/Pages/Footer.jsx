@@ -3,7 +3,7 @@ import Logo from "../Components/Navbar/Logo";
 
 export default function Footer() {
   return (
-    <div className="font-montserrat text-[#736455] py-[15px] flex flex-col justify-between items-center gap-y-2 bg-[#D9D9D9] ">
+    <div className=" w-full font-montserrat text-[#736455] py-[15px] flex flex-col justify-between items-center gap-y-2 bg-[#D9D9D9] ">
       <div className="flex flex-col items-center justify-between gap-y-2 md:flex-row md:px-[72px] md:py-[70px] md:w-full">
         {" "}
         <div className="flex flex-col items-center">
