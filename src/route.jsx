@@ -10,6 +10,8 @@ import TestApi from "./Pages/TestApi";
 import PaymentPage from "./Pages/PaymentPage";
 import SubCategoryPage from "./Pages/SubCategoryPage";
 import NotFoundPage from "./Pages/NotFoundPage";
+import WishlistPage from "./Pages/WishlistPage";
+import HistoryPage from "./Pages/HistoryPage";
 
 export const route = createBrowserRouter([
   {
@@ -44,12 +46,20 @@ export const route = createBrowserRouter([
         element: <ProductPage />,
       },
       {
+        path: "/wishlist",
+        element: <WishlistPage />,
+      },
+      {
         path: "testApi",
         element: <TestApi />,
       },
       {
         path: "payment",
         element: <PaymentPage />,
+      },
+      {
+        path: "history",
+        element: <HistoryPage />,
       },
     ],
   },
