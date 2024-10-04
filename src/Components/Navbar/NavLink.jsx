@@ -26,7 +26,7 @@ export default function NavLink() {
             <FaCaretRight className="text-[25px] group-hover:rotate-90 transition-all duration-300" />
           </div>
 
-          <div className="bg-[#D6D6D6]  text-[20px] ring-1 ring-slate-950 hidden absolute group-hover:flex group-hover:flex-col group-hover:gap-[2px]  shadow-md shadow-slate-400 w-[200px]">
+          <div className="bg-[#D6D6D6]  text-[20px] ring-1 ring-slate-950 hidden absolute z-99 group-hover:flex group-hover:flex-col group-hover:gap-[2px]  shadow-md shadow-slate-400 w-[200px]">
             <Link
               to="/category/cosplay"
               className=" hover:bg-[#9e9e9e] py-[5px] px-[5px] "
