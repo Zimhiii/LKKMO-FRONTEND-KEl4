@@ -18,7 +18,7 @@ export default function CardItem({ classname = "" }) {
             <img
               src={cardImg}
               alt="Card"
-              className="w-[82px] h-[99px] md:w-[231px] md:h-[278px]  filter contrast-125 brightness-110"
+              className="w-[82px] h-[99px] md:w-[231px] md:h-[278px]  "
             />
           </div>
         </div>
