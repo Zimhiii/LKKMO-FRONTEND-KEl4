@@ -17,6 +17,7 @@ export default function HumbergerMenu() {
 
   // Toggle Menu
   const toggleMenu = () => {
+    setIsCategory(false);
     setIsMenuOpen(!isMenuOpen);
     if (!isMenuOpen) {
       document.body.classList.add("overflow-hidden");
@@ -136,7 +137,7 @@ export default function HumbergerMenu() {
             className="text-[25px] italic font-light text-[#ffffff] rounded-[10px] px-[60px] py-[10px] text-center hover:bg-[#96694d] hover:text-white"
             onClick={toggleMenu}
           >
-            Log Out
+            Sign Up
           </Link>
         </div>
       </div>

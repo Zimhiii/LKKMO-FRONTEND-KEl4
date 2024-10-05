@@ -21,13 +21,13 @@ export default function CategoryLayout() {
       </div>
 
       {/* Breadcrumb dengan params */}
-      <p className="font-montserrat text-[14px] ml-[39px]">
+      <p className="font-montserrat text-[8px] mt-[4px] md:text-[14px] ml-[12px] md:ml-[39px]">
         <span className="text-[#666666]">Kategori{">"}</span> {category}
         {subcategory && ` > ${subcategory}`}
       </p>
 
       {/* h1 untuk menampilkan title berdasarkan params terakhir */}
-      <h1 className="container-layout font-cerotta text-[61px] text-center px-[116px]">
+      <h1 className="container-layout font-cerotta text-[23px] md:text-[61px] text-center px-[116px]">
         {pageTitle}
       </h1>
 

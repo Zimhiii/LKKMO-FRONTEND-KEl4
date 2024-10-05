@@ -13,7 +13,7 @@ export default function NavSearch() {
         </span>
         <input
           className=" bg-transparent text-[10px] md:text-[20px] placeholder:text-white focus:outline-none focus:ring-0"
-          type="text"
+          type="search"
           placeholder="Cari Kostum kamu"
         />
       </form>

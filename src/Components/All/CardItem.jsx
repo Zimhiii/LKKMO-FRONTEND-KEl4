@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import { FaRegHeart } from "react-icons/fa";
-import cardImg from "../../Assets/cardImgEX.png";
+import cardImg from "../../assets/cardImgEX.png";
 import { BiSolidCart } from "react-icons/bi";
 import { CiHeart } from "react-icons/ci";
+import { useParams } from "react-router-dom";
 export default function CardItem({ classname = "" }) {
   return (
     <div>

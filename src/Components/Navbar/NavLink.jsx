@@ -38,7 +38,7 @@ export default function NavLink() {
               </div>
             </Link>{" "}
             <Link
-              to="/category/carnaval"
+              to="/category/karnaval"
               className="hover:bg-[#9e9e9e] py-[5px] px-[5px] "
             >
               <div className="flex justify-between items-center">

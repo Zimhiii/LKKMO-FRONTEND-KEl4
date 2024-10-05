@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Content from "../Components/CategoryComponents/Content";
 import { CiHeart } from "react-icons/ci";
+import cardImg from "../assets/cardImgEX.png";
 
 export default function CategoryPage() {
   const [count, setCount] = useState(0);
@@ -34,7 +35,7 @@ export default function CategoryPage() {
         <div className="mt-[24px] flex justify-center items-center w-[224px] h-[189px] bg-[#E8E7E7] rounded-[26px]">
           <img
             className="w-[135px] h-[177px] object-cover"
-            src="./cardImgEx.png"
+            src={cardImg}
             alt=""
           />
         </div>
