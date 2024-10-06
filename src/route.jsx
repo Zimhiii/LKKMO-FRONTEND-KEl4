@@ -12,6 +12,8 @@ import SubCategoryPage from "./Pages/SubCategoryPage";
 import NotFoundPage from "./Pages/NotFoundPage";
 import WishlistPage from "./Pages/WishlistPage";
 import HistoryPage from "./Pages/HistoryPage";
+import ProfilePage from "./Pages/ProfilePage";
+import PasswordPage from "./Pages/PasswordPage"
 
 export const route = createBrowserRouter([
   {
@@ -61,6 +63,14 @@ export const route = createBrowserRouter([
         path: "history",
         element: <HistoryPage />,
       },
+      {
+        path : "profile",
+        element: <ProfilePage />
+      },
+      {
+        path : "password",
+        element: <PasswordPage />
+      }
     ],
   },
   {

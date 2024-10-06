@@ -1,6 +1,6 @@
 import ButtonLogin from "../Components/LoginComponents/ButtonLogin";
 import FormSignUp from "../Components/LoginComponents/FormSignUp";
-import HeaderLogin from "../Components/LoginComponents/LoginHeade";
+import HeaderLogin from "../Components/LoginComponents/LoginHeader";
 import { useNavigate } from "react-router-dom";
 
 function SignupPage() {
