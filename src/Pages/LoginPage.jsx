@@ -32,19 +32,6 @@ function LoginPage() {
         </h1>
         <FormLogin />
 
-        <h3 className="text-[10px] border-b border-black text-center w-fit mx-auto mt-8">
-          Lupa Kata Sandi
-        </h3>
-
-        <div className="flex justify-center mt-3 ">
-          <button
-            onClick={toDashboard}
-            className="px-6 py-2 bg-[#BB8360] rounded-lg text-white font-medium text-sm shadow-md shadow-slate-400 "
-          >
-            Masuk
-          </button>
-        </div>
-
         <div className="flex justify-center items-center mt-8">
           <hr class="w-full border-t border-slate-600" />
           <span class="mx-1 text-slate-500">atau</span>

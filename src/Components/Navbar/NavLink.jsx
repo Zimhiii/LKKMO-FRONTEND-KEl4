@@ -36,7 +36,7 @@ export default function NavLink() {
 
                 <FaCaretRight className="text-[25px] " />
               </div>
-            </Link>{" "}
+            </Link>
             <Link
               to="/category/karnaval"
               className="hover:bg-[#9e9e9e] py-[5px] px-[5px] "
@@ -46,7 +46,7 @@ export default function NavLink() {
 
                 <FaCaretRight className="text-[25px] " />
               </div>
-            </Link>{" "}
+            </Link>
             <Link
               to="/category/AnotherCategory"
               className="hover:bg-[#9e9e9e] py-[5px] px-[5px] "
