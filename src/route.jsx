@@ -81,7 +81,8 @@ export const route = createBrowserRouter([
       {
         path : "password",
         element: <PasswordPage />
-      }
+      },
+      {
         path: "aboutme",
         element: <AboutMe />,
       },
