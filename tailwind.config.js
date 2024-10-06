@@ -8,6 +8,7 @@ export default {
         montserrat: ["Montserrat", "sans-serif"],
         boruna: ["Boruna", "sans-serif"],
         cerotta: ["Cerotta", "sans-serif"],
+        inter: ["Inter", "sans-serif"],
       },
     },
   },

@@ -15,3 +15,7 @@
   font-family: "Cerotta";
   src: url("./fonts/CerottaPersonalUseOnly-0vW5d.otf") format("opentype");
 }
+@font-face {
+  font-family: "Inter";
+  src: url("./fonts/inter.ttf") format("truetype");
+}

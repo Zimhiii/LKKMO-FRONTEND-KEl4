@@ -15,6 +15,10 @@ import HistoryPage from "./Pages/HistoryPage";
 import CategoryLayout from "./Layouts/CategoryLayout";
 import ContainerContent from "./Components/CategoryComponents/ContainerContent";
 import AboutMe from "./Pages/AboutMePage";
+import AdminLayout from "./Layouts/AdminLayout";
+import SettingLayout from "./Layouts/SettingLayout";
+import ProfileUser from "./Pages/ProfileUser";
+import PasswordSetting from "./Pages/PasswordSetting";
 
 export const route = createBrowserRouter([
   {
@@ -99,5 +103,9 @@ export const route = createBrowserRouter([
   {
     path: "*",
     element: <NotFoundPage />,
+  },
+  {
+    path: "/admin",
+    element: <AdminLayout />,
   },
 ]);

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { FaRegHeart } from "react-icons/fa";
-import cardImg from "../../assets/cardImgEX.png";
+import cardImg from "../../assets/ProductImg.png";
 import { BiSolidCart } from "react-icons/bi";
 import { CiHeart } from "react-icons/ci";
 import { Link, useParams } from "react-router-dom";
