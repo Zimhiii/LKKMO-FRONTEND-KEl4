@@ -13,14 +13,12 @@ import NotFoundPage from "./Pages/NotFoundPage";
 import WishlistPage from "./Pages/WishlistPage";
 import HistoryPage from "./Pages/HistoryPage";
 import ProfilePage from "./Pages/ProfilePage";
-import PasswordPage from "./Pages/PasswordPage"
+import PasswordPage from "./Pages/PasswordPage";
 import CategoryLayout from "./Layouts/CategoryLayout";
 import ContainerContent from "./Components/CategoryComponents/ContainerContent";
 import AboutMe from "./Pages/AboutMePage";
 import AdminLayout from "./Layouts/AdminLayout";
 import SettingLayout from "./Layouts/SettingLayout";
-import ProfileUser from "./Pages/ProfileUser";
-import PasswordSetting from "./Pages/PasswordSetting";
 
 export const route = createBrowserRouter([
   {
@@ -79,13 +77,20 @@ export const route = createBrowserRouter([
         element: <HistoryPage />,
       },
       {
-        path : "profile",
-        element: <ProfilePage />
+        path: "settinguser",
+        element: <SettingLayout />,
+        children: [
+          {
+            path: "/settinguser/profileuser",
+            element: <ProfilePage />,
+          },
+          {
+            path: "/settinguser/passwordsetting",
+            element: <PasswordPage />,
+          },
+        ],
       },
       {
-        path : "password",
-        element: <PasswordPage />
-      }
         path: "aboutme",
         element: <AboutMe />,
       },
