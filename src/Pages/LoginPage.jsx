@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import ButtonLogin from "../Components/LoginComponents/ButtonLogin";
 import FormLogin from "../Components/LoginComponents/FormLogin";
-import HeaderLogin from "../Components/LoginComponents/LoginHeade";
+import HeaderLogin from "../Components/LoginComponents/LoginHeader";
 
 function LoginPage() {
   document.title = "Login";
