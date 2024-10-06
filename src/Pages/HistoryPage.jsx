@@ -7,7 +7,7 @@ export default function HistoryPage() {
 
   return (
     <div className="mx-[20px]">
-      <div className=" relative flex font-montserrat text-[10px] justify-center py-[25px]">
+      <div className=" flex font-montserrat text-[10px] md:text-[31px] justify-center py-[25px]">
         {isHistory && (
           <div className="flex bg-[#BB8360] rounded-[10px] cursor-pointer w-fit ">
             <div

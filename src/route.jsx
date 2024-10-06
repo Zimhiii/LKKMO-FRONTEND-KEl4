@@ -14,6 +14,9 @@ import WishlistPage from "./Pages/WishlistPage";
 import HistoryPage from "./Pages/HistoryPage";
 import ProfilePage from "./Pages/ProfilePage";
 import PasswordPage from "./Pages/PasswordPage"
+import CategoryLayout from "./Layouts/CategoryLayout";
+import ContainerContent from "./Components/CategoryComponents/ContainerContent";
+import AboutMe from "./Pages/AboutMePage";
 
 export const route = createBrowserRouter([
   {
@@ -26,19 +29,27 @@ export const route = createBrowserRouter([
       },
       {
         path: "/category",
-        element: (
-          <div>
-            <Outlet />
-          </div>
-        ),
+        element: <CategoryLayout />,
         children: [
           {
             path: "",
             element: <CategoryPage />,
-          },
-          {
-            path: ":subcategory",
-            element: <SubCategoryPage />,
+            children: [
+              {
+                path: ":category",
+                element: <CategoryPage />,
+                children: [
+                  {
+                    path: "",
+                    element: <ContainerContent />,
+                  },
+                  {
+                    path: ":subcategory",
+                    element: <SubCategoryPage />,
+                  },
+                ],
+              },
+            ],
           },
         ],
       },
@@ -71,6 +82,9 @@ export const route = createBrowserRouter([
         path : "password",
         element: <PasswordPage />
       }
+        path: "aboutme",
+        element: <AboutMe />,
+      },
     ],
   },
   {

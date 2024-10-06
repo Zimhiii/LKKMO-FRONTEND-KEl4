@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import { FaRegHeart } from "react-icons/fa";
-import cardImg from "../../Assets/cardImgEX.png";
+import cardImg from "../../assets/cardImgEX.png";
 import { BiSolidCart } from "react-icons/bi";
 import { CiHeart } from "react-icons/ci";
+import { Link, useParams } from "react-router-dom";
 export default function CardItem({ classname = "" }) {
   return (
-    <div>
+    <Link to="/product">
       <div
         className={`${classname} gap-3 shadow-[8px_8px_10px_rgba(0,0,0,0.25)] md:mb-10 rounded-xl px-4 py-4 md:px-5 md:py-[30px] `}
       >
@@ -18,7 +19,7 @@ export default function CardItem({ classname = "" }) {
             <img
               src={cardImg}
               alt="Card"
-              className="w-[82px] h-[99px] md:w-[231px] md:h-[278px]  filter contrast-125 brightness-110"
+              className="w-[82px] h-[99px] md:w-[231px] md:h-[278px]  "
             />
           </div>
         </div>
@@ -38,6 +39,6 @@ export default function CardItem({ classname = "" }) {
           </div>
         </div>
       </div>
-    </div>
+    </Link>
   );
 }
