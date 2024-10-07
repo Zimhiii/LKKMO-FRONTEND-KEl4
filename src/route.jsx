@@ -19,6 +19,9 @@ import ContainerContent from "./Components/CategoryComponents/ContainerContent";
 import AboutMe from "./Pages/AboutMePage";
 import AdminLayout from "./Layouts/AdminLayout";
 import SettingLayout from "./Layouts/SettingLayout";
+import ManagementUser from "./Pages/ManagementUser";
+import EditProduct from "./Pages/EditProduct";
+import EditAccount from "./Pages/EditAccount";
 
 export const route = createBrowserRouter([
   {
@@ -121,5 +124,30 @@ export const route = createBrowserRouter([
   {
     path: "/admin",
     element: <AdminLayout />,
+    children: [
+      {
+        path: "",
+        element: (
+          <div className="w-full h-full flex items-center justify-center ">
+            <h1 className="font-cerotta text-[50px]">
+              Welcome To Dashboard Admin
+            </h1>
+          </div>
+        ),
+      },
+      {
+        path: "/admin/manajemenakun",
+        element: <ManagementUser />,
+      },
+      {
+        path: "/admin/editakun",
+        element: <EditAccount />,
+      },
+
+      {
+        path: "/admin/editproduk",
+        element: <EditProduct />,
+      },
+    ],
   },
 ]);
