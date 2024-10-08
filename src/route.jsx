@@ -122,6 +122,10 @@ export const route = createBrowserRouter([
     element: <NotFoundPage />,
   },
   {
+    path: "aa",
+    element: <NotFoundPage />,
+  },
+  {
     path: "/admin",
     element: <AdminLayout />,
     children: [
