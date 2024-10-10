@@ -139,6 +139,13 @@ export default function HumbergerMenu() {
           >
             Sign Up
           </Link>
+          <Link
+            onClick={() => localStorage.removeItem("token") && toggleMenu()}
+            to={"/login"}
+            className="text-[25px] italic font-light text-[#ffffff] rounded-[10px] px-[60px] py-[10px] text-center hover:bg-[#96694d] hover:text-white"
+          >
+            Logout
+          </Link>
         </div>
       </div>
     </div>

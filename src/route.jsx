@@ -6,17 +6,23 @@ import Dashboard from "./Pages/Dashboard";
 import CategoryPage from "./Pages/CategoryPage";
 import ProductPage from "./Pages/ProductPage";
 import DefaultLayout from "./Layouts/DefaultLayout";
-import TestApi from "./Pages/TestApi";
+import TestApi from "./TestApi/TestApi";
+import ApiProduct from "./TestApi/ApiProduct";
 import PaymentPage from "./Pages/PaymentPage";
 import SubCategoryPage from "./Pages/SubCategoryPage";
 import NotFoundPage from "./Pages/NotFoundPage";
 import WishlistPage from "./Pages/WishlistPage";
 import HistoryPage from "./Pages/HistoryPage";
 import ProfilePage from "./Pages/ProfilePage";
-import PasswordPage from "./Pages/PasswordPage"
+import PasswordPage from "./Pages/PasswordPage";
 import CategoryLayout from "./Layouts/CategoryLayout";
 import ContainerContent from "./Components/CategoryComponents/ContainerContent";
 import AboutMe from "./Pages/AboutMePage";
+import AdminLayout from "./Layouts/AdminLayout";
+import SettingLayout from "./Layouts/SettingLayout";
+import ManagementUser from "./Pages/ManagementUser";
+import EditProduct from "./Pages/EditProduct";
+import EditAccount from "./Pages/EditAccount";
 
 export const route = createBrowserRouter([
   {
@@ -58,13 +64,19 @@ export const route = createBrowserRouter([
         path: "/product",
         element: <ProductPage />,
       },
+
       {
         path: "/wishlist",
         element: <WishlistPage />,
       },
+
       {
         path: "testApi",
         element: <TestApi />,
+      },
+      {
+        path: "apiproduct",
+        element: <ApiProduct />,
       },
       {
         path: "payment",
@@ -75,8 +87,18 @@ export const route = createBrowserRouter([
         element: <HistoryPage />,
       },
       {
-        path : "profile",
-        element: <ProfilePage />
+        path: "settinguser",
+        element: <SettingLayout />,
+        children: [
+          {
+            path: "/settinguser/profileuser",
+            element: <ProfilePage />,
+          },
+          {
+            path: "/settinguser/passwordsetting",
+            element: <PasswordPage />,
+          },
+        ],
       },
       {
         path : "password",
@@ -85,6 +107,14 @@ export const route = createBrowserRouter([
       {
         path: "aboutme",
         element: <AboutMe />,
+      },
+      {
+        path: "testApi",
+        element: <TestApi />,
+      },
+      {
+        path: "apiproduct",
+        element: <ApiProduct />,
       },
     ],
   },
@@ -109,5 +139,38 @@ export const route = createBrowserRouter([
   {
     path: "*",
     element: <NotFoundPage />,
+  },
+  {
+    path: "aa",
+    element: <NotFoundPage />,
+  },
+  {
+    path: "/admin",
+    element: <AdminLayout />,
+    children: [
+      {
+        path: "",
+        element: (
+          <div className="w-full h-full flex items-center justify-center ">
+            <h1 className="font-cerotta text-[50px]">
+              Welcome To Dashboard Admin
+            </h1>
+          </div>
+        ),
+      },
+      {
+        path: "/admin/manajemenakun",
+        element: <ManagementUser />,
+      },
+      {
+        path: "/admin/editakun",
+        element: <EditAccount />,
+      },
+
+      {
+        path: "/admin/editproduk",
+        element: <EditProduct />,
+      },
+    ],
   },
 ]);
