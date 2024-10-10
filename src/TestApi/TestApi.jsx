@@ -6,10 +6,18 @@ const TestApi = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Melakukan GET request menggunakan Axios
+    // Ambil token dari local storage
+    const token = localStorage.getItem("token");
+
+    // Melakukan GET request menggunakan Axios dengan header Authorization
     axios
-      .get("https://lkkmo-backend-production.up.railway.app/api/v1/")
+      .get("https://lkkmo-backend-production.up.railway.app/api/v1/products", {
+        headers: {
+          Authorization: `Bearer ${token}`, // Tambahkan token ke header
+        },
+      })
       .then((response) => {
+        console.log("Data fetched successfully:", response.data);
         setData(response.data); // Menyimpan data dari API ke state
         setLoading(false);
       })

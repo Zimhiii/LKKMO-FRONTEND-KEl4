@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import ButtonLogin from "../Components/LoginComponents/ButtonLogin";
 import FormSignUp from "../Components/LoginComponents/FormSignUp";
 import HeaderLogin from "../Components/LoginComponents/LoginHeader";
@@ -9,6 +10,13 @@ function SignupPage() {
   const toLogin = () => {
     navigate("/login");
   };
+
+  useEffect(() => {
+    if (localStorage.getItem("token")) {
+      navigate("/");
+    }
+  });
+
   return (
     <div className="md:flex font-montserrat">
       <HeaderLogin

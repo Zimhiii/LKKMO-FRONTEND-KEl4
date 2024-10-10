@@ -6,7 +6,8 @@ import Dashboard from "./Pages/Dashboard";
 import CategoryPage from "./Pages/CategoryPage";
 import ProductPage from "./Pages/ProductPage";
 import DefaultLayout from "./Layouts/DefaultLayout";
-import TestApi from "./Pages/TestApi";
+import TestApi from "./TestApi/TestApi";
+import ApiProduct from "./TestApi/ApiProduct";
 import PaymentPage from "./Pages/PaymentPage";
 import SubCategoryPage from "./Pages/SubCategoryPage";
 import NotFoundPage from "./Pages/NotFoundPage";
@@ -63,13 +64,19 @@ export const route = createBrowserRouter([
         path: "/product",
         element: <ProductPage />,
       },
+
       {
         path: "/wishlist",
         element: <WishlistPage />,
       },
+
       {
         path: "testApi",
         element: <TestApi />,
+      },
+      {
+        path: "apiproduct",
+        element: <ApiProduct />,
       },
       {
         path: "payment",
@@ -96,6 +103,14 @@ export const route = createBrowserRouter([
       {
         path: "aboutme",
         element: <AboutMe />,
+      },
+      {
+        path: "testApi",
+        element: <TestApi />,
+      },
+      {
+        path: "apiproduct",
+        element: <ApiProduct />,
       },
     ],
   },

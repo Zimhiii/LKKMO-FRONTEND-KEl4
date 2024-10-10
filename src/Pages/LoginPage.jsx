@@ -2,6 +2,7 @@ import { useNavigate } from "react-router-dom";
 import ButtonLogin from "../Components/LoginComponents/ButtonLogin";
 import FormLogin from "../Components/LoginComponents/FormLogin";
 import HeaderLogin from "../Components/LoginComponents/LoginHeader";
+import { useEffect } from "react";
 
 function LoginPage() {
   document.title = "Login";
@@ -12,6 +13,13 @@ function LoginPage() {
   const toDashboard = () => {
     navigate("/");
   };
+
+  useEffect(() => {
+    if (localStorage.getItem("token")) {
+      navigate("/");
+    }
+  });
+
   return (
     <div className="md:flex md:flex-row-reverse font-montserrat">
       <HeaderLogin
