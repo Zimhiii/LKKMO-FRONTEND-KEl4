@@ -1,27 +1,34 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Select from "./Select";
-import { IoOpenOutline } from "react-icons/io5";
+import EditAkun from "./EditAkun";
 import useProductManagementStore from "../../stores/productManagementStore";
-import InputTambahAkun from "./inputTambahAkun";
+import { useParams } from "react-router-dom";
 
-export default function FormTambahProduct() {
-  const [selectedCategory, setSelectedCategory] = useState("");
-  const [selectedSubCategory, setSelectedSubCategory] = useState("");
-  const [description, setDescription] = useState("");
+export default function FormEditProduct() {
+  const { id } = useParams();
+  const { fetchProductById, product } = useProductManagementStore();
+  console.log(product);
+  const selectedProduct = product;
+  const [selectedCategory, setSelectedCategory] = useState(
+    selectedProduct.category_id
+  );
+  const [name, setName] = useState(selectedProduct.name);
+  const [price, setPrice] = useState(selectedProduct.price);
+  const [stock, setStock] = useState(selectedProduct.stock);
+  const [size, setSize] = useState(selectedProduct.size);
+  const [selectedSubCategory, setSelectedSubCategory] = useState(
+    selectedProduct.subcategory_id
+  );
+  const [description, setDescription] = useState(selectedProduct.description);
   const [file, setFile] = useState(null);
-  const [preview, setPreview] = useState(null); // State for image preview
-  const nameProductRef = useRef(null);
+  const [preview, setPreview] = useState(
+    `https://lkkmo-backend-production.up.railway.app/storage/${selectedProduct.image}`
+  );
+
+  const nameProductRef = useRef("null");
   const priceRef = useRef(null);
   const stockRef = useRef(null);
   const sizeRef = useRef(null);
-  const { addProduct } = useProductManagementStore();
-
-  const handleKeyDown = (event, nextInputRef) => {
-    if (event.key === "Enter") {
-      event.preventDefault();
-      nextInputRef?.current?.focus();
-    }
-  };
 
   const categories = [
     { id: 1, label: "Cosplay" },
@@ -45,8 +52,6 @@ export default function FormTambahProduct() {
   const handleFileChange = (event) => {
     const selectedFile = event.target.files[0];
     setFile(selectedFile);
-
-    // Create a preview URL for the selected image
     if (selectedFile) {
       const objectUrl = URL.createObjectURL(selectedFile);
       setPreview(objectUrl);
@@ -56,12 +61,6 @@ export default function FormTambahProduct() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Ambil nilai dari input refs
-    const name = nameProductRef.current.value;
-    const price = parseFloat(priceRef.current.value);
-    const stock = parseInt(stockRef.current.value);
-    const size = sizeRef.current.value;
-
     const category_id = categories.find(
       (cat) => cat.label.toLowerCase() === selectedCategory
     )?.id;
@@ -69,7 +68,6 @@ export default function FormTambahProduct() {
       (sub) => sub.label.toLowerCase() === selectedSubCategory
     )?.id;
 
-    // Buat form data untuk mengirim file
     const formData = new FormData();
     formData.append("name", name);
     formData.append("price", price);
@@ -81,13 +79,13 @@ export default function FormTambahProduct() {
     formData.append("category_id", category_id);
     formData.append("size", size);
     formData.append("subcategory_id", subcategory_id);
-
-    // Panggil fungsi addProduct dari store
-    await addProduct(formData);
+    console.log(formData);
+    // Call updateProduct function to update the product
+    await updateProduct(id, formData);
   };
 
   return (
-    <form className="w-full flex font-inter" onSubmit={handleSubmit}>
+    <form className="w-full p-5 flex font-inter" onSubmit={handleSubmit}>
       <div className="w-7/12">
         <h2 className="text-[20px] mb-[30px]">Informasi Produk</h2>
         <Select
@@ -112,32 +110,36 @@ export default function FormTambahProduct() {
           onChange={(e) => setSelectedSubCategory(e.target.value)}
           disabled={!selectedCategory}
         />
-        <InputTambahAkun
+        <EditAkun
           type="text"
           placeholder="Nama Produk"
           name="Nama Produk"
-          onKeyDown={(event) => handleKeyDown(event, priceRef)}
+          value={name}
           ref={nameProductRef}
+          onChange={(e) => setName(e.target.value)}
         />
-        <InputTambahAkun
+        <EditAkun
           type="number"
           placeholder="Harga"
+          value={price}
           name="Harga"
-          onKeyDown={(event) => handleKeyDown(event, stockRef)}
+          onChange={(e) => setPrice(e.target.value)}
           ref={priceRef}
         />
-        <InputTambahAkun
+        <EditAkun
           type="text"
           placeholder="Ukuran"
+          value={size}
           name="Ukuran"
-          onKeyDown={(event) => handleKeyDown(event, null)}
-          ref={sizeRef} // Tambahkan useRef untuk size
+          ref={sizeRef}
+          onChange={(e) => setSize(e.target.value)}
         />
-        <InputTambahAkun
+        <EditAkun
           type="number"
+          value={stock}
           placeholder="Stok"
+          onChange={(e) => setStock(e.target.value)}
           name="Stok"
-          onKeyDown={(event) => handleKeyDown(event, null)}
           ref={stockRef}
         />
         <textarea
@@ -146,21 +148,12 @@ export default function FormTambahProduct() {
           value={description}
           onChange={(e) => setDescription(e.target.value)}
         />
-
-        {/* Preview image */}
-
         <div className="flex gap-6 mt-[40px]">
           <button
             type="submit"
             className="bg-[#BB8360] px-6 py-2 rounded-[6px] text-[14px] text-white"
           >
-            Tambah
-          </button>
-          <button
-            type="button"
-            className="ring-1 ring-red-500 px-4 text-red-500 py-2 rounded-[6px]"
-          >
-            Hapus
+            Update
           </button>
         </div>
       </div>

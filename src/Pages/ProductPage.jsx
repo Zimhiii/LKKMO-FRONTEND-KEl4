@@ -1,21 +1,43 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { CiHeart } from "react-icons/ci";
 import SectionComment from "../Components/ProductComponents/SectionComment";
 import img from "../assets/ProductImg.png";
+import { useParams } from "react-router-dom";
+import useProductManagementStore from "../stores/productManagementStore";
 
 export default function CategoryPage() {
   const [count, setCount] = useState(0);
+  const { fetchProductById, product } = useProductManagementStore();
+  const { id } = useParams();
+
+  useEffect(() => {
+    if (id) {
+      fetchProductById(id); // Fetch product based on the ID from the URL
+    }
+  }, [id, fetchProductById]);
+
+  useEffect(() => {
+    document.title = "CategoryPage"; // Set document title on component mount
+  }, []);
+
+  const selectedProduct = product?.products;
 
   const countPlus = () => {
     setCount(count + 1);
   };
+
   const countMinus = () => {
-    if (count <= 0) {
-      setCount(0);
-    } else {
-      setCount(count - 1);
-    }
+    setCount((prevCount) => Math.max(prevCount - 1, 0));
   };
+
+  if (!selectedProduct) {
+    return (
+      <div className="flex justify-center items-center">
+        <p className="text-2xl font-cerotta ">Loading...</p>; // Show a loading
+        message while the product data is
+      </div>
+    );
+  }
 
   document.title = "CategoryPage";
   return (
@@ -26,10 +48,13 @@ export default function CategoryPage() {
         </h1>
         <div className=" md:flex ">
           <div className="w-6/12 hidden md:flex items-center justify-center ">
-            <div className="mt-[24px]  justify-center items-center w-[224px] md:py-[100px] h-[189px] md:w-[475px] md:h-[396px] bg-[#E8E7E7] rounded-[26px] hidden md:flex">
+            <div className="mt-[24px] overflow-hidden justify-center items-center w-[224px] md:py-[100px] h-[189px] md:w-[475px] md:h-[396px] bg-[#E8E7E7] rounded-[26px] hidden md:flex">
               <img
                 className="object-cover w-[296px] hidden md:block"
-                src={img}
+                src={
+                  "http://lkkmo-backend-production.up.railway.app/storage/" +
+                  selectedProduct.image
+                }
                 alt=""
               />
             </div>
@@ -38,7 +63,7 @@ export default function CategoryPage() {
           <div className="md:w-6/12 w-full">
             <div>
               <h1 className="text-[#736455] font-cerotta text-[12px] md:text-[26px] font-extrabold mt-[18px] stroke-[#736455]">
-                MAJESTIC OFFICER UNIFORM
+                {selectedProduct.name}
               </h1>
               <p>
                 <span className="text-[7px] md:text-[12px] ">
@@ -58,7 +83,10 @@ export default function CategoryPage() {
               <div className="mt-[24px] flex justify-center items-center w-[224px] h-[189px] bg-[#E8E7E7] rounded-[26px] md:hidden ">
                 <img
                   className="w-[135px] h-[177px] object-cover md:hidden"
-                  src={img}
+                  src={
+                    "http://lkkmo-backend-production.up.railway.app/storage/" +
+                    selectedProduct.image
+                  }
                   alt=""
                 />
               </div>
@@ -71,15 +99,10 @@ export default function CategoryPage() {
                 <span>| Tersedia</span>
             </p> */}
               <h3 className="font-semibold text-[16px] md:text-[18px]">
-                Rp5.000.000,00 / hari
+                {selectedProduct.price} / hari
               </h3>
               <p className="text-[12px] md:text-[14px] opacity-55 w-[95%] mt-[10px] text-justify">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam
-                commodo justo in orci ullamcorper, a faucibus nisi congue.
-                Curabitur facilisis sem id nisl lacinia, vel convallis lectus
-                eleifend. Fusce vehicula felis sit amet eros placerat, ac
-                fermentum libero interdum. Pellentesque non eros et odio
-                hendrerit tristique.
+                {selectedProduct.description}
               </p>
               <div className="flex mt-[12px] gap-[10px] ">
                 <h2 className="font-bold text-[12px] md:text-[20px]">

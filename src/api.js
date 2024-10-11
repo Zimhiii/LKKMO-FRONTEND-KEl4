@@ -1,6 +1,6 @@
 // src/api.js
 import axios from "axios";
-import { useAuthUserStore } from "./stores/authstore";
+import { useAuthUserStore } from "./stores/authStore";
 
 // Buat instance Axios dengan konfigurasi dasar
 const api = axios.create({

@@ -9,11 +9,12 @@ export default function Sidebar() {
         <Link className="py-[11px] px-[20px] text-[14px] hover:bg-[#8d6349]">
           Tambah Kategori
         </Link>
+
         <Link
-          to="editproduk"
+          to="daftarproduk"
           className="py-[11px] px-[20px] text-[14px] hover:bg-[#8d6349]"
         >
-          Edit Produk
+          Produk
         </Link>
         <Link
           to="manajemenakun"

@@ -1,7 +1,7 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 import api from "../api"; // Sesuaikan path dengan api.js yang Anda gunakan
-import { useAuthUserStore } from "./authstore"; // Pastikan sudah ada authstore
+import { useAuthUserStore } from "./authStore"; // Pastikan sudah ada authstore
 
 const useProductManagementStore = create(
   persist(
@@ -36,7 +36,10 @@ const useProductManagementStore = create(
           const response = await api.get(`/products/${id}`, {
             headers: { Authorization: `Bearer ${token}` },
           });
-          set({ product: response.data.data, loading: false });
+          set({
+            product: response.data.data[0],
+            loading: false,
+          });
         } catch (error) {
           set({
             error: error.response?.data?.message || "Error fetching product",
@@ -102,7 +105,9 @@ const useProductManagementStore = create(
               products: [...state.products, response.data.data],
               loading: false,
             }),
-            console.log("Product added successfully :,", response.data.data)
+            console.log("Product added successfully :,", response.data.data),
+            console.log("product", response),
+            alert(response.data.message)
           );
         } catch (error) {
           set({
@@ -120,7 +125,10 @@ const useProductManagementStore = create(
         const { token } = useAuthUserStore.getState(); // Ambil token dari auth store
         try {
           const response = await api.put(`/products/${id}`, productData, {
-            headers: { Authorization: `Bearer ${token}` },
+            headers: {
+              Authorization: `Bearer ${token}`,
+              "Content-Type": "multipart/form-data",
+            },
           });
           set((state) => ({
             products: state.products.map((product) =>
@@ -133,10 +141,12 @@ const useProductManagementStore = create(
             error: error.response?.data?.message || "Error updating product",
             loading: false,
           });
+          console.log("Error updating product:", error.response?.data?.message);
         }
       },
 
       // Delete product (admin only)
+      // Di dalam store (productManagementStore.js)
       deleteProduct: async (id) => {
         set({ loading: true, error: null });
         const { token } = useAuthUserStore.getState(); // Ambil token dari auth store
@@ -146,6 +156,7 @@ const useProductManagementStore = create(
               Authorization: `Bearer ${token}`,
             },
           });
+          // Filter produk yang dihapus dan update state
           set((state) => ({
             products: state.products.filter((product) => product.id !== id),
             loading: false,

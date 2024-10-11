@@ -1,7 +1,7 @@
 import React, { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import InputLogin from "./LoginInput";
-import { useAuthUserStore } from "../../stores/authstore";
+import { useAuthUserStore } from "../../stores/authStore";
 
 const FormLogin = () => {
   const passwordRef = useRef(null);
@@ -48,7 +48,6 @@ const FormLogin = () => {
         alert("Login berhasil!");
         navigate("/"); // Arahkan ke halaman utama atau dashboard
       }
-      navigate("/");
     } catch (error) {
       setErrorMessage("Login gagal. Silakan coba lagi.");
     }

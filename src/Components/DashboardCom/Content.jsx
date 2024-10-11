@@ -2,8 +2,18 @@ import React from "react";
 import CardItem from "../All/CardItem";
 import { Link } from "react-router-dom";
 
-export default function Content({ category = "Koleksi", children = " " }) {
+export default function Content({ category = "Koleksi", products }) {
   const urlcategory = category.toLowerCase();
+  const mappedProduct = products.map((product) => (
+    <CardItem
+      key={product.id}
+      id={product.id}
+      name={product.name}
+      price={product.price}
+      description={product.description}
+      image={product.image}
+    />
+  ));
 
   return (
     <div className="flex flex-col items-center mb-[44px] md:mb-[84px]">
@@ -11,10 +21,7 @@ export default function Content({ category = "Koleksi", children = " " }) {
         {category}
       </h1>
       <div className="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-[100px]">
-        <CardItem />
-        <CardItem />
-        <CardItem classname="hidden md:block" />
-        {children}
+        {mappedProduct}
       </div>
       <Link
         to={`/category/${urlcategory}`}

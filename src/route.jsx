@@ -21,8 +21,11 @@ import AboutMe from "./Pages/AboutMePage";
 import AdminLayout from "./Layouts/AdminLayout";
 import SettingLayout from "./Layouts/SettingLayout";
 import ManagementUser from "./Pages/ManagementUser";
-import EditProduct from "./Pages/EditProduct";
+import EditProduct from "./Pages/TambahProduct";
 import EditAccount from "./Pages/EditAccount";
+import Product from "./Pages/DaftarProduct";
+import TambahProduct from "./Pages/TambahProduct";
+import FormEditProduct from "./Components/AdminComponents/FormEditProduct";
 
 export const route = createBrowserRouter([
   {
@@ -61,7 +64,7 @@ export const route = createBrowserRouter([
       },
 
       {
-        path: "/product",
+        path: "/product/:id",
         element: <ProductPage />,
       },
 
@@ -101,8 +104,8 @@ export const route = createBrowserRouter([
         ],
       },
       {
-        path : "password",
-        element: <PasswordPage />
+        path: "password",
+        element: <PasswordPage />,
       },
       {
         path: "aboutme",
@@ -168,8 +171,16 @@ export const route = createBrowserRouter([
       },
 
       {
-        path: "/admin/editproduk",
-        element: <EditProduct />,
+        path: "/admin/tambahproduk",
+        element: <TambahProduct />,
+      },
+      {
+        path: "/admin/daftarproduk",
+        element: <Product />,
+      },
+      {
+        path: "/admin/editproduk/:id",
+        element: <FormEditProduct />,
       },
     ],
   },

@@ -5,11 +5,21 @@ import { BiSolidCart } from "react-icons/bi";
 import { CiHeart } from "react-icons/ci";
 import { Link, useNavigate } from "react-router-dom";
 
-export default function CardItem({ classname = "" }) {
+export default function CardItem({
+  classname = "",
+  key,
+  name,
+  price,
+  id,
+  image,
+  description,
+  stock,
+  size,
+}) {
   const navigate = useNavigate();
 
   const toProduct = () => {
-    navigate("/product");
+    navigate(`/product/${id}`);
   };
   return (
     <div typeof="button" onClick={toProduct}>
@@ -25,14 +35,14 @@ export default function CardItem({ classname = "" }) {
 
           <div className="flex justify-center items-center">
             <img
-              src={cardImg}
+              src={`https://lkkmo-backend-production.up.railway.app/storage/${image}`}
               alt="Card"
               className="w-[82px] h-[99px] md:w-[231px] md:h-[278px]"
             />
           </div>
         </div>
         <div className="relative font-montserrat text-[10px] md:text-[20px]">
-          <h2 className="font-semibold">Majestic Officer Uniform</h2>
+          <h2 className="font-semibold">{name}</h2>
           <div className="flex gap-2">
             <span>⭐⭐⭐⭐⭐</span>
             <p className="md:text-[15px]">
@@ -40,7 +50,7 @@ export default function CardItem({ classname = "" }) {
             </p>
           </div>
           <h2 className="text-[#000000] md:text-[17px] text-opacity-60 font-semibold">
-            Rp.5.000.000 / hari
+            Rp.{price} / hari
           </h2>
           <div className="absolute p-[3px] -bottom-2 -right-2 md:bottom-0 md:-right-0 bg-transparent rounded-[6px] text-[20px] md:text-[35px]">
             <button>

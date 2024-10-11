@@ -1,7 +1,9 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import EditInput from "./EditInput";
 import { useUserStore } from "../../Store/stored";
-import { useAuthUserStore } from "../../stores/authstore";
+import { useAuthUserStore } from "../../stores/authStore";
+import useProductManagementStore from "../../stores/productManagementStore";
+import { useParams } from "react-router-dom";
 
 export default function FormEdit() {
   const NameRef = useRef(null);
@@ -10,7 +12,18 @@ export default function FormEdit() {
   const adressRef = useRef(null);
   const [profilePicture, setProfilePicture] = useState(null);
   const [imagePreview, setImagePreview] = useState(null);
+  const { id } = useParams(); // Ambil ID dari parameter URL
+  const { fetchProductById, product, loading } = useProductManagementStore(); // Ambil fungsi fetch dan data produk
   const user = useAuthUserStore((state) => state.user);
+
+  useEffect(() => {
+    if (id) {
+      fetchProductById(id);
+    }
+  }, [id, fetchProductById]);
+
+  // Menghindari error jika product belum terisi
+  const selectedProduct = product?.products?.[0] || {};
 
   const handleKeyDown = (event, nextInputRef) => {
     if (event.key === "Enter") {
@@ -24,6 +37,10 @@ export default function FormEdit() {
     setProfilePicture(event.target.files[0]);
     setImagePreview(URL.createObjectURL(event.target.files[0]));
   };
+
+  if (loading) {
+    return <p>Loading...</p>;
+  }
 
   return (
     <form action="" className="flex flex-col w-full  justify-center md:w-3/4">
@@ -67,7 +84,7 @@ export default function FormEdit() {
 
       <EditInput
         type="text"
-        placeholder={user.name}
+        placeholder={selectedProduct.name || user.name}
         name="Nama"
         onKeyDown={(event) => handleKeyDown(event, emailRef)}
         ref={NameRef}
@@ -82,7 +99,7 @@ export default function FormEdit() {
       />
       <EditInput
         type="text"
-        placeholder="+62.... "
+        placeholder={selectedProduct.phone || "+62.... "}
         name="Nomor Handphone"
         onKeyDown={(event) => handleKeyDown(event, adressRef)}
         ref={phoneNumberRef}
@@ -95,13 +112,11 @@ export default function FormEdit() {
           Alamat <span className="text-red-500">*</span>
         </label>
         <textarea
-          placeholder="Jl. ..."
+          placeholder={selectedProduct.address || "Jl. ..."}
           className={` rounded-[4px] h-[80px] text-[12px] md:text-[16px] py-1 px-1 w-full active:bg-[#D9D9D9] ring-1 ring-[#000000] placeholder:text-[#000000] placeholder:text-opacity-30 placeholder:text-[10px] placeholder:italic focus:outline-black `}
           id="Alamat"
           ref={adressRef}
           onKeyDown={(event) => handleKeyDown(event, null)}
-          //   onChange={onChange} // Mendukung onChange untuk input nilai
-          //   value={value} // Mendukung value untuk kontrol input
         />
       </div>
       <div className="flex justify-center mt-5 ">

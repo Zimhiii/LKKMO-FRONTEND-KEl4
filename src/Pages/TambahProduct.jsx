@@ -1,7 +1,7 @@
 import React from "react";
 import FormTambahProduct from "../Components/AdminComponents/FormTambahProduct";
 
-export default function EditProduct() {
+export default function TambahProduct() {
   return (
     <div className="w-full h-full px-[67px] py-[80px]">
       <header className="mb-[75px]">
