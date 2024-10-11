@@ -23,7 +23,11 @@ export default function SettingLayout() {
           </span>
           <span>Password</span>
         </Link>
-        <Link to="#" className="flex items-center gap-2">
+        <Link
+          onClick={() => localStorage.clear()}
+          to="/login"
+          className="flex items-center gap-2"
+        >
           <span>
             <MdLogout className="text-[#545454]" />
           </span>

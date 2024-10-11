@@ -1,7 +1,7 @@
 import React, { useRef, useState } from "react";
-import axios from "axios";
+import { useNavigate } from "react-router-dom";
 import InputLogin from "./LoginInput";
-import { useNavigate } from "react-router-dom"; // Import useNavigate for navigation
+import { useAuthUserStore } from "../../stores/authstore";
 
 const FormLogin = () => {
   const passwordRef = useRef(null);
@@ -12,17 +12,17 @@ const FormLogin = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
-  const navigate = useNavigate(); // Create a navigate object for redirection
+  const navigate = useNavigate();
+
+  // Ambil fungsi login dan status dari useAuthUserStore
+  const { login, isLoggedIn } = useAuthUserStore();
 
   // Fungsi untuk menangani navigasi antar input dengan tombol Enter
   const handleKeyDown = (event, nextInputRef) => {
     if (event.key === "Enter") {
-      event.preventDefault(); // Mencegah form di-submit
-      nextInputRef.current.focus(); // Pindah ke input selanjutnya
+      event.preventDefault();
+      nextInputRef.current.focus();
     }
-  };
-  const toDashboard = () => {
-    navigate("/");
   };
 
   // Fungsi untuk menampilkan atau menyembunyikan kata sandi
@@ -32,39 +32,32 @@ const FormLogin = () => {
 
   // Fungsi untuk menangani pengiriman form login
   const handleSubmit = async (event) => {
-    event.preventDefault(); // Mencegah submit otomatis
-    try {
-      // Mengirim permintaan POST ke API login
-      const response = await axios.post(
-        "https://lkkmo-backend-production.up.railway.app/api/v1/login",
-        {
-          name: name,
-          email: email,
-          password: password,
-        }
-      );
+    event.preventDefault();
+    const credentials = {
+      name,
+      email,
+      password,
+    };
 
-      // Jika login berhasil, simpan token ke localStorage
-      const { token } = response.data;
-      localStorage.setItem("token", token); // Menyimpan token JWT
-      alert("Login berhasil!");
-      navigate("/"); // Mengarahkan pengguna ke dashboard
-    } catch (error) {
-      // Penanganan error jika login gagal
-      if (error.response) {
-        setErrorMessage(error.response.data.message || "Login gagal.");
-      } else if (error.request) {
-        setErrorMessage("Tidak ada respon dari server. Coba lagi nanti.");
-      } else {
-        setErrorMessage("Terjadi kesalahan. Silakan coba lagi.");
+    try {
+      // Memanggil login function dari useAuthUserStore untuk login
+      await login(credentials);
+
+      // Jika login berhasil, arahkan pengguna ke dashboard
+      if (isLoggedIn) {
+        alert("Login berhasil!");
+        navigate("/"); // Arahkan ke halaman utama atau dashboard
       }
+      navigate("/");
+    } catch (error) {
+      setErrorMessage("Login gagal. Silakan coba lagi.");
     }
   };
 
   return (
     <div>
       <form onSubmit={handleSubmit}>
-        {/* Input untuk Name */}
+        {/* Input untuk Nama */}
         <InputLogin
           type="text"
           placeholder="Nama Lengkap"

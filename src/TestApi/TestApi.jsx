@@ -23,6 +23,7 @@ const TestApi = () => {
       })
       .catch((error) => {
         console.error("Error fetching data:", error);
+
         setLoading(false);
       });
   }, []); // Dependency array kosong untuk menjalankan sekali ketika komponen mount
@@ -34,8 +35,7 @@ const TestApi = () => {
   return (
     <div>
       <h1>Data from API:</h1>
-      <pre>{JSON.stringify(data, null, 2)}</pre>{" "}
-      {/* Menampilkan data dalam format JSON */}
+      <pre>{JSON.stringify(data, null, 2)}</pre>
     </div>
   );
 };

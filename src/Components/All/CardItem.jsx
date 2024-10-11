@@ -4,7 +4,6 @@ import cardImg from "../../assets/ProductImg.png";
 import { BiSolidCart } from "react-icons/bi";
 import { CiHeart } from "react-icons/ci";
 import { Link, useNavigate } from "react-router-dom";
-import { useStore } from "../../Store/stored";
 
 export default function CardItem({ classname = "" }) {
   const navigate = useNavigate();
@@ -13,7 +12,7 @@ export default function CardItem({ classname = "" }) {
     navigate("/product");
   };
   return (
-    <button onClick={toProduct}>
+    <div typeof="button" onClick={toProduct}>
       <div
         className={`${classname} gap-3 shadow-[8px_8px_10px_rgba(0,0,0,0.25)] md:mb-10 rounded-xl px-4 py-4 md:px-5 md:py-[30px] `}
       >
@@ -50,6 +49,6 @@ export default function CardItem({ classname = "" }) {
           </div>
         </div>
       </div>
-    </button>
+    </div>
   );
 }

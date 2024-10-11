@@ -7,9 +7,11 @@ import { useEffect } from "react";
 function LoginPage() {
   document.title = "Login";
   const navigate = useNavigate();
+
   const toSignup = () => {
     navigate("/signup");
   };
+
   const toDashboard = () => {
     navigate("/");
   };
@@ -41,9 +43,9 @@ function LoginPage() {
         <FormLogin />
 
         <div className="flex justify-center items-center mt-8">
-          <hr class="w-full border-t border-slate-600" />
-          <span class="mx-1 text-slate-500">atau</span>
-          <hr class="w-full border-t border-slate-600" />
+          <hr className="w-full border-t border-slate-600" />
+          <span className="mx-1 text-slate-500">atau</span>
+          <hr className="w-full border-t border-slate-600" />
         </div>
 
         <div className=" w-11/12 mx-auto mt-5 mb-24">

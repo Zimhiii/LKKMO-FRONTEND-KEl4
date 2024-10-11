@@ -85,22 +85,22 @@ export default function CategoryPage() {
                 <h2 className="font-bold text-[12px] md:text-[20px]">
                   Warna :{" "}
                 </h2>
-                <div class="flex items-center space-x-4">
-                  <label class="relative focus-within:ring-1 focus-within:ring-black rounded-full">
-                    <input class="sr-only" name="warna" type="radio" />
-                    <div class="w-4 h-4 md:w-5 md:h-5 bg-[#C615CA] rounded-full"></div>
+                <div className="flex items-center space-x-4">
+                  <label className="relative focus-within:ring-1 focus-within:ring-black rounded-full">
+                    <input className="sr-only" name="warna" type="radio" />
+                    <div className="w-4 h-4 md:w-5 md:h-5 bg-[#C615CA] rounded-full"></div>
                   </label>
-                  <label class="relative focus-within:ring-1 focus-within:ring-black rounded-full">
-                    <input class="sr-only" name="warna" type="radio" />
-                    <div class="w-4 h-4 md:w-5 md:h-5 bg-[#A0BCE0] rounded-full"></div>
+                  <label className="relative focus-within:ring-1 focus-within:ring-black rounded-full">
+                    <input className="sr-only" name="warna" type="radio" />
+                    <div className="w-4 h-4 md:w-5 md:h-5 bg-[#A0BCE0] rounded-full"></div>
                   </label>
-                  <label class="relative focus-within:ring-1 focus-within:ring-black rounded-full">
-                    <input class="sr-only" name="warna" type="radio" />
-                    <div class="w-4 h-4 md:w-5 md:h-5 bg-[#15B4CA] rounded-full"></div>
+                  <label className="relative focus-within:ring-1 focus-within:ring-black rounded-full">
+                    <input className="sr-only" name="warna" type="radio" />
+                    <div className="w-4 h-4 md:w-5 md:h-5 bg-[#15B4CA] rounded-full"></div>
                   </label>
-                  <label class="relative focus-within:ring-1 focus-within:ring-black rounded-full">
-                    <input class="sr-only" name="warna" type="radio" />
-                    <div class="w-4 h-4 md:w-5 md:h-5 bg-[#C1F729] rounded-full"></div>
+                  <label className="relative focus-within:ring-1 focus-within:ring-black rounded-full">
+                    <input className="sr-only" name="warna" type="radio" />
+                    <div className="w-4 h-4 md:w-5 md:h-5 bg-[#C1F729] rounded-full"></div>
                   </label>
                 </div>
               </div>
@@ -109,28 +109,28 @@ export default function CategoryPage() {
                 <h2 className="font-bold text-[12px] md:text-[20px]">
                   Ukuran :{" "}
                 </h2>
-                <div class="flex items-center space-x-4">
-                  <label class="relative ring-1 ring-black focus-within:ring-0 rounded-[3px] group">
-                    <input class="sr-only" name="ukuran" type="radio" />
-                    <div class="text-[9px] font-normal w-[16px] h-[16px] md:w-[20px] md:h-[20px]  rounded-[3px] flex items-center justify-center group-focus-within:bg-[#BB8360] group-focus-within:text-white text-black">
+                <div className="flex items-center space-x-4">
+                  <label className="relative ring-1 ring-black focus-within:ring-0 rounded-[3px] group">
+                    <input className="sr-only" name="ukuran" type="radio" />
+                    <div className="text-[9px] font-normal w-[16px] h-[16px] md:w-[20px] md:h-[20px]  rounded-[3px] flex items-center justify-center group-focus-within:bg-[#BB8360] group-focus-within:text-white text-black">
                       S
                     </div>
                   </label>
-                  <label class="relative ring-1 ring-black focus-within:ring-0 rounded-[3px] group">
-                    <input class="sr-only" name="ukuran" type="radio" />
-                    <div class="text-[9px] font-normal w-[16px] h-[16px] md:w-[20px] md:h-[20px]  rounded-[3px] flex items-center justify-center group-focus-within:bg-[#BB8360] group-focus-within:text-white text-black">
+                  <label className="relative ring-1 ring-black focus-within:ring-0 rounded-[3px] group">
+                    <input className="sr-only" name="ukuran" type="radio" />
+                    <div className="text-[9px] font-normal w-[16px] h-[16px] md:w-[20px] md:h-[20px]  rounded-[3px] flex items-center justify-center group-focus-within:bg-[#BB8360] group-focus-within:text-white text-black">
                       M
                     </div>
                   </label>
-                  <label class="relative ring-1 ring-black focus-within:ring-0 rounded-[3px] group">
-                    <input class="sr-only" name="ukuran" type="radio" />
-                    <div class="text-[9px] font-normal w-[16px] h-[16px] md:w-[20px] md:h-[20px]  rounded-[3px] flex items-center justify-center group-focus-within:bg-[#BB8360] group-focus-within:text-white text-black">
+                  <label className="relative ring-1 ring-black focus-within:ring-0 rounded-[3px] group">
+                    <input className="sr-only" name="ukuran" type="radio" />
+                    <div className="text-[9px] font-normal w-[16px] h-[16px] md:w-[20px] md:h-[20px]  rounded-[3px] flex items-center justify-center group-focus-within:bg-[#BB8360] group-focus-within:text-white text-black">
                       L
                     </div>
                   </label>
-                  <label class="relative ring-1 ring-black focus-within:ring-0 rounded-[3px] group">
-                    <input class="sr-only" name="ukuran" type="radio" />
-                    <div class="text-[9px] font-normal w-[16px] h-[16px] md:w-[20px] md:h-[20px]  rounded-[3px] flex items-center justify-center group-focus-within:bg-[#BB8360] group-focus-within:text-white text-black">
+                  <label className="relative ring-1 ring-black focus-within:ring-0 rounded-[3px] group">
+                    <input className="sr-only" name="ukuran" type="radio" />
+                    <div className="text-[9px] font-normal w-[16px] h-[16px] md:w-[20px] md:h-[20px]  rounded-[3px] flex items-center justify-center group-focus-within:bg-[#BB8360] group-focus-within:text-white text-black">
                       XL
                     </div>
                   </label>

@@ -1,14 +1,16 @@
 import React, { useRef, useState } from "react";
 import EditInput from "./EditInput";
+import { useUserStore } from "../../Store/stored";
+import { useAuthUserStore } from "../../stores/authstore";
 
 export default function FormEdit() {
-  const firstNameRef = useRef(null);
-  const lastNameRef = useRef(null);
+  const NameRef = useRef(null);
   const emailRef = useRef(null);
   const phoneNumberRef = useRef(null);
   const adressRef = useRef(null);
   const [profilePicture, setProfilePicture] = useState(null);
   const [imagePreview, setImagePreview] = useState(null);
+  const user = useAuthUserStore((state) => state.user);
 
   const handleKeyDown = (event, nextInputRef) => {
     if (event.key === "Enter") {
@@ -16,11 +18,13 @@ export default function FormEdit() {
       nextInputRef.current.focus();
     }
   };
+
   const handleImageChange = (event) => {
     event.preventDefault();
     setProfilePicture(event.target.files[0]);
     setImagePreview(URL.createObjectURL(event.target.files[0]));
   };
+
   return (
     <form action="" className="flex flex-col w-full  justify-center md:w-3/4">
       <div className="flex flex-col gap-5 justify-center items-center mb-5 md:gap-8">
@@ -60,25 +64,18 @@ export default function FormEdit() {
           </button>
         </div>
       </div>
-      <div className="flex gap-2 font-montserrat justify-center w-full ">
-        <EditInput
-          type="text"
-          placeholder="first name"
-          name="Nama Awal"
-          onKeyDown={(event) => handleKeyDown(event, lastNameRef)}
-          ref={firstNameRef}
-        />
-        <EditInput
-          type="text"
-          placeholder="last name"
-          name="Nama Akhir"
-          onKeyDown={(event) => handleKeyDown(event, emailRef)}
-          ref={lastNameRef}
-        />
-      </div>
+
+      <EditInput
+        type="text"
+        placeholder={user.name}
+        name="Nama"
+        onKeyDown={(event) => handleKeyDown(event, emailRef)}
+        ref={NameRef}
+      />
+
       <EditInput
         type="email"
-        placeholder="example@gmail.com "
+        placeholder={user.email}
         name="Email"
         onKeyDown={(event) => handleKeyDown(event, phoneNumberRef)}
         ref={emailRef}
