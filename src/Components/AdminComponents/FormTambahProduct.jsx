@@ -59,9 +59,9 @@ export default function FormTambahProduct() {
         if (file) {
             formData.append('image', file);
         }
-        formData.append('category_id', category_id);
+        formData.append('category_id', selectedCategory);
         formData.append('size', size);
-        formData.append('subcategory_id', subcategory_id);
+        formData.append('subcategory_id', selectedSubCategory);
 
         // Panggil fungsi addProduct dari store
         await addProduct(formData);
