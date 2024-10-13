@@ -51,9 +51,24 @@ export default function FormTambahProduct() {
     const stock = parseInt(stockRef.current.value);
     const size = sizeRef.current.value;
 
+<<<<<<< HEAD
     // Ambil category_id dan subcategory_id dari state
     const category_id = selectedCategory;
     const subcategory_id = selectedSubCategory;
+=======
+        // Buat form data untuk mengirim file
+        const formData = new FormData();
+        formData.append('name', name);
+        formData.append('price', price);
+        formData.append('description', description);
+        formData.append('stock', stock);
+        if (file) {
+            formData.append('image', file);
+        }
+        formData.append('category_id', selectedCategory);
+        formData.append('size', size);
+        formData.append('subcategory_id', selectedSubCategory);
+>>>>>>> 2e862fa34288d4d04322cffab50f10189a63adf0
 
     // Buat form data untuk mengirim file
     const formData = new FormData();
