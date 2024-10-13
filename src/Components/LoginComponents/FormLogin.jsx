@@ -13,9 +13,9 @@ const FormLogin = () => {
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const navigate = useNavigate();
+  const { login, isLoggedIn, loading } = useAuthUserStore();
 
   // Ambil fungsi login dan status dari useAuthUserStore
-  const { login, isLoggedIn } = useAuthUserStore();
 
   // Fungsi untuk menangani navigasi antar input dengan tombol Enter
   const handleKeyDown = (event, nextInputRef) => {
@@ -45,8 +45,8 @@ const FormLogin = () => {
 
       // Jika login berhasil, arahkan pengguna ke dashboard
       if (isLoggedIn) {
-        alert("Login berhasil!");
-        navigate("/"); // Arahkan ke halaman utama atau dashboard
+        // alert("Login berhasil!");
+        // navigate("/"); // Arahkan ke halaman utama atau dashboard
       }
     } catch (error) {
       setErrorMessage("Login gagal. Silakan coba lagi.");
@@ -99,7 +99,7 @@ const FormLogin = () => {
             Tampilkan Kata Sandi
           </label>
         </div>
-
+        {loading && <p>Try to login...</p>}
         {errorMessage && <p className="text-red-500">{errorMessage}</p>}
 
         {/* Tombol Submit */}

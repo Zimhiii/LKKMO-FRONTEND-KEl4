@@ -3,8 +3,14 @@ import { Link, Outlet } from "react-router-dom";
 import { MdManageAccounts } from "react-icons/md";
 import { TbPasswordUser } from "react-icons/tb";
 import { MdLogout } from "react-icons/md";
+import { useAuthUserStore } from "../stores/authStore";
 
 export default function SettingLayout() {
+  const logout = useAuthUserStore((state) => state.logout);
+
+  const handleLogout = () => {
+    logout();
+  };
   return (
     <div className="p-[14px]">
       <h1 className="font-cerotta  text-[16px] md:text-[39px] font-medium mb-[10px]">
@@ -24,8 +30,10 @@ export default function SettingLayout() {
           <span>Password</span>
         </Link>
         <Link
-          onClick={() => localStorage.clear()}
-          to="/login"
+          onClick={() => {
+            handleLogout();
+          }}
+          to="/"
           className="flex items-center gap-2"
         >
           <span>

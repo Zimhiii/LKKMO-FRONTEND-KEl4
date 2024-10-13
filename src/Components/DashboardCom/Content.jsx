@@ -1,10 +1,19 @@
-import React from "react";
+import React, { useEffect } from "react";
 import CardItem from "../All/CardItem";
 import { Link } from "react-router-dom";
+import useProductManagementStore from "../../stores/productManagementStore";
 
-export default function Content({ category = "Koleksi", products }) {
+export default function Content({ category = "Koleksi", id }) {
   const urlcategory = category.toLowerCase();
-  const mappedProduct = products.map((product) => (
+  const idCategory = id;
+  const { products } = useProductManagementStore();
+
+  // Filter products based on category_id
+  const productsCategory = products.filter(
+    (product) => product.category.id == idCategory
+  );
+
+  const mappedProduct = productsCategory.map((product) => (
     <CardItem
       key={product.id}
       id={product.id}
@@ -20,8 +29,16 @@ export default function Content({ category = "Koleksi", products }) {
       <h1 className="font-cerotta text-[25px] mb-5 md:text-[50px]">
         {category}
       </h1>
-      <div className="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-[100px]">
-        {mappedProduct}
+      <div className="flex flex-wrap gap-3 md:gap-[100px]">
+        {mappedProduct.length > 0 ? (
+          mappedProduct
+        ) : (
+          <div className="text-center text-4xl font-cerotta">
+            Produk tidak ditemukan
+          </div>
+        )}
+
+        {console.log(`${category}`, products)}
       </div>
       <Link
         to={`/category/${urlcategory}`}

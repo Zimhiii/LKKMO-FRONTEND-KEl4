@@ -17,7 +17,8 @@ export default function Dashboard() {
   return (
     <div>
       <Hero />
-      <Content category="Carnaval" products={products} />
+      <Content category="Carnaval" products={products} id="2" />
+      <Content category="Cosplay" products={products} id="1" />
     </div>
   );
 }

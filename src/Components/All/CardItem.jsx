@@ -22,7 +22,7 @@ export default function CardItem({
     navigate(`/product/${id}`);
   };
   return (
-    <div typeof="button" onClick={toProduct}>
+    <div typeof="button" onClick={toProduct} className="cursor-pointer">
       <div
         className={`${classname} gap-3 shadow-[8px_8px_10px_rgba(0,0,0,0.25)] md:mb-10 rounded-xl px-4 py-4 md:px-5 md:py-[30px] `}
       >
