@@ -29,7 +29,7 @@ export default function Content({ category = "Koleksi", id }) {
       <h1 className="font-cerotta text-[25px] mb-5 md:text-[50px]">
         {category}
       </h1>
-      <div className="flex flex-wrap gap-3 md:gap-[100px]">
+      <div className="flex flex-wrap justify-center gap-3 md:gap-[100px]">
         {mappedProduct.length > 0 ? (
           mappedProduct
         ) : (

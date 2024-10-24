@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { BsSortDown } from "react-icons/bs";
 import { Await, Link } from "react-router-dom";
 import { useUserManagementStore } from "../stores/userManagementStore";
-import { useAuthUserStore } from "../stores/authstore";
+import { useAuthUserStore } from "../stores/authStore";
 
 export default function ManagementUser() {
   const { users, fetchUsers, deleteUser, setAdminStatus } =

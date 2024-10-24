@@ -2,10 +2,16 @@ import React, { useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import { FaCaretRight } from "react-icons/fa";
 import { useLoginStore } from "../../Store/stored";
+import { useAuthUserStore } from "../../stores/authStore";
 
 export default function NavLinkComponent() {
+  const user = useAuthUserStore((state) => state.user);
   const { login, setLogin } = useLoginStore();
   const token = localStorage.getItem("token");
+
+  // if (!user || user.role_id !== 2) {
+  //   window.location.href = "/";
+  // }
   useEffect(() => {
     if (token) {
       setLogin(true);
@@ -87,6 +93,19 @@ export default function NavLinkComponent() {
         >
           Tentang Kami
         </NavLink>
+
+        {user && user.role_id === 2 && (
+          <NavLink
+            to="/admin"
+            className={({ isActive }) =>
+              isActive
+                ? "text-black border-b-2 border-black"
+                : "text-[#736455] hover:text-black"
+            }
+          >
+            AdminPage
+          </NavLink>
+        )}
       </div>
     </div>
   );

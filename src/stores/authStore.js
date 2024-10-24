@@ -3,6 +3,7 @@ import { create } from "zustand";
 import { persist } from "zustand/middleware";
 import api from "../api";
 import { useNavigate } from "react-router-dom";
+import useProductManagementStore from "./productManagementStore";
 
 export const useAuthUserStore = create(
   persist(
@@ -79,6 +80,8 @@ export const useAuthUserStore = create(
           user: null, // Reset user saat logout
         });
         localStorage.removeItem("token"); // Hapus token dari localStorage
+        const { setProducts } = useProductManagementStore.getState(); // Akses fungsi dari store
+        setProducts([]);
         localStorage.clear();
         // window.location.href = "/"; // Hapus token dari localStorage
       },

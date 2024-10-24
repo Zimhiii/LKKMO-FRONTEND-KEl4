@@ -12,6 +12,7 @@ const useProductManagementStore = create(
       product: null,
       loading: false,
       error: null,
+      setProducts: (products) => set({ products }),
       setProduct: (product) => set({ product }),
 
       // Fetch all products (accessible by authenticated users)

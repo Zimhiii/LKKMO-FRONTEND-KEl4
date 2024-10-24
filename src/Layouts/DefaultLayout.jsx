@@ -4,10 +4,12 @@ import { Outlet, useParams } from "react-router-dom";
 import Footer from "../Pages/Footer";
 import { useLoginStore, useUserStore } from "../Store/stored";
 import useProductManagementStore from "../stores/productManagementStore";
+import useWishlistStore from "../stores/wishlistManagementStore";
 
 const DefaultLayout = () => {
   const { fetchProducts, fetchProductById, product, products } =
     useProductManagementStore();
+  const { fetchWishlist, wishlist } = useWishlistStore();
   const user = useUserStore((state) => state.user);
   const { setLogin } = useLoginStore();
   const { id } = useParams();
@@ -21,7 +23,7 @@ const DefaultLayout = () => {
   useEffect(() => {
     // Panggil fetchProducts saat komponen pertama kali dirender
     fetchProducts();
-
+    fetchWishlist();
     // Hanya panggil fetchProductById jika ada ID
     if (id) {
       fetchProductById(id);
@@ -34,6 +36,7 @@ const DefaultLayout = () => {
 
   console.log("Product by ID:", product);
   console.log("All Products:", products);
+  console.log("All Products:", wishlist);
 
   return (
     <div className="relative min-h-screen flex flex-col">

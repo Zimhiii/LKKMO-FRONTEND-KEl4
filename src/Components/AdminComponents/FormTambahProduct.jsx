@@ -26,10 +26,10 @@ export default function FormTambahProduct() {
   };
 
   const allCategory = categories[0];
-  console.log(allCategory);
 
   const availableSubCategories =
-    allCategory[selectedCategory - 1]?.subcategories;
+    allCategory?.find((cat) => cat.id === selectedCategory)?.subcategories ||
+    [];
 
   const handleFileChange = (event) => {
     const selectedFile = event.target.files[0];
@@ -52,19 +52,6 @@ export default function FormTambahProduct() {
     const size = sizeRef.current.value;
 
     // Buat form data untuk mengirim file
-    // const formData = new FormData();
-    // formData.append('name', name);
-    // formData.append('price', price);
-    // formData.append('description', description);
-    // formData.append('stock', stock);
-    // if (file) {
-    //     formData.append('image', file);
-    // }
-    // formData.append('category_id', selectedCategory);
-    // formData.append('size', size);
-    // formData.append('subcategory_id', selectedSubCategory);
-
-    // Buat form data untuk mengirim file
     const formData = new FormData();
     formData.append("name", name);
     formData.append("price", price);
@@ -73,9 +60,9 @@ export default function FormTambahProduct() {
     if (file) {
       formData.append("image", file);
     }
-    formData.append("category_id", category_id); // Gunakan state selectedCategory
+    formData.append("category_id", selectedCategory); // Gunakan state selectedCategory
     formData.append("size", size);
-    formData.append("subcategory_id", subcategory_id); // Gunakan state selectedSubCategory
+    formData.append("subcategory_id", selectedSubCategory); // Gunakan state selectedSubCategory
 
     // Panggil fungsi addProduct dari store
     await addProduct(formData);
@@ -87,13 +74,13 @@ export default function FormTambahProduct() {
         <h2 className="text-[20px] mb-[30px]">Informasi Produk</h2>
         <Select
           name="Kategori"
-          options={allCategory.map((cat) => ({
+          options={allCategory?.map((cat) => ({
             value: cat.id,
             label: cat.name,
           }))}
           value={selectedCategory}
           onChange={(e) => {
-            setSelectedCategory(e.target.value);
+            setSelectedCategory(parseInt(e.target.value));
             setSelectedSubCategory("");
           }}
         />
@@ -104,7 +91,7 @@ export default function FormTambahProduct() {
             label: sub.name,
           }))}
           value={selectedSubCategory}
-          onChange={(e) => setSelectedSubCategory(e.target.value)}
+          onChange={(e) => setSelectedSubCategory(parseInt(e.target.value))}
           disabled={!selectedCategory}
         />
         <InputTambahAkun
@@ -126,7 +113,7 @@ export default function FormTambahProduct() {
           placeholder="Ukuran"
           name="Ukuran"
           onKeyDown={(event) => handleKeyDown(event, null)}
-          ref={sizeRef} // Tambahkan useRef untuk size
+          ref={sizeRef}
         />
         <InputTambahAkun
           type="number"
@@ -143,7 +130,6 @@ export default function FormTambahProduct() {
         />
 
         {/* Preview image */}
-
         <div className="flex gap-6 mt-[40px]">
           <button
             type="submit"
