@@ -80,10 +80,10 @@ export default function CardItem({
       >
         <div className="relative z-1 bg-[#D9D9D9] px-6 py-6  rounded-xl">
           <div
-            className={`group absolute z-99 px-[3px] py-[2px] md:p-[6px] text-[16px] md:text-[30px] top-0 -right-1 md:-top-4 md:-right-3 bg-white rounded-[6px] md:rounded-[14px] shadow-lg shadow-slate-500 ${
+            className={`group absolute z-99 px-[3px] py-[2px] md:p-[6px] text-[16px] md:text-[30px] top-0 -right-1 md:-top-4 md:-right-3 rounded-[6px] md:rounded-[14px] shadow-lg shadow-slate-500 ${
               isProductInWishlist
-                ? "bg-pink-500 text-white"
-                : "hover:bg-pink-500"
+                ? "bg-pink-500 "
+                : "bg-white hover:bg-pink-500"
             } transition-all ease-in`}
           >
             <Link

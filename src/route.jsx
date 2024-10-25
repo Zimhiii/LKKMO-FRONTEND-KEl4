@@ -16,7 +16,7 @@ import HistoryPage from "./Pages/HistoryPage";
 import ProfilePage from "./Pages/ProfilePage";
 import PasswordPage from "./Pages/PasswordPage";
 import CategoryLayout from "./Layouts/CategoryLayout";
-import ContainerContent from "./Components/CategoryComponents/ContainerContent";
+import ContainerContentCategory from "./Components/CategoryComponents/ContainerContentCategory";
 import AboutMe from "./Pages/AboutMePage";
 import AdminLayout from "./Layouts/AdminLayout";
 import SettingLayout from "./Layouts/SettingLayout";
@@ -54,7 +54,7 @@ export const route = createBrowserRouter([
                 children: [
                   {
                     path: "",
-                    element: <ContainerContent />,
+                    element: <ContainerContentCategory />,
                   },
                   {
                     path: ":subcategory",
