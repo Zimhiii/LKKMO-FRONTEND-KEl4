@@ -4,11 +4,12 @@ import { useParams } from "react-router-dom";
 import useProductManagementStore from "../../stores/productManagementStore";
 import useCategoryManagementStore from "../../stores/categoryManagementStore";
 import useSubcategoryManagementStore from "../../stores/subCategoryManagementStore";
+// import Content from "../DashboardCom/Content";
 
 export default function ContainerContenCategory() {
   const category_params = useParams().category.toLowerCase();
   const { categories, fetchCategories, loading } = useCategoryManagementStore();
-  const { productByCategory, fetchProductsByCategory } =
+  const { productByCategory, fetchProductsByCategory, products } =
     useProductManagementStore();
   const { fetchSubcategoryById, subcategory } = useSubcategoryManagementStore();
   useEffect(() => {
@@ -28,9 +29,12 @@ export default function ContainerContenCategory() {
   //   }
   // });
 
-  const categoryData = categories[0].find(
-    (category) => category.name.toLowerCase() === category_params
-  );
+  const categoryData =
+    categories && categories[0]
+      ? categories[0].find(
+          (category) => category.name.toLowerCase() === category_params
+        )
+      : null;
   const category_id = categoryData ? categoryData.id - 1 : null;
   const subCategoryArray = categoryData
     ? categories[0][category_id].subcategories
@@ -49,10 +53,19 @@ export default function ContainerContenCategory() {
         </div>
       )}
 
-      {categories && !loading && (
+      {categories && categories[0] && !loading && (
         <>
           {subCategoryArray.map((subcategory) => (
-            <Content key={subcategory.id} subcategory={subcategory.name} />
+            <>
+              <Content
+                key={subcategory.id}
+                category={subcategory.name}
+                products={products}
+                id={category_id}
+                idsubcategory={subcategory.id}
+              />
+              <p className="text-2xl  px-10 py-5">{subcategory.id}</p>
+            </>
           ))}
           {/* <Content subcategory="anime" />
           <Content subcategory="comic" />
@@ -64,8 +77,9 @@ export default function ContainerContenCategory() {
               // console.log("productByCategory", productByCategory);
               console.log("category_params :", category_params);
               console.log("categories_id :", category_id);
-              console.log("categories_id :", categories[0][category_id]);
+              // console.log("categories_id :", categories[0][category_id]);
               console.log("subcategories[] :", subCategoryArray);
+              console.log("products :", products);
             }}
           >
             a

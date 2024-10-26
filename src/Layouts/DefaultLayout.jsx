@@ -10,6 +10,7 @@ const DefaultLayout = () => {
   const { fetchProducts, fetchProductById, product, products } =
     useProductManagementStore();
   const { fetchWishlist, wishlist } = useWishlistStore();
+  const { fetchCategories } = useProductManagementStore();
   const user = useUserStore((state) => state.user);
   const { setLogin } = useLoginStore();
   const { id } = useParams();
@@ -24,6 +25,7 @@ const DefaultLayout = () => {
     // Panggil fetchProducts saat komponen pertama kali dirender
     fetchProducts();
     fetchWishlist();
+    fetchCategories;
     // Hanya panggil fetchProductById jika ada ID
     if (id) {
       fetchProductById(id);

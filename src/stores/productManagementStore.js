@@ -96,6 +96,8 @@ const useProductManagementStore = create(
       fetchProductsBySubCategory: async (subcategoryId) => {
         set({ loading: true, error: null });
         const { token } = useAuthUserStore.getState(); // Ambil token dari auth store
+        // console.log("subcategory id fetch", subcategoryId);
+        // set({ productsBySubCategory: [], loading: true, error: null });
         try {
           const response = await api.get(
             `/products/subcategory/${subcategoryId}`,
@@ -103,7 +105,10 @@ const useProductManagementStore = create(
               headers: { Authorization: `Bearer ${token}` },
             }
           );
-          set({ products: response.data.data[0], loading: false });
+          set({
+            productsBySubCategory: response.data.data[0].products,
+            loading: false,
+          });
         } catch (error) {
           set({
             error:
@@ -113,6 +118,40 @@ const useProductManagementStore = create(
           });
         }
       },
+      // fetchProductsBySubCategory: async (subcategoryId) => {
+      //   if (!subcategoryId) return;
+      //   // Hentikan jika subcategoryId tidak valid
+      //   console.log(
+      //     "Memanggil fetchProductsBySubCategory dengan subcategoryId:",
+      //     subcategoryId
+      //   );
+
+      //   set({ productsBySubCategory: [], loading: true, error: null }); // Reset sebelum fetch
+      //   const { token } = useAuthUserStore.getState();
+      //   try {
+      //     const response = await api.get(
+      //       `/products/subcategory/${subcategoryId}`,
+      //       {
+      //         headers: { Authorization: `Bearer ${token}` },
+      //       }
+      //     );
+      //     console.log(
+      //       "Response dari fetchProductsBySubCategory:",
+      //       response.data
+      //     );
+      //     set({
+      //       productsBySubCategory: response.data.data[0].products, // Pastikan struktur ini benar
+      //       loading: false,
+      //     });
+      //   } catch (error) {
+      //     set({
+      //       error:
+      //         error.response?.data?.message ||
+      //         "Error fetching products by subcategory",
+      //       loading: false,
+      //     });
+      //   }
+      // },
 
       // Add new product (admin only)
       addProduct: async (productData) => {

@@ -13,15 +13,18 @@ export default function Content({ category = "Koleksi", id }) {
     (product) => product.category.id == idCategory
   );
 
-  const mappedProduct = productsCategory.map((product) => (
-    <CardItem
-      key={product.id}
-      id={product.id}
-      name={product.name}
-      price={product.price}
-      description={product.description}
-      image={product.image}
-    />
+  const mappedProduct = productsCategory.slice(0, 3).map((product) => (
+    <>
+      <CardItem
+        key={product.id}
+        id={product.id}
+        name={product.name}
+        price={product.price}
+        description={product.description}
+        image={product.image}
+      />
+      {console.log(`cek isi product dari ${category}`, products)}
+    </>
   ));
 
   return (
