@@ -38,11 +38,11 @@ export default function WishlistPage() {
         Wishlist
       </h1>
 
+      {/* Render detail produk berdasarkan wishlist */}
       <div className="flex flex-col items-center mb-[12px] mt-[12px] md:mt-[40px] md:mb-[31px]">
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-[100px]">
-          {/* Render detail produk berdasarkan wishlist */}
-          {wishlistProducts.length > 0 ? (
-            wishlistProducts.map((product) => (
+        {wishlistProducts.length > 0 ? (
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-[100px]">
+            {wishlistProducts.map((product) => (
               <CardItem
                 key={product.id}
                 id={product.id}
@@ -51,15 +51,17 @@ export default function WishlistPage() {
                 description={product.description}
                 image={product.image}
               />
-            ))
-          ) : (
-            <p>No items in wishlist</p>
-          )}
-        </div>
+            ))}
+          </div>
+        ) : (
+          <p className="font-cerotta text-2xl text-center">
+            No items in wishlist
+          </p>
+        )}
 
         <button
           className="rounded-[9px] ring-1 ring-[#BB8360] text-[11px] md:text-[20px] px-2 py-1 mt-5"
-          on
+          onClick={() => console.log("wish", wishlist)}
         >
           Lihat Semua
         </button>

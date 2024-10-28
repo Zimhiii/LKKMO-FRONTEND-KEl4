@@ -1,5 +1,5 @@
 import React from "react";
-import { Outlet, useParams } from "react-router-dom";
+import { Link, Outlet, useParams } from "react-router-dom";
 
 export default function CategoryLayout() {
   const { category, subcategory } = useParams(); // Destructuring untuk params
@@ -21,10 +21,16 @@ export default function CategoryLayout() {
       </div>
 
       {/* Breadcrumb dengan params */}
-      <p className="font-montserrat text-[8px] mt-[4px] md:text-[14px] ml-[12px] md:ml-[39px]">
-        <span className="text-[#666666]">Kategori{">"}</span> {category}
-        {subcategory && ` > ${subcategory}`}
-      </p>
+      <div className="font-montserrat text-[8px] mt-[4px] md:text-[14px] ml-[12px] md:ml-[39px]">
+        <span className="text-[#666666]">Kategori{">"}</span>{" "}
+        <Link to={`/category/${category}`}>{category}</Link>
+        {subcategory && (
+          <>
+            {">"}
+            <Link to={`/category/${category}`}>{subcategory}</Link>
+          </>
+        )}
+      </div>
 
       {/* h1 untuk menampilkan title berdasarkan params terakhir */}
       <h1 className="container-layout font-cerotta text-[23px] md:text-[61px] text-center px-[116px]">

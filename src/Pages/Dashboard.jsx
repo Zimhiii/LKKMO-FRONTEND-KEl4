@@ -10,7 +10,6 @@ export default function Dashboard() {
   document.title = "Dashboard";
   const { products } = useProductManagementStore();
   const { fetchCategories, categories, loading } = useCategoryManagementStore();
-
   useEffect(() => {
     fetchCategories(); // Pastikan fungsi dipanggil dengan tanda kurung
   }, [fetchCategories]);

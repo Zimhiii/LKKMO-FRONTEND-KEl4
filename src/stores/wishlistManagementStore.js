@@ -9,7 +9,7 @@ const useWishlistStore = create(
       wishlist: [],
       loading: false,
       error: null,
-
+      
       // Fetch all wishlist items
       fetchWishlist: async () => {
         set({ loading: true, error: null });

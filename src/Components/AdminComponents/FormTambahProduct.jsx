@@ -61,7 +61,7 @@ export default function FormTambahProduct() {
       formData.append("image", file);
     }
     formData.append("category_id", selectedCategory); // Gunakan state selectedCategory
-    formData.append("size", size);
+    // formData.append("size", size);
     formData.append("subcategory_id", selectedSubCategory); // Gunakan state selectedSubCategory
 
     // Panggil fungsi addProduct dari store

@@ -69,6 +69,13 @@ export default function CardItem({
     navigate(`/product/${id}`);
   };
 
+  const rupiah = (number) => {
+    return new Intl.NumberFormat("id-ID", {
+      style: "currency",
+      currency: "IDR",
+    }).format(number);
+  };
+
   return (
     <div
       typeof="button"
@@ -119,7 +126,7 @@ export default function CardItem({
             </p>
           </div>
           <h2 className="text-[#000000] md:text-[17px] text-opacity-60 font-semibold">
-            Rp.{price} / hari
+            {rupiah(price)}/ hari
           </h2>
           <div className="absolute p-[3px] -bottom-2 -right-2 md:bottom-0 md:-right-0 bg-transparent rounded-[6px] text-[20px] md:text-[35px] ">
             <Link

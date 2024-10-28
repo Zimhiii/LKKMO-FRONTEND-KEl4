@@ -10,6 +10,7 @@ export default function TambahSubCategory() {
   const id = useParams().id;
   const loading = useSubcategoryManagementStore((state) => state.loading);
   const error = useSubcategoryManagementStore((state) => state.error);
+  const setError = useSubcategoryManagementStore((state) => state.setError);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -17,10 +18,11 @@ export default function TambahSubCategory() {
     // Lakukan pengecekan terhadap input
     const subcategoryData = {
       name,
-      id,
+      category_id: id,
     };
     await addSubcategory(subcategoryData);
     setName("");
+    setError(null);
     // window.location.href = "/admin/daftarcategory/category/" + categoryId;
   };
 

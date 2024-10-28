@@ -3,8 +3,14 @@ import CardItem from "../All/CardItem";
 import { Link } from "react-router-dom";
 import useProductManagementStore from "../../stores/productManagementStore";
 
-export default function Content({ category = "Koleksi", id, idsubcategory }) {
+export default function Content({
+  category = "Koleksi",
+  id,
+  idsubcategory,
+  subcategory,
+}) {
   const urlcategory = category.toLowerCase();
+  const urlsubcategory = subcategory.toLowerCase();
   const {
     productsBySubCategory,
     fetchProductsBySubCategory,
@@ -56,7 +62,7 @@ export default function Content({ category = "Koleksi", id, idsubcategory }) {
     <div className="flex flex-col items-center mb-[44px] md:mb-[84px]">
       <div className="flex flex-col w-full items-start ">
         <h1 className="font-boruna text-[25px] text-start mb-5 md:text-[50px]">
-          {category}
+          {subcategory}
         </h1>
       </div>
       <div className="flex flex-wrap justify-center gap-3 md:gap-[100px]">
@@ -65,18 +71,16 @@ export default function Content({ category = "Koleksi", id, idsubcategory }) {
         ) : error ? (
           <div className="text-center text-4xl font-cerotta">{error}</div>
         ) : mappedProduct.length > 0 ? (
-          <>
-            {mappedProduct}
-            <button>test</button>
-          </>
+          <>{mappedProduct}</>
         ) : (
           <div className="text-center text-4xl font-cerotta">
-            Produk tidak ditemukan
+            Produk Kosong, Silahkan Pilih Kategori Lain Atau Login Terlebih
+            Dahulu
           </div>
         )}
       </div>
       <Link
-        to={`/category/${urlcategory}`}
+        to={`/category/${urlcategory}/${urlsubcategory}`}
         className="ring-1 ring-[#BB8360] text-[14px] px-4 py-2 rounded-lg mt-5"
       >
         Lihat Semua

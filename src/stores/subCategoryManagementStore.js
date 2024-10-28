@@ -11,6 +11,7 @@ const useSubcategoryManagementStore = create(
       subcategory: null,
       loading: false,
       error: null,
+      setError: (error) => set({ error }),
 
       // Fetch subcategory by ID
       fetchSubcategoryById: async (id) => {

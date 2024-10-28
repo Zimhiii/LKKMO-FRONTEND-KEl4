@@ -1,14 +1,27 @@
 import React, { useEffect, useState } from "react";
 import { CiHeart } from "react-icons/ci";
 import SectionComment from "../Components/ProductComponents/SectionComment";
-import img from "../assets/ProductImg.png";
 import { useParams } from "react-router-dom";
 import useProductManagementStore from "../stores/productManagementStore";
+import useOrderManagementStore from "../stores/orderManagementStore";
 
 export default function CategoryPage() {
-  const [count, setCount] = useState(0);
-  const { fetchProductById, product } = useProductManagementStore();
+  const [count, setCount] = useState(1);
+  const [selectedStartDate, setSelectedStartDate] = useState("");
+  const [selectedEndDate, setSelectedEndDate] = useState("");
+  const { fetchProductById, product, products } = useProductManagementStore();
   const { id } = useParams();
+  const [activeSize, setActiveSize] = useState(null); // State untuk menyimpan ukuran yang dipilih
+  const { createOrder } = useOrderManagementStore();
+
+  const handleSizeClick = (size) => {
+    setActiveSize(size); // Menyetel ukuran yang dipilih sebagai active
+  };
+
+  const selectedProduct = product?.products;
+  // const selectedProduct = products
+  //   ? products.find((product) => product.id == id)
+  //   : null;
 
   useEffect(() => {
     if (id) {
@@ -17,19 +30,35 @@ export default function CategoryPage() {
   }, [id, fetchProductById]);
 
   useEffect(() => {
-    document.title = "CategoryPage"; // Set document title on component mount
+    document.title = "Page-Product-" + selectedProduct?.name; // Set document title on component mount
   }, []);
-
-  const selectedProduct = product?.products;
 
   const countPlus = () => {
     setCount(count + 1);
   };
 
   const countMinus = () => {
-    setCount((prevCount) => Math.max(prevCount - 1, 0));
+    if (count > 1) {
+      setCount((prevCount) => Math.max(prevCount - 1, 0));
+    }
   };
 
+  const handleRentalNow = () => {
+    // Hitung total harga
+    const totalPrice = count * selectedProduct.price;
+
+    // Data order yang akan dikirim
+    const orderData = {
+      quantity: count,
+      product_id: id,
+      size: activeSize,
+      rental_start: selectedStartDate,
+      rental_end: selectedEndDate, // Sesuaikan jika ada tanggal akhir yang diinginkan
+      total_price: totalPrice,
+      status: "Belum",
+    };
+    createOrder(orderData); // Panggil fungsi createOrder
+  };
   if (!selectedProduct) {
     return (
       <div className="flex justify-center items-center">
@@ -105,10 +134,11 @@ export default function CategoryPage() {
                 {selectedProduct.description}
               </p>
               <div className="flex mt-[12px] gap-[10px] ">
-                <h2 className="font-bold text-[12px] md:text-[20px]">
+                {/* <h2 className="font-bold text-[12px] md:text-[20px]">
                   Warna :{" "}
-                </h2>
-                <div className="flex items-center space-x-4">
+                </h2> */}
+                {/* Warna Kalo Jadi wkwk */}
+                {/* <div className="flex items-center space-x-4">
                   <label className="relative focus-within:ring-1 focus-within:ring-black rounded-full">
                     <input className="sr-only" name="warna" type="radio" />
                     <div className="w-4 h-4 md:w-5 md:h-5 bg-[#C615CA] rounded-full"></div>
@@ -125,10 +155,10 @@ export default function CategoryPage() {
                     <input className="sr-only" name="warna" type="radio" />
                     <div className="w-4 h-4 md:w-5 md:h-5 bg-[#C1F729] rounded-full"></div>
                   </label>
-                </div>
+                </div> */}
               </div>
 
-              <div className="flex mt-[12px] gap-[10px]">
+              {/* <div className="flex mt-[12px] gap-[10px]">
                 <h2 className="font-bold text-[12px] md:text-[20px]">
                   Ukuran :{" "}
                 </h2>
@@ -158,6 +188,61 @@ export default function CategoryPage() {
                     </div>
                   </label>
                 </div>
+              </div> */}
+              <div className="flex mt-[12px] gap-[10px]">
+                <h2 className="font-bold text-[12px] md:text-[20px]">
+                  Ukuran :{" "}
+                </h2>
+                <div className="flex items-center space-x-4">
+                  {["S", "M", "L", "XL"].map((size) => (
+                    <label
+                      key={size}
+                      className={`relative ring-1 ring-black rounded-[3px] group ${
+                        activeSize === size
+                          ? "bg-[#BB8360] text-white"
+                          : "text-black"
+                      }`} // Tambahkan style ketika active
+                      onClick={() => handleSizeClick(size)} // Setel ukuran yang dipilih saat label di klik
+                    >
+                      <input
+                        className="sr-only"
+                        name="ukuran"
+                        type="radio"
+                        checked={activeSize === size}
+                        onChange={() => handleSizeClick(size)}
+                        required
+                      />
+                      <div className="text-[9px] font-normal w-[16px] h-[16px] md:w-[20px] md:h-[20px] rounded-[3px] flex items-center justify-center">
+                        {size}
+                      </div>
+                    </label>
+                  ))}
+                </div>
+              </div>
+              {/* Tambahkan input tanggal di sini */}
+              <div className="mt-4">
+                <label className="text-[12px] md:text-[18px] font-semibold">
+                  Pilih Tanggal Awal:
+                </label>
+                <input
+                  type="date"
+                  value={selectedStartDate}
+                  onChange={(e) => setSelectedStartDate(e.target.value)}
+                  className="ml-2 px-2 py-1 border border-gray-300 rounded"
+                  required
+                />
+              </div>
+              <div className="mt-4">
+                <label className="text-[12px] md:text-[18px] font-semibold">
+                  Pilih Tanggal Akhir:
+                </label>
+                <input
+                  type="date"
+                  value={selectedEndDate}
+                  onChange={(e) => setSelectedEndDate(e.target.value)}
+                  className="ml-2 px-2 py-1 border border-gray-300 rounded"
+                  required
+                />
               </div>
 
               <div className="mt-[25px] text-[10px] md:text-[20px] flex items-center  h-[23px] md:h-[43px] gap-[16px] md:gap-[46px]">
@@ -178,10 +263,16 @@ export default function CategoryPage() {
                     +
                   </span>
                 </div>
-                <button className="flex items-center bg-white h-full px-[7px] py-[2px] rounded-[3px] text-[8px] md:text-[14px] border-solid border-[1px] border-[#BB8360]">
+                <button
+                  onClick={() => console.log(selectedProduct)}
+                  className="flex items-center bg-white h-full px-[7px] py-[2px] rounded-[3px] text-[8px] md:text-[14px] border-solid border-[1px] border-[#BB8360]"
+                >
                   Tambahkan Keranjang
                 </button>
-                <button className="flex items-center bg-[#BB8360] h-full w-fit p-[1px] rounded-[5px] text-[8px] md:text-[14px] text-white px-[6px] ">
+                <button
+                  onClick={handleRentalNow}
+                  className="flex items-center bg-[#BB8360] h-full w-fit p-[1px] rounded-[5px] text-[8px] md:text-[14px] text-white px-[6px] "
+                >
                   Rental Sekarang
                 </button>
                 <div className=" px-[3px] py-[2px] md:p-[6px] text-[16px] md:text-[30px] top-0 -right-1 md:-top-4 md:-right-3 bg-white rounded-[6px] md:rounded-[0px] border-black border-[1px]">

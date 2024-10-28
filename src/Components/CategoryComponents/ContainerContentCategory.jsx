@@ -59,7 +59,8 @@ export default function ContainerContenCategory() {
             <>
               <Content
                 key={subcategory.id}
-                category={subcategory.name}
+                category={category_params}
+                subcategory={subcategory.name}
                 products={products}
                 id={category_id}
                 idsubcategory={subcategory.id}
