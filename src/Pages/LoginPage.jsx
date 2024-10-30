@@ -12,10 +12,6 @@ function LoginPage() {
     navigate("/signup");
   };
 
-  const toDashboard = () => {
-    navigate("/");
-  };
-
   useEffect(() => {
     if (localStorage.getItem("token")) {
       navigate("/");
@@ -56,7 +52,7 @@ function LoginPage() {
           </ButtonLogin> */}
           <Link
             to={"/"}
-            className="hover:border hover:border-[#BB8360] hover:bg-transparent hover:text-[#BB8360] hover:font-bold w-full rounded-lg px-6 py-2 flex justify-center items-center gap-2 mb-4 shadow-[0px_4px_30px_rgba(0,0,0,0.25)] bg-[#BB8360] text-white transition-all duration-150 ease-in-out"
+            className="hover:border hover:border-[#BB8360] hover:bg-transparent hover:text-[#BB8360] hover:font-medium  w-full rounded-lg px-6 py-2 flex justify-center items-center gap-2 mb-4 shadow-[0px_4px_30px_rgba(0,0,0,0.25)] bg-[#BB8360] text-white transition-all duration-150 ease-in-out"
           >
             Stay Logged In as Anonymous
           </Link>

@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import InputLogin from "./LoginInput";
 import { useAuthUserStore } from "../../stores/authStore";
@@ -25,6 +25,9 @@ const FormLogin = () => {
       nextInputRef.current.focus();
     }
   };
+  useEffect(() => {
+    nameRef.current.focus();
+  }, []);
 
   // Fungsi untuk menampilkan atau menyembunyikan kata sandi
   const handlePasswordToggle = () => {

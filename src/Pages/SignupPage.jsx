@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import ButtonLogin from "../Components/LoginComponents/ButtonLogin";
 import FormSignUp from "../Components/LoginComponents/FormSignUp";
 import HeaderLogin from "../Components/LoginComponents/LoginHeader";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 function SignupPage() {
   document.title = "Signup";
@@ -43,9 +43,17 @@ function SignupPage() {
           <hr class="w-full border-t border-slate-600" />
         </div>
 
-        <div className=" w-11/12 mx-auto mt-5 mb-20">
-          <ButtonLogin img="Google.svg">Google</ButtonLogin>
-          <ButtonLogin img="Facebook.svg">Facebook</ButtonLogin>
+        <div className=" w-11/12 mx-auto mt-8 mb-20">
+          {/* <ButtonLogin img="Google.svg">Google</ButtonLogin>
+        
+          <ButtonLogin img="Facebook.svg">Facebook</ButtonLogin> */}
+
+          <Link
+            to={"/"}
+            className="hover:border hover:border-[#BB8360] hover:bg-transparent hover:text-[#BB8360] hover:font-medium w-full rounded-lg px-6 py-2 flex justify-center items-center gap-2 mb-4 shadow-[0px_4px_30px_rgba(0,0,0,0.25)] bg-[#BB8360] text-white transition-all duration-150 ease-in-out"
+          >
+            Stay Logged In as Anonymous
+          </Link>
         </div>
       </div>
     </div>

@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, Outlet } from "react-router-dom";
+import { NavLink, Outlet } from "react-router-dom";
 import { MdManageAccounts } from "react-icons/md";
 import { TbPasswordUser } from "react-icons/tb";
 import { MdLogout } from "react-icons/md";
@@ -11,36 +11,51 @@ export default function SettingLayout() {
   const handleLogout = () => {
     logout();
   };
+
   return (
     <div className="p-[14px]">
-      <h1 className="font-cerotta  text-[16px] md:text-[39px] font-medium mb-[10px]">
+      <h1 className="font-cerotta text-[16px] md:text-[39px] font-medium mb-[10px]">
         Pengaturan
       </h1>
-      <nav className="font-montserrat text-[12px] md:text-[24px] flex  justify-evenly gap-2 md:gap-5 px-5 py-4 shadow-md shadow-slate-400">
-        <Link to="profileuser" className="flex items-center gap-2">
-          <span>
-            <MdManageAccounts className="text-[#545454]" />
-          </span>
-          <span>Akun</span>
-        </Link>
-        <Link to="passwordsetting" className="flex items-center gap-2">
-          <span>
-            <TbPasswordUser className="text-[#545454]" />
-          </span>
-          <span>Password</span>
-        </Link>
-        <Link
-          onClick={() => {
-            handleLogout();
-          }}
-          to="/"
-          className="flex items-center gap-2"
+      <nav className="font-montserrat text-[12px] md:text-[24px] flex justify-evenly gap-2 md:gap-5 shadow-md shadow-slate-400">
+        <NavLink
+          to="profileuser"
+          className={({ isActive }) =>
+            `flex items-center gap-2 ${
+              isActive
+                ? "border-b-[2px] border-[#BB8360] text-[#BB8360] font px-5 py-4 "
+                : "text-[#545454] px-5 py-4"
+            }`
+          }
         >
-          <span>
-            <MdLogout className="text-[#545454]" />
-          </span>
+          <MdManageAccounts />
+          <span>Akun</span>
+        </NavLink>
+        <NavLink
+          to="passwordsetting"
+          className={({ isActive }) =>
+            `flex items-center gap-2 ${
+              isActive
+                ? "border-b-[2px] border-[#BB8360] text-[#BB8360] font px-5 py-4 "
+                : "text-[#545454] px-5 py-4"
+            }`
+          }
+        >
+          <TbPasswordUser />
+          <span>Password</span>
+        </NavLink>
+        <NavLink
+          onClick={handleLogout}
+          to="/"
+          className={({ isActive }) =>
+            `flex items-center gap-2 ${
+              isActive ? "text-blue-500 font-bold" : "text-[#545454]"
+            }`
+          }
+        >
+          <MdLogout />
           <span>Logout</span>
-        </Link>
+        </NavLink>
       </nav>
       <Outlet />
     </div>

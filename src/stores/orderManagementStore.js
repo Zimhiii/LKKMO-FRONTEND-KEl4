@@ -9,6 +9,8 @@ const useOrderManagementStore = create(
       orders: [],
       orderHistory: [],
       loading: false,
+      isOrder: false,
+      setIsOrder: (value) => set({ isOrder: value }),
       error: null,
 
       // Fetch all orders for user
@@ -16,7 +18,7 @@ const useOrderManagementStore = create(
         set({ loading: true, error: null });
         try {
           const response = await api.get("/orders");
-          set({ orders: response.data.data, loading: false });
+          set({ orders: response.data.data[0], loading: false });
         } catch (error) {
           set({
             error: error.response?.data?.message || "Error fetching orders",
@@ -48,8 +50,10 @@ const useOrderManagementStore = create(
           set((state) => ({
             orders: [...state.orders, response.data.data],
             loading: false,
+            isOrder: true,
           }));
-          alert(response.data.message); // Notifikasi berhasil
+          // alert(response.data.message); // Notifikasi berhasil
+          window.location.href = "/history";
         } catch (error) {
           set({
             error: error.response?.data?.message || "Error creating order",

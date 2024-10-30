@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import axios from "axios";
 import InputLogin from "./LoginInput";
 import { useNavigate } from "react-router-dom";
@@ -12,6 +12,10 @@ const FormSignUp = () => {
   const [error, setError] = useState(null);
 
   const navigate = useNavigate();
+
+  useEffect(() => {
+    nameRef.current.focus();
+  }, []);
 
   // Fungsi untuk menangani tombol Enter dan pindah ke input berikutnya
   const handleKeyDown = (event, nextInputRef) => {
@@ -78,7 +82,12 @@ const FormSignUp = () => {
           placeholder="Masukkan Kata Sandi"
           name="Kata Sandi"
           ref={passwordRef}
-          onKeyDown={(event) => handleKeyDown(event, null)}
+          onKeyDown={(event) => {
+            if (event.key === "Enter") {
+              event.preventDefault();
+              handleSubmit(event);
+            }
+          }}
         />
         <div className="flex items-center mt-5 ml-2">
           <input
@@ -97,7 +106,7 @@ const FormSignUp = () => {
           <button
             type="submit"
             disabled={loading}
-            className="px-6 py-2 bg-[#BB8360] rounded-lg text-white font-medium text-sm shadow-md shadow-slate-400"
+            className="px-6 py-2 bg-[#BB8360] rounded-lg text-white font-medium text-sm shadow-[0px_0px_4px_rgba(0,0,0,0.25)] shadow-slate-400 hover:bg-white hover:text-[#BB8360] active:bg-white active:text-[#BB8360] active:shadow-[0px_0px_4px_rgba(0,0,0,0.25)] hover:ring-1 hover:ring-[#BB8360]"
           >
             {loading ? "Loading..." : "Daftar Akun"}
           </button>

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { CiHeart } from "react-icons/ci";
 import SectionComment from "../Components/ProductComponents/SectionComment";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import useProductManagementStore from "../stores/productManagementStore";
 import useOrderManagementStore from "../stores/orderManagementStore";
 
@@ -12,7 +12,7 @@ export default function CategoryPage() {
   const { fetchProductById, product, products } = useProductManagementStore();
   const { id } = useParams();
   const [activeSize, setActiveSize] = useState(null); // State untuk menyimpan ukuran yang dipilih
-  const { createOrder } = useOrderManagementStore();
+  const { createOrder, isOrder, error, setIsOrder } = useOrderManagementStore();
 
   const handleSizeClick = (size) => {
     setActiveSize(size); // Menyetel ukuran yang dipilih sebagai active
@@ -43,7 +43,7 @@ export default function CategoryPage() {
     }
   };
 
-  const handleRentalNow = () => {
+  const handleRentalNow = async () => {
     // Hitung total harga
     const totalPrice = count * selectedProduct.price;
 
@@ -59,7 +59,15 @@ export default function CategoryPage() {
     };
 
     console.log(orderData);
-    createOrder(orderData); // Panggil fungsi createOrder
+    try {
+      await createOrder(orderData); // Panggil fungsi createOrder
+      if (isOrder) {
+        setIsOrder(false);
+        useNavigate("/history");
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
   if (!selectedProduct) {
     return (
@@ -198,22 +206,22 @@ export default function CategoryPage() {
                   {["S", "M", "L", "XL"].map((size) => (
                     <label
                       key={size}
-                      className={`relative ring-1 ring-black rounded-[3px] group ${
+                      className={`relative ring-1 ring-black rounded-[3px] group  ${
                         activeSize === size
                           ? "bg-[#BB8360] text-white"
-                          : "text-black"
+                          : "text-black hover:text-[#BB8360]"
                       }`} // Tambahkan style ketika active
                       onClick={() => handleSizeClick(size)} // Setel ukuran yang dipilih saat label di klik
                     >
                       <input
-                        className="sr-only"
+                        className="sr-only cursor-pointer "
                         name="ukuran"
                         type="radio"
                         checked={activeSize === size}
                         onChange={() => handleSizeClick(size)}
                         required
                       />
-                      <div className="text-[9px] font-normal w-[16px] h-[16px] md:w-[20px] md:h-[20px] rounded-[3px] flex items-center justify-center">
+                      <div className="text-[9px] font-normal w-[16px] h-[16px] md:w-[20px] md:h-[20px] rounded-[3px] flex items-center justify-center cursor-pointer ">
                         {size}
                       </div>
                     </label>
@@ -229,7 +237,7 @@ export default function CategoryPage() {
                   type="date"
                   value={selectedStartDate}
                   onChange={(e) => setSelectedStartDate(e.target.value)}
-                  className="ml-2 px-2 py-1 border border-gray-300 rounded"
+                  className="ml-2 px-2 py-1 border border-gray-300 rounded cursor-pointer"
                   required
                 />
               </div>
@@ -241,7 +249,7 @@ export default function CategoryPage() {
                   type="date"
                   value={selectedEndDate}
                   onChange={(e) => setSelectedEndDate(e.target.value)}
-                  className="ml-2 px-2 py-1 border border-gray-300 rounded"
+                  className="ml-2 px-2 py-1 border border-gray-300 rounded cursor-pointer"
                   required
                 />
               </div>

@@ -83,7 +83,7 @@ export default function Content({
                   </h1>
                   <Link
                     to="/login"
-                    className="bg-[#BB8360] transition-all duration-150 text-[20px] text-black font-montserrat px-2 py-1 rounded-md hover:bg-white hover:text-[#BB8360] hover:ring-1 hover:ring-[#BB8360] "
+                    className="bg-[#BB8360] transition-all duration-150 text-[20px] text-black font-montserrat md:px-4 md:py-3 px-2 py-1 rounded-md hover:bg-white hover:text-[#BB8360] hover:ring-1 hover:ring-[#BB8360] "
                   >
                     Login
                   </Link>

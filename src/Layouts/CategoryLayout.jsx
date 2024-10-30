@@ -22,18 +22,22 @@ export default function CategoryLayout() {
 
       {/* Breadcrumb dengan params */}
       <div className="font-montserrat text-[10px] mt-[15px] md:text-[18px] ml-[12px] md:ml-[39px]">
-        <span className="text-[#666666]">Kategori{">"}</span>{" "}
-        <Link to={`/category/${category}`}>{category}</Link>
+        <span className="text-[#666666]">Kategori{" > "}</span>{" "}
+        <Link className="hover:text-[#BB8360]" to={`/category/${category}`}>
+          {category}
+        </Link>
         {subcategory && (
           <>
-            {">"}
-            <Link to={`/category/${category}`}>{subcategory}</Link>
+            {" > "}
+            <Link className="hover:text-[#BB8360]" to={`/category/${category}`}>
+              {subcategory}
+            </Link>
           </>
         )}
       </div>
 
       {/* h1 untuk menampilkan title berdasarkan params terakhir */}
-      <h1 className="container-layout font-cerotta text-[23px] md:text-[61px] text-center px-[116px]">
+      <h1 className="container-layout font-bold font-cerotta text-[23px] md:text-[61px] text-center px-[116px]">
         {pageTitle}
       </h1>
 
