@@ -11,6 +11,7 @@ export default function Content({
 }) {
   const urlcategory = category.toLowerCase();
   const urlsubcategory = subcategory.toLowerCase();
+  const token = localStorage.getItem("token");
   const {
     productsBySubCategory,
     fetchProductsBySubCategory,
@@ -61,31 +62,56 @@ export default function Content({
   return (
     <div className="flex flex-col items-center mb-[44px] md:mb-[84px]">
       <div className="flex flex-col w-full items-start ">
-        <h1 className="font-boruna text-[25px] text-start mb-5 md:text-[50px]">
+        <h1 className="font-boruna text-[25px] text-start mb-5 md:text-[50px] ml-[20px]">
           {subcategory}
         </h1>
       </div>
       <div className="flex flex-wrap justify-center gap-3 md:gap-[100px]">
         {loading ? (
-          <div className="text-center text-4xl font-cerotta">Loading...</div>
+          <div className="text-center text-[20px] md:text-4xl font-cerotta">
+            Loading...
+          </div>
         ) : error ? (
-          <div className="text-center text-4xl font-cerotta">{error}</div>
+          <div className="text-center  text-[20px] md:text-4xl font-cerotta">
+            <div>{error}</div>
+            <br />
+            <div className="">
+              {!token && (
+                <>
+                  <h1>
+                    Silahkan Login Terlebih Dahulu untuk melihat lebih lanjut
+                  </h1>
+                  <Link
+                    to="/login"
+                    className="bg-[#BB8360] transition-all duration-150 text-[20px] text-black font-montserrat px-2 py-1 rounded-md hover:bg-white hover:text-[#BB8360] hover:ring-1 hover:ring-[#BB8360] "
+                  >
+                    Login
+                  </Link>
+                </>
+              )}
+            </div>
+          </div>
         ) : mappedProduct.length > 0 ? (
-          <>{mappedProduct}</>
+          <div className="flex flex-col items-center justify-center">
+            <div className="flex flex-wrap justify-evenly md:justify-center gap-[30px] md:gap-[100px]">
+              {mappedProduct}
+            </div>
+            <Link
+              to={`/category/${urlcategory}/${urlsubcategory}`}
+              // className="ring-1 ring-[#BB8360] text-[14px] px-4 py-2 rounded-lg mt-5"
+              className="ring-1 ring-[#BB8360] text-[14px] px-4 py-2 rounded-lg mt-5 backdrop-blur-sm drop-shadow-[0px_0px_4px_rgba(0,0,0,0.25)] shadow-slate-900 hover:backdrop-blur-none hover:bg-[#BB8360] hover:text-white"
+            >
+              Lihat Semua
+            </Link>
+          </div>
         ) : (
-          <div className="text-center text-4xl font-cerotta">
+          <div className="text-center text-[20px] md:text-4xl font-cerotta">
             Produk Kosong, Silahkan Pilih Kategori Lain Atau Login Terlebih
             Dahulu
           </div>
         )}
       </div>
-      <Link
-        to={`/category/${urlcategory}/${urlsubcategory}`}
-        className="ring-1 ring-[#BB8360] text-[14px] px-4 py-2 rounded-lg mt-5"
-      >
-        Lihat Semua
-      </Link>
-      <button
+      {/* <button
         className="px-10 py-6 ring-1 ring-slate-500 "
         onClick={() => {
           console.log(
@@ -96,7 +122,7 @@ export default function Content({
         }}
       >
         test
-      </button>
+      </button> */}
     </div>
   );
 }

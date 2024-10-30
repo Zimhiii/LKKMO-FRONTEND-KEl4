@@ -59,12 +59,12 @@ export default function WishlistPage() {
           </p>
         )}
 
-        <button
+        {/* <button
           className="rounded-[9px] ring-1 ring-[#BB8360] text-[11px] md:text-[20px] px-2 py-1 mt-5"
           onClick={() => console.log("wish", wishlist)}
         >
           Lihat Semua
-        </button>
+        </button> */}
       </div>
     </div>
   );

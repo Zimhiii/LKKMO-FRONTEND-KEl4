@@ -2,6 +2,7 @@ import React, { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import InputLogin from "./LoginInput";
 import { useAuthUserStore } from "../../stores/authStore";
+import LoginBerhasil from "../PopUpComponent.jsx/LoginBerhasil";
 
 const FormLogin = () => {
   const passwordRef = useRef(null);
@@ -46,6 +47,7 @@ const FormLogin = () => {
       // Jika login berhasil, arahkan pengguna ke dashboard
       if (isLoggedIn) {
         // alert("Login berhasil!");
+        // <LoginBerhasil />;
         // navigate("/"); // Arahkan ke halaman utama atau dashboard
       }
     } catch (error) {
@@ -83,7 +85,13 @@ const FormLogin = () => {
           name="password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
-          onKeyDown={(event) => handleKeyDown(event, passwordRef)}
+          onKeyDown={(event) => {
+            // handleKeyDown(event, null);
+            if (event.key === "Enter") {
+              event.preventDefault();
+              handleSubmit(event);
+            }
+          }}
           ref={passwordRef}
         />
         {/* Checkbox untuk menampilkan kata sandi */}
@@ -99,20 +107,20 @@ const FormLogin = () => {
             Tampilkan Kata Sandi
           </label>
         </div>
-        {loading && <p>Try to login...</p>}
+
         {errorMessage && <p className="text-red-500">{errorMessage}</p>}
 
         {/* Tombol Submit */}
-        <h3 className="text-[10px] border-b border-black text-center w-fit mx-auto mt-8">
+        {/* <h3 className="text-[10px] border-b border-black text-center w-fit mx-auto mt-8">
           Lupa Kata Sandi
-        </h3>
+        </h3> */}
 
         <div className="flex justify-center mt-3 ">
           <button
             type="submit"
-            className="px-6 py-2 bg-[#BB8360] rounded-lg text-white font-medium text-sm shadow-md shadow-slate-400 "
+            className="px-6 py-2 bg-[#BB8360] rounded-lg text-white font-medium text-sm shadow-[0px_0px_4px_rgba(0,0,0,0.25)] shadow-slate-400 hover:bg-white hover:text-[#BB8360] active:bg-white active:text-[#BB8360] active:shadow-[0px_0px_4px_rgba(0,0,0,0.25)] hover:ring-1 hover:ring-[#BB8360] "
           >
-            Masuk
+            {loading ? <p>Try to login...</p> : "Masuk"}
           </button>
         </div>
       </form>

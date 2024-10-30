@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 export default function HeroBody() {
   const fill = [
@@ -34,9 +35,12 @@ export default function HeroBody() {
           </p>
         </div>
         <div className="w-full flex justify-center items-center mt-[42px]">
-          <button className="px-6 py-2 mb-[45px] md:text-[16px] bg-[#BB8360] rounded-lg text-[#255255255] font-normal font-montserrat text-[13px] shadow-md shadow-slate-400">
+          <Link
+            to="/allproduct"
+            className="px-6 py-2 mb-[45px] md:text-[16px] bg-[#BB8360] rounded-lg text-[#255255255] font-normal font-montserrat text-[13px] shadow-md shadow-slate-400 hover:bg-[#a97758] hover:text-white transition-all duration-100 hover:ring-1 hover:ring-[#BB8360] active:bg-white active:text-[#BB8360] active:ring-1 active:ring-[#BB8360]"
+          >
             Sewa Sekarang
-          </button>
+          </Link>
         </div>
         <div className="w-full flex flex-col justify-center items-center md:flex-row">
           {fill.map((item) => (

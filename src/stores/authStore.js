@@ -57,7 +57,7 @@ export const useAuthUserStore = create(
               user, // Simpan user di store
             });
             localStorage.setItem("token", token); // Simpan token di localStorage
-            alert("Login Berhasil");
+            // alert("Login Berhasil");
             // Gunakan navigate dari react-router-dom
             window.location.href = "/"; // Pastikan Anda menggunakan useNavigate di komponen
           } else {

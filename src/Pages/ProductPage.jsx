@@ -53,17 +53,18 @@ export default function CategoryPage() {
       product_id: id,
       size: activeSize,
       rental_start: selectedStartDate,
-      rental_end: selectedEndDate, // Sesuaikan jika ada tanggal akhir yang diinginkan
+      rental_end: selectedEndDate,
       total_price: totalPrice,
       status: "Belum",
     };
+
+    console.log(orderData);
     createOrder(orderData); // Panggil fungsi createOrder
   };
   if (!selectedProduct) {
     return (
-      <div className="flex justify-center items-center">
-        <p className="text-2xl font-cerotta ">Loading...</p>; // Show a loading
-        message while the product data is
+      <div className="flex justify-center items-center h-[500px]">
+        <p className="text-4xl font-cerotta ">Loading...</p>;
       </div>
     );
   }
@@ -264,7 +265,7 @@ export default function CategoryPage() {
                   </span>
                 </div>
                 <button
-                  onClick={() => console.log(selectedProduct)}
+                  onClick={() => console.log(orderData)}
                   className="flex items-center bg-white h-full px-[7px] py-[2px] rounded-[3px] text-[8px] md:text-[14px] border-solid border-[1px] border-[#BB8360]"
                 >
                   Tambahkan Keranjang

@@ -3,17 +3,34 @@ import { MdMenu, MdClose } from "react-icons/md";
 import logo from "../../Assets/RuSLogoWhite.png";
 import { Link, useNavigate } from "react-router-dom";
 import { FaCaretDown, FaCaretUp } from "react-icons/fa";
+import useCategoryManagementStore from "../../stores/categoryManagementStore";
+import { useLoginStore } from "../../Store/stored";
 
 export default function HumbergerMenu() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isCategory, setIsCategory] = useState(false);
+  const { categories, fetchCategories } = useCategoryManagementStore();
   const menuRef = useRef(null); // Reference untuk menu
   const navigate = useNavigate();
+  const { login, setLogin } = useLoginStore();
+  const token = localStorage.getItem("token");
 
   const navigateTo = (url) => {
     toggleMenu();
     navigate(url);
   };
+
+  useEffect(() => {
+    fetchCategories();
+  }, [fetchCategories]);
+
+  useEffect(() => {
+    if (token) {
+      setLogin(true);
+    } else {
+      setLogin(false);
+    }
+  }, [token, setLogin]);
 
   // Toggle Menu
   const toggleMenu = () => {
@@ -91,28 +108,17 @@ export default function HumbergerMenu() {
             </div>
 
             {isCategory && (
-              <div className=" flex flex-col">
-                <Link
-                  to={"category/cosplay"}
-                  className="hover:bg-[#96694d] px-6 py-2"
-                  onClick={toggleMenu}
-                >
-                  Cosplay
-                </Link>
-                <Link
-                  to={"category/carnaval"}
-                  className="hover:bg-[#96694d] px-6 py-2"
-                  onClick={toggleMenu}
-                >
-                  Carnaval
-                </Link>
-                <Link
-                  to={"category/game"}
-                  className="hover:bg-[#96694d] px-6 py-2"
-                  onClick={toggleMenu}
-                >
-                  Game
-                </Link>
+              <div className="flex flex-col gap-3">
+                {categories[0]?.map((category) => (
+                  <Link
+                    key={category.id} // Menggunakan 'key' unik dari 'category.id'
+                    to={`category/${category.name.toLowerCase()}`}
+                    className="hover:bg-[#96694d] px-6 py-2"
+                    onClick={toggleMenu}
+                  >
+                    {category.name}
+                  </Link>
+                ))}
               </div>
             )}
           </button>
@@ -124,29 +130,41 @@ export default function HumbergerMenu() {
             Tentang Kami{" "}
           </Link>
         </div>
-        <div className="font-montserrat flex flex-col  items-center">
-          <Link
-            to={"/login"}
-            className="text-[25px] text-[#BB8360] bg-[#ffffff] rounded-[10px] px-[70px] py-[10px] text-center hover:bg-[#96694d] hover:text-white"
-            onClick={toggleMenu}
-          >
-            Login
-          </Link>
-          <Link
-            to={"/signup"}
-            className="text-[25px] italic font-light text-[#ffffff] rounded-[10px] px-[60px] py-[10px] text-center hover:bg-[#96694d] hover:text-white"
-            onClick={toggleMenu}
-          >
-            Sign Up
-          </Link>
-          <Link
-            onClick={() => localStorage.removeItem("token") && toggleMenu()}
-            to={"/login"}
-            className="text-[25px] italic font-light text-[#ffffff] rounded-[10px] px-[60px] py-[10px] text-center hover:bg-[#96694d] hover:text-white"
-          >
-            Logout
-          </Link>
-        </div>
+        {login ? (
+          <div className="font-montserrat flex flex-col  items-center gap-4">
+            <Link
+              to={"/wishlist"}
+              className="text-[20px] text-white rounded-[10px] px-[70px] py-[10px] text-center hover:bg-[#96694d] hover:text-white"
+              onClick={toggleMenu}
+            >
+              Wishlist
+            </Link>
+            <Link
+              to={"/settinguser/profileuser"}
+              className="text-[20px]  text-[#ffffff] rounded-[10px] px-[60px] py-[10px] text-center hover:bg-[#96694d] hover:text-white"
+              onClick={toggleMenu}
+            >
+              Profile
+            </Link>
+          </div>
+        ) : (
+          <div className="font-montserrat flex flex-col  items-center">
+            <Link
+              to={"/login"}
+              className="text-[25px] text-[#BB8360] bg-[#ffffff] rounded-[10px] px-[70px] py-[10px] text-center hover:bg-[#96694d] hover:text-white"
+              onClick={toggleMenu}
+            >
+              Login
+            </Link>
+            <Link
+              to={"/signup"}
+              className="text-[25px] italic font-light text-[#ffffff] rounded-[10px] px-[60px] py-[10px] text-center hover:bg-[#96694d] hover:text-white"
+              onClick={toggleMenu}
+            >
+              Sign Up
+            </Link>
+          </div>
+        )}
       </div>
     </div>
   );

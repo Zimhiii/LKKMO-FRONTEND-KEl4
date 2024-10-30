@@ -28,27 +28,29 @@ export default function Content({ category = "Koleksi", id }) {
   ));
 
   return (
-    <div className="flex flex-col items-center mb-[44px] md:mb-[84px]">
+    <div className="flex flex-col items-center pb-[44px] md:pb-[84px]">
       <h1 className="font-cerotta text-[25px] mb-5 md:text-[50px]">
         {category}
       </h1>
-      <div className="flex flex-wrap justify-center gap-3 md:gap-[100px]">
-        {mappedProduct.length > 0 ? (
-          mappedProduct
-        ) : (
-          <div className="text-center text-4xl font-cerotta">
-            Produk tidak ditemukan
+      {mappedProduct.length > 0 ? (
+        <div className="flex flex-col items-center justify-center gap-5">
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-[40px] md:gap-[100px]">
+            {mappedProduct}
           </div>
-        )}
+          <Link
+            to={`/category/${urlcategory}`}
+            className="ring-1 ring-[#BB8360] text-[14px] px-4 py-2 rounded-lg mt-5 backdrop-blur-sm drop-shadow-[0px_0px_4px_rgba(0,0,0,0.25)] shadow-slate-900 hover:backdrop-blur-none hover:bg-[#BB8360] hover:text-white"
+          >
+            Lihat Semua
+          </Link>
+        </div>
+      ) : (
+        <div className="text-center text-4xl font-cerotta">
+          Produk tidak ditemukan
+        </div>
+      )}
 
-        {console.log(`${category}`, products)}
-      </div>
-      <Link
-        to={`/category/${urlcategory}`}
-        className="ring-1 ring-[#BB8360] text-[14px] px-4 py-2 rounded-lg mt-5"
-      >
-        Lihat Semua
-      </Link>
+      {console.log(`${category}`, products)}
     </div>
   );
 }

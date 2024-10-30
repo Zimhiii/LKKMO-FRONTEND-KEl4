@@ -13,13 +13,13 @@ export default function NavButton() {
         <div className="flex gap-2 font-montserrat ">
           <Link
             to="/login"
-            className="bg-[#BB8360] py-[5px] px-[40px] text-[#000000] rounded-[10px]"
+            className="bg-[#BB8360] py-[5px] px-[40px] text-[#000000] rounded-[10px] hover:bg-[#DDC6B6] hover:text-black hover:ring-1 hover:ring-[#BB8360] transition-all duration-150"
           >
             Masuk
           </Link>
           <Link
             to="/signup"
-            className="border border-[#BB8360] py-[5px] px-[40px] text-[#000000] rounded-[10px]"
+            className="border border-[#BB8360] py-[5px] px-[40px] text-[#000000] rounded-[10px] hover:bg-[#BB8360] hover:text-white transition-all duration-150"
           >
             Daftar
           </Link>

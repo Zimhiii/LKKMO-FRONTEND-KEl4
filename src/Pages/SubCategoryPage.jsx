@@ -42,7 +42,7 @@ export default function SubCategoryPage() {
 
   return (
     <div>
-      <div className="flex flex-col justify-center items-center mb-[44px] md:mb-[84px]">
+      <div className="flex flex-col justify-center items-center mb-[44px] md:mb-[84px] mt-[50px]">
         {loading ? (
           <div className="text-center text-4xl font-cerotta">Loading...</div>
         ) : error ? (

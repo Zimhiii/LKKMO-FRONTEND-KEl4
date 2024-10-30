@@ -19,22 +19,19 @@ export default function CardItem({
     useWishlistStore();
   const navigate = useNavigate();
 
-  // State untuk melacak apakah produk ada di wishlist
   const [isProductInWishlist, setIsProductInWishlist] = useState(false);
-  const [wishlistId, setWishlistId] = useState(null); // Untuk menyimpan id wishlist
+  const [wishlistId, setWishlistId] = useState(null);
+  const [isActionDisabled, setIsActionDisabled] = useState(false); // State untuk mengunci aksi
 
   useEffect(() => {
-    // Cek apakah produk ada di wishlist saat komponen dirender pertama kali
     fetchWishlist();
   }, [fetchWishlist]);
 
   useEffect(() => {
-    // Update state isProductInWishlist jika wishlist berubah
     const foundWishlistItem = wishlist.find((item) => item.product_id === id);
-
     if (foundWishlistItem) {
       setIsProductInWishlist(true);
-      setWishlistId(foundWishlistItem.id); // Simpan id wishlist
+      setWishlistId(foundWishlistItem.id);
     } else {
       setIsProductInWishlist(false);
       setWishlistId(null);
@@ -42,25 +39,24 @@ export default function CardItem({
   }, [wishlist, id]);
 
   const handleWishlistToggle = async () => {
-    if (isProductInWishlist && wishlistId) {
-      // Jika produk ada di wishlist, hapus dari wishlist menggunakan wishlistId
-      try {
+    if (isActionDisabled) return; // Mencegah aksi jika sedang dikunci
+    setIsActionDisabled(true); // Mengunci aksi sementara
+
+    try {
+      if (isProductInWishlist && wishlistId) {
         await removeFromWishlist(wishlistId);
-        setIsProductInWishlist(false); // Update state lokal
-        alert("Item berhasil dihapus dari wishlist!");
-      } catch (err) {
-        console.error("Gagal menghapus dari wishlist:", err);
+        // alert("Item berhasil dihapus dari wishlist!");
+      } else {
+        await addToWishlist({ product_id: id });
+        // alert("Item berhasil ditambahkan ke wishlist!");
       }
-    } else {
-      // Jika produk tidak ada di wishlist, tambahkan ke wishlist
-      const credentials = { product_id: id };
-      try {
-        await addToWishlist(credentials);
-        setIsProductInWishlist(true); // Update state lokal
-        alert("Item berhasil ditambahkan ke wishlist!");
-      } catch (err) {
-        console.error("Gagal menambah ke wishlist:", err);
-      }
+
+      // Refetch wishlist agar perubahan ter-update
+      await fetchWishlist();
+    } catch (err) {
+      console.error("Terjadi kesalahan pada wishlist:", err);
+    } finally {
+      setIsActionDisabled(false); // Membuka kembali aksi setelah selesai
     }
   };
 
@@ -76,6 +72,10 @@ export default function CardItem({
     }).format(number);
   };
 
+  function truncateText(text, maxLength) {
+    return text.length > maxLength ? text.slice(0, maxLength) + "..." : text;
+  }
+
   return (
     <div
       typeof="button"
@@ -85,9 +85,9 @@ export default function CardItem({
       <div
         className={`${classname} gap-3 shadow-[8px_8px_10px_rgba(0,0,0,0.25)] md:mb-10 rounded-xl px-4 py-4 md:px-5 md:py-[30px]  hover:shadow-[8px_8px_20px_rgba(0,0,0,0.25)]`}
       >
-        <div className="relative z-1 bg-[#D9D9D9] px-6 py-6  rounded-xl">
+        <div className="relative z-1 bg-[#D9D9D9] px-3 py-3 md:px-6 md:py-6 rounded-xl">
           <div
-            className={`group absolute z-99 px-[3px] py-[2px] md:p-[6px] text-[16px] md:text-[30px] top-0 -right-1 md:-top-4 md:-right-3 rounded-[6px] md:rounded-[14px] shadow-lg shadow-slate-500 ${
+            className={`group absolute z-99 px-[2px] py-[2px] md:p-[6px] text-[16px] md:text-[30px] top-0 -right-1 md:-top-4 md:-right-3 rounded-[6px] md:rounded-[14px] shadow-lg shadow-slate-500 ${
               isProductInWishlist
                 ? "bg-pink-500 "
                 : "bg-white hover:bg-pink-500"
@@ -109,16 +109,16 @@ export default function CardItem({
             </Link>
           </div>
 
-          <div className="flex justify-center items-center">
+          <div className="flex text-[10px] text-wrap justify-center items-center">
             <img
               src={`https://lkkmo-backend-production.up.railway.app/storage/${image}`}
-              alt="Card"
+              alt={truncateText(name, 13)}
               className="w-[82px] h-[99px] md:w-[231px] md:h-[278px] object-cover object-center"
             />
           </div>
         </div>
         <div className="relative font-montserrat text-[10px] md:text-[20px]">
-          <h2 className="font-semibold">{name}</h2>
+          <h2 className="font-semibold">{truncateText(name, 13)}</h2>
           <div className="flex gap-2">
             <span>⭐⭐⭐⭐⭐</span>
             <p className="md:text-[15px]">

@@ -65,14 +65,14 @@ export default function ContainerContenCategory() {
                 id={category_id}
                 idsubcategory={subcategory.id}
               />
-              <p className="text-2xl  px-10 py-5">{subcategory.id}</p>
+              {/* <p className="text-2xl  px-10 py-5">{subcategory.id}</p> */}
             </>
           ))}
           {/* <Content subcategory="anime" />
           <Content subcategory="comic" />
           <Content subcategory="game" /> */}
 
-          <button
+          {/* <button
             className="rounded-sm p-5 ring-1 ring-slate-500"
             onClick={() => {
               // console.log("productByCategory", productByCategory);
@@ -84,7 +84,7 @@ export default function ContainerContenCategory() {
             }}
           >
             a
-          </button>
+          </button> */}
         </>
       )}
     </div>

@@ -30,6 +30,7 @@ import DaftarCategory from "./Pages/DaftarCategory";
 import TambahCategory from "./Pages/TambahCategory";
 import EditCategory from "./Pages/EditCategory";
 import TambahSubCategory from "./Components/AdminComponents/TambahSubCategory";
+import AllProduct from "./Pages/AllProduct";
 
 export const route = createBrowserRouter([
   {
@@ -67,6 +68,10 @@ export const route = createBrowserRouter([
         ],
       },
 
+      {
+        path: "/allproduct",
+        element: <AllProduct />,
+      },
       {
         path: "/product/:id",
         element: <ProductPage />,

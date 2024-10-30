@@ -21,7 +21,7 @@ export default function CategoryLayout() {
       </div>
 
       {/* Breadcrumb dengan params */}
-      <div className="font-montserrat text-[8px] mt-[4px] md:text-[14px] ml-[12px] md:ml-[39px]">
+      <div className="font-montserrat text-[10px] mt-[15px] md:text-[18px] ml-[12px] md:ml-[39px]">
         <span className="text-[#666666]">Kategori{">"}</span>{" "}
         <Link to={`/category/${category}`}>{category}</Link>
         {subcategory && (

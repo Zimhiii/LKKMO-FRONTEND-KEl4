@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import ButtonLogin from "../Components/LoginComponents/ButtonLogin";
 import FormLogin from "../Components/LoginComponents/FormLogin";
 import HeaderLogin from "../Components/LoginComponents/LoginHeader";
@@ -42,15 +42,24 @@ function LoginPage() {
         </h1>
         <FormLogin />
 
-        <div className="flex justify-center items-center mt-8">
+        {/* <div className="flex justify-center items-center mt-8">
           <hr className="w-full border-t border-slate-600" />
           <span className="mx-1 text-slate-500">atau</span>
           <hr className="w-full border-t border-slate-600" />
-        </div>
+        </div> */}
 
-        <div className=" w-11/12 mx-auto mt-5 mb-24">
-          <ButtonLogin img="Google.svg">Google</ButtonLogin>
-          <ButtonLogin img="Facebook.svg">Facebook</ButtonLogin>
+        <div className=" w-11/12 mx-auto mt-8 mb-24">
+          {/* <ButtonLogin img="Google.svg">Google</ButtonLogin>
+          <ButtonLogin img="Facebook.svg">Facebook</ButtonLogin> */}
+          {/* <ButtonLogin img="Facebook.svg">
+            Stay Logged In as Anonymous
+          </ButtonLogin> */}
+          <Link
+            to={"/"}
+            className="hover:border hover:border-[#BB8360] hover:bg-transparent hover:text-[#BB8360] hover:font-bold w-full rounded-lg px-6 py-2 flex justify-center items-center gap-2 mb-4 shadow-[0px_4px_30px_rgba(0,0,0,0.25)] bg-[#BB8360] text-white transition-all duration-150 ease-in-out"
+          >
+            Stay Logged In as Anonymous
+          </Link>
         </div>
       </div>
     </div>
