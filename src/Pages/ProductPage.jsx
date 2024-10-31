@@ -12,7 +12,8 @@ export default function CategoryPage() {
   const { fetchProductById, product, products } = useProductManagementStore();
   const { id } = useParams();
   const [activeSize, setActiveSize] = useState(null); // State untuk menyimpan ukuran yang dipilih
-  const { createOrder, isOrder, error, setIsOrder } = useOrderManagementStore();
+  const { createOrder, isOrder, error, setIsOrder, setError, loading } =
+    useOrderManagementStore();
 
   const handleSizeClick = (size) => {
     setActiveSize(size); // Menyetel ukuran yang dipilih sebagai active
@@ -27,6 +28,7 @@ export default function CategoryPage() {
     if (id) {
       fetchProductById(id); // Fetch product based on the ID from the URL
     }
+    setError(null);
   }, [id, fetchProductById]);
 
   useEffect(() => {
@@ -42,6 +44,20 @@ export default function CategoryPage() {
       setCount((prevCount) => Math.max(prevCount - 1, 0));
     }
   };
+
+  const handdleError = setTimeout(() => {
+    setError(null);
+  }, 5000);
+
+  useEffect(() => {
+    if (error) {
+      handdleError;
+    } else {
+      setError(null);
+    }
+  }, [error]);
+
+  // const
 
   const handleRentalNow = async () => {
     // Hitung total harga
@@ -254,23 +270,31 @@ export default function CategoryPage() {
                 />
               </div>
 
+              {error && (
+                <div className="text-[12px] md:text-[18px] text-red-500">
+                  {error}
+                  <br />
+                  Silahkan isi form dengan benar
+                </div>
+              )}
+
               <div className="mt-[25px] text-[10px] md:text-[20px] flex items-center  h-[23px] md:h-[43px] gap-[16px] md:gap-[46px]">
                 <div className="ring-1 ring-[#BB8360] w-fit overflow-hidden flex items-center justify-center gap-[2px] rounded-[5px] h-full">
-                  <span
-                    className="px-[7px] md:px-[12px] py-[2px] h-full bg-white rounded-l-[2px] cursor-pointer hover:bg-[#BB8360] rounded-r-[2px] flex items-center"
+                  <button
+                    className="px-[7px] md:px-[12px] active:bg-[#805a42] py-[2px] h-full bg-white rounded-l-[2px] cursor-pointer hover:bg-[#BB8360] rounded-r-[2px] flex items-center"
                     onClick={countMinus}
                   >
                     -
-                  </span>
-                  <span className="px-[7px] md:px-[20px] py-[2px] bg-white">
+                  </button>
+                  <span className="px-[10px] md:px-[20px] py-[2px] bg-white">
                     {count}
                   </span>
-                  <span
-                    className="px-[7px] md:px-[10px] py-[2px] h-full bg-white cursor-pointer hover:bg-[#BB8360] rounded-r-[2px] flex items-center"
+                  <button
+                    className="px-[7px] active:bg-[#805a42] md:px-[10px] py-[2px] h-full bg-white cursor-pointer hover:bg-[#BB8360] rounded-r-[2px] flex items-center"
                     onClick={countPlus}
                   >
                     +
-                  </span>
+                  </button>
                 </div>
                 <button
                   onClick={() => console.log(orderData)}
@@ -280,9 +304,10 @@ export default function CategoryPage() {
                 </button>
                 <button
                   onClick={handleRentalNow}
-                  className="flex items-center bg-[#BB8360] h-full w-fit p-[1px] rounded-[5px] text-[8px] md:text-[14px] text-white px-[6px] "
+                  className="flex items-center bg-[#BB8360] h-full w-fit p-[1px] rounded-[5px] text-[8px] md:text-[14px] text-white px-[6px] hover:bg-[#9e6d50] active:border-solid active:border-[1px] active:border-[#BB8360] active:bg-white active:text-[#BB8360] active:scale-95 transition duration-100 ease-in-out"
                 >
-                  Rental Sekarang
+                  {loading ? "Loading..." : "Rental Sekarang"}
+                  {/* Rental Sekarang */}
                 </button>
                 <div className=" px-[3px] py-[2px] md:p-[6px] text-[16px] md:text-[30px] top-0 -right-1 md:-top-4 md:-right-3 bg-white rounded-[6px] md:rounded-[0px] border-black border-[1px]">
                   <CiHeart className="  text-[#000000]" />

@@ -6,7 +6,7 @@ import InputTambahAkun from "./inputTambahAkun";
 import useCategoryManagementStore from "../../stores/categoryManagementStore";
 
 export default function FormTambahProduct() {
-  const [selectedCategory, setSelectedCategory] = useState(1);
+  const [selectedCategory, setSelectedCategory] = useState();
   const [selectedSubCategory, setSelectedSubCategory] = useState("");
   const { categories } = useCategoryManagementStore();
   const [description, setDescription] = useState("");
@@ -42,6 +42,20 @@ export default function FormTambahProduct() {
     }
   };
 
+  const setNull = () => {
+    setFile(null);
+    setPreview(null);
+    setDescription("");
+    setSelectedCategory();
+    setSelectedSubCategory("");
+    nameProductRef.current.value = null;
+    priceRef.current.value = null;
+    stockRef.current.value = null;
+    sizeRef.current.value = null;
+
+    // Reset form
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -65,7 +79,12 @@ export default function FormTambahProduct() {
     formData.append("subcategory_id", selectedSubCategory); // Gunakan state selectedSubCategory
 
     // Panggil fungsi addProduct dari store
-    await addProduct(formData);
+    try {
+      await addProduct(formData);
+      setNull();
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (

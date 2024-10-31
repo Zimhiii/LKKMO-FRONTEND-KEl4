@@ -12,7 +12,7 @@ const useOrderManagementStore = create(
       isOrder: false,
       setIsOrder: (value) => set({ isOrder: value }),
       error: null,
-
+      setError: (value) => set({ error: value }),
       // Fetch all orders for user
       fetchOrders: async () => {
         set({ loading: true, error: null });
@@ -53,7 +53,7 @@ const useOrderManagementStore = create(
             isOrder: true,
           }));
           // alert(response.data.message); // Notifikasi berhasil
-          window.location.href = "/history";
+          // window.location.href = "/history";
         } catch (error) {
           set({
             error: error.response?.data?.message || "Error creating order",

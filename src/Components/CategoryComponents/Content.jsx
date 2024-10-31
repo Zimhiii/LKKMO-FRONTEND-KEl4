@@ -105,9 +105,8 @@ export default function Content({
             </Link>
           </div>
         ) : (
-          <div className="text-center text-[20px] md:text-4xl font-cerotta">
-            Produk Kosong, Silahkan Pilih Kategori Lain Atau Login Terlebih
-            Dahulu
+          <div className="text-center flex items-center justify-center text-[20px] md:text-4xl font-cerotta h-[500px]">
+            <h1>Produk Kosong, Silahkan Pilih Kategori Lain</h1>
           </div>
         )}
       </div>
