@@ -31,6 +31,7 @@ import TambahCategory from "./Pages/TambahCategory";
 import EditCategory from "./Pages/EditCategory";
 import TambahSubCategory from "./Components/AdminComponents/TambahSubCategory";
 import AllProduct from "./Pages/AllProduct";
+import RedirectToWA from "./Pages/RedirectToWA";
 
 export const route = createBrowserRouter([
   {
@@ -97,6 +98,10 @@ export const route = createBrowserRouter([
       {
         path: "history",
         element: <HistoryPage />,
+      },
+      {
+        path: "wa",
+        element: <RedirectToWA />,
       },
       {
         path: "settinguser",

@@ -3,6 +3,9 @@ import useProductManagementStore from "../stores/productManagementStore";
 import { Link } from "react-router-dom";
 
 const DaftarProduct = () => {
+  useEffect(() => {
+    document.title = "Daftar Product ";
+  });
   const { products, deleteProduct, loading, error, fetchProducts } =
     useProductManagementStore();
 

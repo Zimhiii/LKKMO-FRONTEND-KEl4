@@ -3,6 +3,9 @@ import { Link } from "react-router-dom";
 import useCategoryManagementStore from "../stores/categoryManagementStore";
 
 const DaftarCategory = () => {
+  useEffect(() => {
+    document.title = "Daftar Category";
+  });
   const { categories, deleteCategory, loading, error } =
     useCategoryManagementStore();
   const baseUrl = "https://lkkmo-backend-production.up.railway.app/api/v1";

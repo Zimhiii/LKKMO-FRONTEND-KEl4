@@ -43,14 +43,14 @@ function SignupPage() {
           <hr class="w-full border-t border-slate-600" />
         </div>
 
-        <div className=" w-11/12 mx-auto mt-8 mb-20">
+        <div className=" w-11/12 mx-auto mt-8 mb-20 flex justify-center">
           {/* <ButtonLogin img="Google.svg">Google</ButtonLogin>
         
           <ButtonLogin img="Facebook.svg">Facebook</ButtonLogin> */}
 
           <Link
             to={"/"}
-            className="hover:border hover:border-[#BB8360] hover:bg-transparent hover:text-[#BB8360] hover:font-medium w-full rounded-lg px-6 py-2 flex justify-center items-center gap-2 mb-4 shadow-[0px_4px_30px_rgba(0,0,0,0.25)] bg-[#BB8360] text-white transition-all duration-150 ease-in-out"
+            className="hover:border text-center w-fit hover:border-[#BB8360] hover:bg-transparent hover:text-[#BB8360] hover:font-medium  rounded-lg px-6 py-2 flex justify-center items-center gap-2 mb-4 shadow-[0px_4px_30px_rgba(0,0,0,0.25)] bg-[#BB8360] text-white transition-all duration-150 ease-in-out"
           >
             Stay Logged In as Anonymous
           </Link>

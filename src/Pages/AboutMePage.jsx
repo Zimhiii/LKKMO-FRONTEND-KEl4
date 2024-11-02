@@ -1,9 +1,13 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import img from "../../src/assets/AboutMeImg.png";
 import LoginBerhasil from "../Components/PopUpComponent.jsx/LoginBerhasil";
 
 export default function AboutMe() {
   const [isPopVisible, setIsPopVisible] = useState(false);
+
+  useEffect(() => {
+    document.title = "About Us";
+  });
 
   const handlePop = () => {
     setIsPopVisible(true);

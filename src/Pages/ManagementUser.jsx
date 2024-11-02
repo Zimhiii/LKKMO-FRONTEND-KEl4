@@ -16,6 +16,10 @@ export default function ManagementUser() {
     // Ambil daftar pengguna saat komponen dimuat
   }, [fetchUsers, token]);
 
+  useEffect(() => {
+    document.title = "Manajemen Akun ";
+  });
+
   // Fungsi untuk menghapus pengguna
   const handleDeleteUser = async (id) => {
     if (window.confirm("Apakah Anda yakin ingin menghapus pengguna ini?")) {

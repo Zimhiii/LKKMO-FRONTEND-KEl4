@@ -8,7 +8,9 @@ import useCategoryManagementStore from "../stores/categoryManagementStore";
 import { Link } from "react-router-dom";
 
 export default function Dashboard() {
-  document.title = "Dashboard";
+  useEffect(() => {
+    document.title = "Home";
+  });
   const { products } = useProductManagementStore();
   const { fetchCategories, categories, loading } = useCategoryManagementStore();
   useEffect(() => {
@@ -38,13 +40,13 @@ export default function Dashboard() {
           />
         ))
       ) : (
-        <div className="flex flex-col font-bold gap-5 justify-center items-center font-center font-cerotta text-[18px] md:text-[35px]">
-          <h1>No categories found</h1>
-          <div className="flex flex-col gap-2 items-center">
+        <div className="flex py-[100px] flex-col font-bold gap-5 justify-center items-center font-center font-cerotta text-[18px] md:text-[35px]">
+          <h1>No Products found</h1>
+          <div className="flex flex-col gap-7 items-center">
             <h2>Login First to See Products</h2>
             <Link
               to="/login"
-              className="bg-[#BB8360] text-center  text-[16px] md:text-[30px]  font-normal font-montserrat text-white p-2 md:p-4 rounded-md "
+              className="bg-[#BB8360] text-center shadow-[0px_5px_10px_rgba(0,0,0,0.25)] text-[16px] md:text-[30px]  font-normal font-montserrat text-white px-3 py-1 md:px-6 md:py-2 rounded-md hover:bg-[#9c6d50] active:text-[#BB8360] active:bg-transparent active:ring-1 active:ring-[#BB8360]"
             >
               Login
             </Link>

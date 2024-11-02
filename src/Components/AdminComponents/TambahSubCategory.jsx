@@ -3,6 +3,9 @@ import useSubcategoryManagementStore from "../../stores/subCategoryManagementSto
 import { useParams } from "react-router-dom";
 
 export default function TambahSubCategory() {
+  useEffect(() => {
+    document.title = "Tambah Subcategory";
+  });
   const [name, setName] = useState("");
   const addSubcategory = useSubcategoryManagementStore(
     (state) => state.addSubcategory

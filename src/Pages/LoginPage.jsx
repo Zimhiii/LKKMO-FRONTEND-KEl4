@@ -38,13 +38,13 @@ function LoginPage() {
         </h1>
         <FormLogin />
 
-        {/* <div className="flex justify-center items-center mt-8">
+        <div className="flex justify-center items-center mt-8">
           <hr className="w-full border-t border-slate-600" />
           <span className="mx-1 text-slate-500">atau</span>
           <hr className="w-full border-t border-slate-600" />
-        </div> */}
+        </div>
 
-        <div className=" w-11/12 mx-auto mt-8 mb-24">
+        <div className=" w-11/12 mx-auto mt-8 mb-24 flex justify-center ">
           {/* <ButtonLogin img="Google.svg">Google</ButtonLogin>
           <ButtonLogin img="Facebook.svg">Facebook</ButtonLogin> */}
           {/* <ButtonLogin img="Facebook.svg">
@@ -52,7 +52,7 @@ function LoginPage() {
           </ButtonLogin> */}
           <Link
             to={"/"}
-            className="hover:border hover:border-[#BB8360] hover:bg-transparent hover:text-[#BB8360] hover:font-medium  w-full rounded-lg px-6 py-2 flex justify-center items-center gap-2 mb-4 shadow-[0px_4px_30px_rgba(0,0,0,0.25)] bg-[#BB8360] text-white transition-all duration-150 ease-in-out"
+            className="hover:border text-center  hover:border-[#BB8360] hover:bg-transparent hover:text-[#BB8360] hover:font-medium  w-fit rounded-lg px-6 py-2 flex justify-center items-center gap-2 mb-4 shadow-[0px_4px_30px_rgba(0,0,0,0.25)] bg-[#BB8360] text-white transition-all duration-150 ease-in-out"
           >
             Stay Logged In as Anonymous
           </Link>

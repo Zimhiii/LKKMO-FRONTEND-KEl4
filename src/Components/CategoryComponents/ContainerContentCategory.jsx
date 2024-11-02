@@ -15,6 +15,9 @@ export default function ContainerContenCategory() {
   useEffect(() => {
     fetchCategories();
   }, [fetchCategories]);
+  useEffect(() => {
+    document.title = "Category - " + category_params;
+  });
 
   // const fetchCategoriess = useCallback(() => {
   //   fetchCategories();

@@ -4,39 +4,41 @@ import EditAkun from "./EditAkun";
 import useProductManagementStore from "../../stores/productManagementStore";
 import { useParams } from "react-router-dom";
 import useCategoryManagementStore from "../../stores/categoryManagementStore";
+
 export default function FormEditProduct() {
   const { id } = useParams();
   const { product, updateProduct } = useProductManagementStore();
   const { categories } = useCategoryManagementStore();
 
-  const selectedProduct = product?.products || {}; // Handle undefined product
+  useEffect(() => {
+    document.title = "Edit Product - " + id;
+  });
+
+  const selectedProduct = product?.products || {};
   const [selectedCategory, setSelectedCategory] = useState(
-    selectedProduct.category_id || ""
-  ); // Default to empty string
-  const [name, setName] = useState(selectedProduct.name || ""); // Default to empty string
-  const [price, setPrice] = useState(selectedProduct.price || "");
-  const [stock, setStock] = useState(selectedProduct.stock || "");
-  const [size, setSize] = useState(selectedProduct.size || "");
+    selectedProduct.category_id
+  );
+  const [name, setName] = useState(selectedProduct.name);
+  const [price, setPrice] = useState(selectedProduct.price);
+  const [stock, setStock] = useState(selectedProduct.stock);
+  const [size, setSize] = useState(selectedProduct.size);
   const [selectedSubCategory, setSelectedSubCategory] = useState(
     selectedProduct.subcategory_id
   );
   const [description, setDescription] = useState(selectedProduct.description);
-  const [file, setFile] = useState(null);
   const [preview, setPreview] = useState(
     selectedProduct.image
       ? `https://lkkmo-backend-production.up.railway.app/storage/${selectedProduct.image}`
       : ""
   );
-
-  console.log(product);
+  const [file, setFile] = useState(selectedProduct.image || null);
 
   const nameProductRef = useRef("null");
   const priceRef = useRef(null);
   const stockRef = useRef(null);
   const sizeRef = useRef(null);
 
-  const allCategory = categories?.[0] || {}; // Handle undefined categories
-
+  const allCategory = categories?.[0] || {};
   const availableSubCategories =
     allCategory[selectedCategory - 1]?.subcategories || [];
 
@@ -49,44 +51,110 @@ export default function FormEditProduct() {
     }
   };
 
-  const handleDebuging = () => {
-    console.log(
-      "selectedCategory" + selectedCategory,
-      "selectedSubCategory" + selectedSubCategory,
-      "name" + name,
-      "price" + price,
-      "stock" + stock,
-      "size" + size,
-      "description" + description,
-      "file" + file
-    );
-  };
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+
+  //   const token = localStorage.getItem("token"); // Ambil token dari localStorage
+  //   const formData = new FormData();
+  //   formData.append("name", name);
+  //   formData.append("price", price);
+  //   formData.append("description", description);
+  //   formData.append("stock", stock);
+  //   if (file) {
+  //     formData.append("image", file);
+  //   }
+  //   formData.append("category_id", selectedCategory);
+  //   formData.append("subcategory_id", selectedSubCategory);
+
+  //   const updateProducts = async (id, formData) => {
+  //     try {
+  //       const response = await fetch(
+  //         `https://lkkmo-backend-production.up.railway.app/api/v1/products/${id}`,
+  //         {
+  //           method: "PUT",
+  //           body: JSON.stringify(formData),
+  //           headers: {
+  //             Authorization: `Bearer ${token}`, // Gunakan token dalam header
+  //           },
+  //         }
+  //       );
+  //       if (!response.ok) throw new Error("Update failed");
+  //       const data = await response.json();
+  //       return data;
+  //     } catch (error) {
+  //       console.error("Error updating product:", error);
+  //     }
+  //   };
+
+  //   // const jsondata = {
+  //   //   name: name ? name : selectedProduct.name,
+  //   //   price: price ? price : selectedProduct.price,
+  //   //   description: description ? description : selectedProduct.description,
+  //   //   stock: stock ? stock : selectedProduct.stock,
+  //   //   category_id: selectedCategory
+  //   //     ? selectedCategory
+  //   //     : selectedProduct.category_id,
+  //   //   subcategory_id: selectedSubCategory
+  //   //     ? selectedSubCategory
+  //   //     : selectedProduct.subcategory_id,
+  //   //   file: file,
+  //   // };
+
+  //   await updateProducts(id, formData);
+  //   // console.log("Product updated:", FormData); // Tunggu hingga update selesai
+  // };
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // const category_id = allCategory.find(
-    //   (cat) => cat.label.toLowerCase() === selectedCategory
-    // )?.id;
-    // const subcategory_id = availableSubCategories.find(
-    //   (sub) => sub.label.toLowerCase() === selectedSubCategory
-    // )?.id;
-
+    const token = localStorage.getItem("token");
     const formData = new FormData();
-    formData.append("name", name);
-    formData.append("price", price);
-    formData.append("description", description);
-    formData.append("stock", stock);
+    formData.append("name", name); // Tanpa spasi
+    formData.append("price", price); // Tanpa spasi
+    formData.append("description", description); // Tanpa spasi
+    formData.append("stock", stock); // Tanpa spasi
     if (file) {
-      formData.append("image", file);
+      formData.append("image", file); // Tanpa spasi
     }
     formData.append("category_id", selectedCategory);
-    // formData.append('size', size);
     formData.append("subcategory_id", selectedSubCategory);
 
-    console.log(formData);
-    // Call updateProduct function to update the product
-    await updateProduct(id, formData);
+    const updateProducts = async (id, formData) => {
+      try {
+        const response = await fetch(
+          `https://lkkmo-backend-production.up.railway.app/api/v1/products/${id}`,
+          {
+            method: "PUT",
+            body: formData, // Kirim objek formData
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        if (!response.ok) {
+          const errorMessage = await response.text();
+          throw new Error(`Update failed: ${response.status} ${errorMessage}`);
+        }
+        const data = await response.json();
+        return data;
+      } catch (error) {
+        console.error("Error updating product:", error);
+      }
+    };
+
+    await updateProducts(id, formData);
   };
+
+  console.log({
+    name,
+    price,
+    description,
+    stock,
+    selectedCategory,
+    selectedSubCategory,
+    file,
+  });
+
+  console.log(name);
 
   return (
     <form className="w-full p-5 flex font-inter" onSubmit={handleSubmit}>
@@ -155,7 +223,6 @@ export default function FormEditProduct() {
         <div className="flex gap-6 mt-[40px]">
           <button
             type="submit"
-            // onClick={() => console.log(handleDebuging())}
             className="bg-[#BB8360] px-6 py-2 rounded-[6px] text-[14px] text-white"
           >
             Update

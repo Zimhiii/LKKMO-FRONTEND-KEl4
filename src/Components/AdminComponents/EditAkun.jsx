@@ -13,6 +13,9 @@ const EditAkun = forwardRef(
     },
     ref
   ) => {
+    useEffect(() => {
+      document.title = "Edit Akun ";
+    });
     return (
       <div className="mb-2 w-full">
         <label

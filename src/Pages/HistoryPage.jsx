@@ -5,11 +5,19 @@ import useOrderManagementStore from "../stores/orderManagementStore";
 
 export default function HistoryPage() {
   const [isHistory, setIsHistory] = useState(true);
+  // const { fetchOrderHistory, orderHistory } = useOrderManagementStore();
   const { fetchOrders, orders } = useOrderManagementStore();
 
   useEffect(() => {
     fetchOrders();
   }, [fetchOrders]);
+
+  useEffect(() => {
+    document.title = "History";
+  });
+  // useEffect(() => {
+  //   fetchOrderHistory();
+  // }, [fetchOrderHistory]);
 
   return (
     <div className="mx-[20px]">
@@ -70,7 +78,7 @@ export default function HistoryPage() {
           <CardHistory /> */}
 
           <button
-            onClick={() => console.log(orders)}
+            onClick={() => console.log(orderHistory)}
             className="bg-[#BB8360] px-4 py-2  text-[20px] rounded-[6px] text-white"
           >
             Debugging

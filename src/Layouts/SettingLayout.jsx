@@ -7,6 +7,9 @@ import { useAuthUserStore } from "../stores/authStore";
 
 export default function SettingLayout() {
   const logout = useAuthUserStore((state) => state.logout);
+  useEffect(() => {
+    document.title = "Settings";
+  });
 
   const handleLogout = () => {
     logout();

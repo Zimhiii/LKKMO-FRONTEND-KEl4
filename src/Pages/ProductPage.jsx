@@ -32,7 +32,7 @@ export default function CategoryPage() {
   }, [id, fetchProductById]);
 
   useEffect(() => {
-    document.title = "Page-Product-" + selectedProduct?.name; // Set document title on component mount
+    document.title = "Page-Product-" + selectedProduct.name; // Set document title on component mount
   }, []);
 
   const countPlus = () => {
@@ -93,7 +93,6 @@ export default function CategoryPage() {
     );
   }
 
-  document.title = "CategoryPage";
   return (
     <div className="px-[19px] py-[17px] md:mx-[91px]">
       <div className="font-montserrat">
@@ -324,12 +323,14 @@ export default function CategoryPage() {
           <span className="text-[#000000] text-opacity-50 ">{"(20)"}</span>
         </div>
         <div className="relative grid grid-cols-1 md:grid-cols-2 gap-3  md:gap-6 mt-[12px]">
+          {product.review.map((review) => (
+            <SectionComment />
+          ))}
+          {/* <SectionComment />
           <SectionComment />
           <SectionComment />
           <SectionComment />
-          <SectionComment />
-          <SectionComment />
-          <SectionComment />
+          <SectionComment /> */}
         </div>
       </div>
     </div>

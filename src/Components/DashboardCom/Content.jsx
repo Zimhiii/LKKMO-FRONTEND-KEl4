@@ -45,7 +45,7 @@ export default function Content({ category = "Koleksi", id }) {
           </Link>
         </div>
       ) : (
-        <div className="text-center text-4xl font-cerotta">
+        <div className="text-center text-[20px] md:text-4xl font-cerotta">
           Produk tidak ditemukan
         </div>
       )}

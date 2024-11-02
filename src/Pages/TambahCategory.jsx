@@ -19,6 +19,10 @@ export default function TambahCategory() {
     window.location.href = "/admin/daftarcategory";
   };
 
+  useEffect(() => {
+    document.title = "Tambah Category";
+  });
+
   return (
     <form className="w-full p-5" onSubmit={handleSubmit}>
       <div className="mb-4">
