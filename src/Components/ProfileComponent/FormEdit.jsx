@@ -179,14 +179,16 @@ export default function FormEdit() {
           </button>
         </div>
       </form>
-      <div>
+      {/* <div>
         <button
-          onClick={() => console.log("profile", profile)}
+          onClick={() => 
+            // console.log("profile", profile)
+          }
           className="mt-10 text-[50px]"
         >
           debuggin
         </button>
-      </div>
+      </div> */}
     </div>
   );
 }

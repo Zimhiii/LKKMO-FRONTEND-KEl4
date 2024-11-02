@@ -85,7 +85,7 @@ export default function EditSubCategory() {
           </button>
         </div>
 
-        <div>
+        {/* <div>
           <button
             onClick={() => {
               console.log("debugging", subcategory);
@@ -94,7 +94,7 @@ export default function EditSubCategory() {
           >
             debuggin
           </button>
-        </div>
+        </div> */}
       </form>
 
       {/* Tabel Subkategori */}

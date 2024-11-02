@@ -191,8 +191,8 @@ const useProductManagementStore = create(
               products: [...state.products, response.data.data],
               loading: false,
             }),
-            console.log("Product added successfully :,", response.data.data),
-            console.log("product", response),
+            // console.log("Product added successfully :,", response.data.data),
+            // console.log("product", response),
             alert(response.data.message)
           );
         } catch (error) {
@@ -200,8 +200,8 @@ const useProductManagementStore = create(
             error: error.response?.data?.message || "Error adding product",
             loading: false,
           });
-          console.log("Error adding product:", error.response?.data?.message);
-          console.log("product", state.products);
+          // console.log("Error adding product:", error.response?.data?.message);
+          // console.log("product", state.products);
         }
       },
 
@@ -227,7 +227,7 @@ const useProductManagementStore = create(
             error: error.response?.data?.message || "Error updating product",
             loading: false,
           });
-          console.log("Error updating product:", error.response?.data?.message);
+          // console.log("Error updating product:", error.response?.data?.message);
         }
       },
 

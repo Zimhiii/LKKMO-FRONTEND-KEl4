@@ -60,7 +60,7 @@ export default function SubCategoryPage() {
           </div>
         )}
       </div>
-      <button
+      {/* <button
         className="rounded-sm p-5 ring-1 ring-slate-500"
         onClick={() => {
           console.log("categories : ", categories[0]);
@@ -71,7 +71,7 @@ export default function SubCategoryPage() {
         }}
       >
         a
-      </button>
+      </button> */}
 
       {/* <div className="grid grid-cols-2  md:grid-cols-3 gap-3 md:gap-[100px]">
         <CardItem />

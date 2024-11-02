@@ -17,7 +17,7 @@ export default function TambahSubCategory() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(name, " test ", id);
+    // console.log(name, " test ", id);
     // Lakukan pengecekan terhadap input
     const subcategoryData = {
       name,

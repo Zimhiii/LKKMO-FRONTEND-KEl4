@@ -5,8 +5,11 @@ import { Link, useNavigate } from "react-router-dom";
 import { FaCaretDown, FaCaretUp } from "react-icons/fa";
 import useCategoryManagementStore from "../../stores/categoryManagementStore";
 import { useLoginStore } from "../../Store/stored";
+import { useAuthUserStore } from "../../stores/authStore";
 
 export default function HumbergerMenu() {
+  const user = useAuthUserStore((state) => state.user);
+
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isCategory, setIsCategory] = useState(false);
   const { categories, fetchCategories } = useCategoryManagementStore();
@@ -65,6 +68,14 @@ export default function HumbergerMenu() {
       document.removeEventListener("mousedown", handleClickOutside); // Cleanup
     };
   }, [isMenuOpen]);
+
+  useEffect(() => {
+    if (token) {
+      setLogin(true);
+    } else {
+      setLogin(false);
+    }
+  }, [token, setLogin]);
 
   return (
     <div>
@@ -146,6 +157,16 @@ export default function HumbergerMenu() {
             >
               Profile
             </Link>
+
+            {user && user.role_id === 2 && (
+              <Link
+                to={"/admin"}
+                className="text-[20px]  text-[#ffffff] rounded-[10px] px-[60px] py-[10px] text-center hover:bg-[#96694d] hover:text-white"
+                onClick={toggleMenu}
+              >
+                Admin Page
+              </Link>
+            )}
           </div>
         ) : (
           <div className="font-montserrat flex flex-col  items-center">

@@ -99,7 +99,7 @@ export default function CardKeranjang({
             </h2>
 
             <h2 className="text-[8px] md:text-[20px] font-semibold ">
-              {selectedProduct?.price} / hari
+              {rupiah(selectedProduct?.price)} / hari
             </h2>
             <h2 className="text-[8px] md:text-[20px] font-semibold ">
               Rental Start : {rental_start}

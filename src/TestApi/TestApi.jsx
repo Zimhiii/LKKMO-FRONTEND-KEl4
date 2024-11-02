@@ -20,7 +20,7 @@ const TestApi = () => {
         }
       )
       .then((response) => {
-        console.log("Data fetched successfully:", response.data);
+        // console.log("Data fetched successfully:", response.data);
         setData(response.data); // Menyimpan data dari API ke state
         setLoading(false);
       })

@@ -18,7 +18,7 @@ const TestApi = () => {
         }
       )
       .then((response) => {
-        console.log("Data fetched successfully:", response.data);
+        // console.log("Data fetched successfully:", response.data);
         // Pastikan mengambil array yang tepat dari response
         setData(response.data.data[0]); // Mengambil array produk dari response
         setLoading(false);

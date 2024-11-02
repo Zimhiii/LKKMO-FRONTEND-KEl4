@@ -36,9 +36,9 @@ const DefaultLayout = () => {
     handleLogin(); // Panggil fungsi handleLogin dengan benar
   }, []); // Kosongkan array dependensi agar hanya dijalankan sekali saat komponen dirender
 
-  console.log("Product by ID:", product);
-  console.log("All Products:", products);
-  console.log("All Products:", wishlist);
+  // console.log("Product by ID:", product);
+  // console.log("All Products:", products);
+  // console.log("All Products:", wishlist);
 
   return (
     <div className="relative min-h-screen flex flex-col">
@@ -46,7 +46,7 @@ const DefaultLayout = () => {
       <div className="flex-grow">
         <Outlet />
       </div>
-      {console.log("User:", user)}
+      {/* {console.log("User:", user)} */}
       <Footer />
     </div>
   );

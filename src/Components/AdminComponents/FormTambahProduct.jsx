@@ -127,13 +127,13 @@ export default function FormTambahProduct() {
           onKeyDown={(event) => handleKeyDown(event, stockRef)}
           ref={priceRef}
         />
-        <InputTambahAkun
+        {/* <InputTambahAkun
           type="text"
           placeholder="Ukuran"
           name="Ukuran"
           onKeyDown={(event) => handleKeyDown(event, null)}
           ref={sizeRef}
-        />
+        /> */}
         <InputTambahAkun
           type="number"
           placeholder="Stok"

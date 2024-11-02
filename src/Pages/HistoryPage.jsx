@@ -10,6 +10,12 @@ export default function HistoryPage() {
   useEffect(() => {
     fetchOrders();
   }, [fetchOrders]);
+  const rupiah = (number) => {
+    return new Intl.NumberFormat("id-ID", {
+      style: "currency",
+      currency: "IDR",
+    }).format(number);
+  };
 
   useEffect(() => {
     document.title = "History";
@@ -86,7 +92,7 @@ export default function HistoryPage() {
           <CardHistory />
           <CardHistory /> */}
 
-          <button
+          {/* <button
             onClick={() => {
               console.log(orders);
               console.log(orderHistory);
@@ -94,7 +100,7 @@ export default function HistoryPage() {
             className="bg-[#BB8360] px-4 py-2  text-[20px] rounded-[6px] text-white"
           >
             Debugging
-          </button>
+          </button> */}
         </div>
       )}
       {!isHistory && (
@@ -125,7 +131,7 @@ export default function HistoryPage() {
           <CardHistory />
           <CardHistory /> */}
 
-          <button
+          {/* <button
             onClick={() => {
               console.log(orders);
               console.log(orderHistory);
@@ -133,7 +139,7 @@ export default function HistoryPage() {
             className="bg-[#BB8360] px-4 py-2  text-[20px] rounded-[6px] text-white"
           >
             Debugging
-          </button>
+          </button> */}
         </div>
       )}
     </div>

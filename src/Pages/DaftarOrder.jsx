@@ -44,7 +44,7 @@ export default function DaftarOrder() {
       });
 
       const result = await response.json();
-      console.log("Message sent successfully:", result);
+      //   console.log("Message sent successfully:", result);
       return result;
     } catch (error) {
       console.error("Error sending message:", error);
@@ -191,14 +191,14 @@ Jika ada pertanyaan lebih lanjut, jangan ragu untuk menghubungi kami! Terima kas
         </table>
       </div>
 
-      <div>
+      {/* <div>
         <button
           onClick={() => console.log(ordersall)}
           className="bg-[#BB8360] px-4 text-white py-2 rounded"
         >
           debugging
         </button>
-      </div>
+      </div> */}
     </div>
   );
 }

@@ -144,17 +144,17 @@ export default function FormEditProduct() {
     await updateProducts(id, formData);
   };
 
-  console.log({
-    name,
-    price,
-    description,
-    stock,
-    selectedCategory,
-    selectedSubCategory,
-    file,
-  });
+  // console.log({
+  //   name,
+  //   price,
+  //   description,
+  //   stock,
+  //   selectedCategory,
+  //   selectedSubCategory,
+  //   file,
+  // });
 
-  console.log(name);
+  // console.log(name);
 
   return (
     <form className="w-full p-5 flex font-inter" onSubmit={handleSubmit}>

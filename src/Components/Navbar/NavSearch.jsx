@@ -21,7 +21,7 @@ export default function NavSearch() {
           type="submit"
           onClick={(e) => {
             e.preventDefault();
-            console.log(search);
+            // console.log(search);
             handdleSearch();
           }}
           className="text-[#736455] mr-2 bg-white rounded-full w-[20px] h-[20px]  md:w-[40px] md:h-[40px]   flex items-center justify-center"

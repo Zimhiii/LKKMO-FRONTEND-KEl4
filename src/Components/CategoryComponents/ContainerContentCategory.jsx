@@ -79,11 +79,11 @@ export default function ContainerContenCategory() {
             className="rounded-sm p-5 ring-1 ring-slate-500"
             onClick={() => {
               // console.log("productByCategory", productByCategory);
-              console.log("category_params :", category_params);
+              // console.log("category_params :", category_params);
               console.log("categories_id :", category_id);
               // console.log("categories_id :", categories[0][category_id]);
-              console.log("subcategories[] :", subCategoryArray);
-              console.log("products :", products);
+              // console.log("subcategories[] :", subCategoryArray);
+              // console.log("products :", products);
             }}
           >
             a

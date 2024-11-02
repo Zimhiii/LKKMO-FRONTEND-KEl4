@@ -11,7 +11,7 @@ export default function ManagementUser() {
 
   useEffect(() => {
     fetchUsers(token);
-    console.log("users:", users);
+    // console.log("users:", users);
 
     // Ambil daftar pengguna saat komponen dimuat
   }, [fetchUsers, token]);
@@ -36,7 +36,7 @@ export default function ManagementUser() {
           <button
             onClick={(e) => {
               e.preventDefault();
-              console.log("users:", users);
+              // console.log("users:", users);
             }}
             className="bg-[#BB8360] px-[8px] rounded-[6px] text-[14px] text-white"
           >

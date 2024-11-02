@@ -8,7 +8,7 @@ export default function EditCategory() {
   const [name, setName] = useState(category?.name ?? ""); // State untuk nama kategori
   const { id } = useParams();
   const subcategories = category?.subcategories ?? [];
-  console.log(category);
+  // console.log(category);
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {

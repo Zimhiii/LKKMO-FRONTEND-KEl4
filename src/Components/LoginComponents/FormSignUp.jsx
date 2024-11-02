@@ -50,7 +50,7 @@ const FormSignUp = () => {
         }
       );
       alert("Registrasi Berhasil");
-      console.log(response.data);
+      // console.log(response.data);
       navigate("/login");
     } catch (err) {
       console.error(err);

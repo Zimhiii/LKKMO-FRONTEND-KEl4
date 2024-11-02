@@ -113,11 +113,11 @@ export default function Content({
       {/* <button
         className="px-10 py-6 ring-1 ring-slate-500 "
         onClick={() => {
-          console.log(
+          // console.log(
             `product sub ${category} ${idsubcategory} : `,
             productsBySubCategory
           );
-          console.log(`product ${category} : `, products);
+          // console.log(`product ${category} : `, products);
         }}
       >
         test

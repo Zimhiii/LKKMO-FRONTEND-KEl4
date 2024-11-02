@@ -51,10 +51,10 @@ const useSubcategoryManagementStore = create(
             error: error.response?.data?.message || "Error adding subcategory",
             loading: false,
           });
-          console.log(
-            "Error adding subcategory:",
-            error.response?.data?.message
-          );
+          // console.log(
+          //   "Error adding subcategory:",
+          //   error.response?.data?.message
+          // );
         }
       },
 

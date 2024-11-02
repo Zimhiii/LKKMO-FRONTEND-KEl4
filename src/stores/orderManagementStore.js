@@ -90,7 +90,7 @@ const useOrderManagementStore = create(
             isOrder: true,
           }));
           // alert(response.data.message); // Notifikasi berhasil
-          // window.location.href = "/history";
+          window.location.href = "/history";
         } catch (error) {
           set({
             error: error.response?.data?.message || "Error creating order",

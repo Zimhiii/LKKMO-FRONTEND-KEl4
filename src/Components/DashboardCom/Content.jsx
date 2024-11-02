@@ -11,6 +11,9 @@ export default function Content({ category = "Koleksi", id }) {
   useEffect(() => {
     fetchProducts();
   }, [fetchProducts, products.length]);
+  // useEffect(() => {
+  //   fetchProducts();
+  // }, [fetchProducts]);
 
   // Filter products based on category_id
   const productsCategory = products.filter(
@@ -27,7 +30,7 @@ export default function Content({ category = "Koleksi", id }) {
         description={product.description}
         image={product.image}
       />
-      {console.log(`cek isi product dari ${category}`, products)}
+      {/* {console.log(`cek isi product dari ${category}`, products)} */}
     </>
   ));
 
@@ -54,7 +57,7 @@ export default function Content({ category = "Koleksi", id }) {
         </div>
       )}
 
-      {console.log(`${category}`, products)}
+      {/* {console.log(`${category}`, products)} */}
     </div>
   );
 }

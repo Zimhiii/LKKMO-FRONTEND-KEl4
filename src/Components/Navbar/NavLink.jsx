@@ -7,13 +7,13 @@ import useCategoryManagementStore from "../../stores/categoryManagementStore";
 
 export default function NavLinkComponent() {
   const user = useAuthUserStore((state) => state.user);
-  const { login, setLogin } = useLoginStore();
-  const token = localStorage.getItem("token");
   const { fetchCategories, categories, loading } = useCategoryManagementStore();
 
   // if (!user || user.role_id !== 2) {
   //   window.location.href = "/";
   // }
+  const token = localStorage.getItem("token");
+  const { login, setLogin } = useLoginStore();
   useEffect(() => {
     if (token) {
       setLogin(true);
@@ -39,7 +39,7 @@ export default function NavLinkComponent() {
         >
           Beranda
         </NavLink>
-        {console.log("login 2", login)}
+        {/* {console.log("login 2", login)} */}
 
         <div className="relative group cursor-pointer">
           <div className="flex items-center justify-center">

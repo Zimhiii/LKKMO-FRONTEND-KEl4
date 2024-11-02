@@ -21,7 +21,7 @@ export default function Dashboard() {
   const categoryData =
     categories && categories.length > 0 ? categories[0] : null;
 
-  console.log(products);
+  // console.log(products);
 
   return (
     <div className="min-h-screen">

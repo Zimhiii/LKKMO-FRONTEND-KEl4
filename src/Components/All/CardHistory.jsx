@@ -109,15 +109,12 @@ export default function CardHistory({
               {selectedProduct.review ? "Lihat Penilaian" : "Tambah Penilaian"}
             </button>
 
-            <button
-              onClick={() => {
-                console.log("product", product);
-                console.log("product_id", product_id);
-              }}
+            <Link
+              to={`/product/${selectedProduct.id}`}
               className="text-[#000000] border border-[#BB8360] rounded-[4px] px-[4px] py-[2px]"
             >
               Sewa Lagi
-            </button>
+            </Link>
           </div>
           <div>
             <h1 className="text-[6px] md:text-[20px] text-[#000000] text-opacity-70">

@@ -4,6 +4,7 @@ import SectionComment from "../Components/ProductComponents/SectionComment";
 import { useNavigate, useParams } from "react-router-dom";
 import useProductManagementStore from "../stores/productManagementStore";
 import useOrderManagementStore from "../stores/orderManagementStore";
+import useProfileStore from "../stores/profileManagementStore";
 
 export default function CategoryPage() {
   const [count, setCount] = useState(1);
@@ -11,6 +12,8 @@ export default function CategoryPage() {
   const [selectedEndDate, setSelectedEndDate] = useState("");
   const { fetchProductById, product, products, loading } =
     useProductManagementStore();
+
+  const { profile, fetchProfile } = useProfileStore();
   const { id } = useParams();
   const [activeSize, setActiveSize] = useState(null); // State untuk menyimpan ukuran yang dipilih
   const { createOrder, isOrder, error, setIsOrder, setError, loadingorder } =
@@ -25,13 +28,18 @@ export default function CategoryPage() {
   //   : null;
 
   useEffect(() => {
+    fetchProfile();
+  }, [fetchProfile]);
+
+  useEffect(() => {
     if (id) {
       fetchProductById(id); // Fetch product based on the ID from the URL
     }
+
     setError(null);
   }, [id, fetchProductById]);
 
-  const selectedProduct = product?.products;
+  const selectedProduct = product ? product?.products : null;
   useEffect(() => {
     document.title = "Page-Product-" + selectedProduct.name; // Set document title on component mount
   }, []);
@@ -75,17 +83,30 @@ export default function CategoryPage() {
       status: "Belum",
     };
 
-    console.log(orderData);
-    try {
-      await createOrder(orderData); // Panggil fungsi createOrder
-      if (isOrder) {
-        setIsOrder(false);
-        useNavigate("/history");
+    // const navigate = useNavigate();
+
+    // console.log(orderData);
+    if (profile.phone == null) {
+      alert("Silahkan isikan nomor handphone terlebih dahulu");
+    } else {
+      try {
+        await createOrder(orderData); // Panggil fungsi createOrder
+        if (isOrder) {
+          setIsOrder(false);
+          // window.location.href = "/history";
+        }
+      } catch (error) {
+        // console.log(error);
       }
-    } catch (error) {
-      console.log(error);
     }
   };
+  const rupiah = (number) => {
+    return new Intl.NumberFormat("id-ID", {
+      style: "currency",
+      currency: "IDR",
+    }).format(number);
+  };
+
   if (!selectedProduct) {
     return (
       <div className="flex justify-center items-center h-[500px]">
@@ -93,7 +114,8 @@ export default function CategoryPage() {
       </div>
     );
   }
-  if (selectedProduct === undefined) {
+
+  if (loading) {
     return (
       <div className="flex justify-center items-center h-[500px]">
         <p className="text-4xl font-cerotta ">Loading...</p>;
@@ -113,7 +135,7 @@ export default function CategoryPage() {
               <img
                 className="object-cover w-[296px] hidden md:block"
                 src={
-                  "http://lkkmo-backend-production.up.railway.app/storage/" +
+                  "https://lkkmo-backend-production-3ab2.up.railway.app/storage/" +
                   selectedProduct.image
                 }
                 alt=""
@@ -145,7 +167,7 @@ export default function CategoryPage() {
                 <img
                   className="w-[135px] h-[177px] object-cover md:hidden"
                   src={
-                    "http://lkkmo-backend-production.up.railway.app/storage/" +
+                    "https://lkkmo-backend-production-3ab2.up.railway.app/storage/" +
                     selectedProduct.image
                   }
                   alt=""
@@ -160,7 +182,7 @@ export default function CategoryPage() {
                 <span>| Tersedia</span>
             </p> */}
               <h3 className="font-semibold text-[16px] md:text-[18px]">
-                {selectedProduct.price} / hari
+                {rupiah(selectedProduct.price)} / hari
               </h3>
               <p className="text-[12px] md:text-[14px] opacity-55 w-[95%] mt-[10px] text-justify">
                 {selectedProduct.description}
@@ -303,22 +325,23 @@ export default function CategoryPage() {
                     +
                   </button>
                 </div>
-                <button
+                {/* <button
                   onClick={() => console.log(orderData)}
                   className="flex items-center bg-white h-full px-[7px] py-[2px] rounded-[3px] text-[8px] md:text-[14px] border-solid border-[1px] border-[#BB8360]"
                 >
                   Tambahkan Keranjang
-                </button>
+                </button> */}
                 <button
+                  type
                   onClick={handleRentalNow}
                   className="flex items-center bg-[#BB8360] h-full w-fit p-[1px] rounded-[5px] text-[8px] md:text-[14px] text-white px-[6px] hover:bg-[#9e6d50] active:border-solid active:border-[1px] active:border-[#BB8360] active:bg-white active:text-[#BB8360] active:scale-95 transition duration-100 ease-in-out"
                 >
                   {loadingorder ? "Loading..." : "Rental Sekarang"}
                   {/* Rental Sekarang */}
                 </button>
-                <div className=" px-[3px] py-[2px] md:p-[6px] text-[16px] md:text-[30px] top-0 -right-1 md:-top-4 md:-right-3 bg-white rounded-[6px] md:rounded-[0px] border-black border-[1px]">
+                {/* <div className=" px-[3px] py-[2px] md:p-[6px] text-[16px] md:text-[30px] top-0 -right-1 md:-top-4 md:-right-3 bg-white rounded-[6px] md:rounded-[0px] border-black border-[1px]">
                   <CiHeart className="  text-[#000000]" />
-                </div>
+                </div> */}
               </div>
             </div>
           </div>
@@ -348,7 +371,7 @@ export default function CategoryPage() {
           <SectionComment /> */}
         </div>
 
-        <button onClick={() => console.log(selectedProduct)}>debugging</button>
+        {/* <button onClick={() => console.log(profile)}>debugging</button> */}
       </div>
     </div>
   );
