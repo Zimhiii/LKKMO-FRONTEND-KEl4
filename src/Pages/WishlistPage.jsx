@@ -14,6 +14,10 @@ export default function WishlistPage() {
   // }, [fetchWishlist]);
 
   useEffect(() => {
+    document.title = "Wishlist";
+  });
+
+  useEffect(() => {
     // Jika wishlist sudah terisi, ambil detail produk berdasarkan product_id
     if (wishlist.length > 0) {
       const fetchProducts = async () => {

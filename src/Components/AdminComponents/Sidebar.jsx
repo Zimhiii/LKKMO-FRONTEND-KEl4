@@ -34,10 +34,10 @@ export default function Sidebar() {
           Manajemen Akun
         </Link>
         <Link
-          to="daftarcategory"
+          to="daftarorder"
           className="py-[11px] px-[20px] text-[14px] hover:bg-[#8d6349]"
         >
-          Category
+          Transaksi
         </Link>
       </div>
     </div>

@@ -5,8 +5,7 @@ import useOrderManagementStore from "../stores/orderManagementStore";
 
 export default function HistoryPage() {
   const [isHistory, setIsHistory] = useState(true);
-  // const { fetchOrderHistory, orderHistory } = useOrderManagementStore();
-  const { fetchOrders, orders } = useOrderManagementStore();
+  const { fetchOrders, orders, deleteOrder } = useOrderManagementStore();
 
   useEffect(() => {
     fetchOrders();
@@ -18,6 +17,11 @@ export default function HistoryPage() {
   // useEffect(() => {
   //   fetchOrderHistory();
   // }, [fetchOrderHistory]);
+
+  const orderfilter = orders.filter((order) => order.status === "Belum");
+  const orderHistoryfilter = orders.filter(
+    (order) => order.status === "Selesai"
+  );
 
   return (
     <div className="mx-[20px]">
@@ -58,14 +62,19 @@ export default function HistoryPage() {
       </div>
       {isHistory && (
         <div className="flex flex-col gap-5 mb-8">
-          {orders.length > 0 ? (
-            orders.map((order) => (
+          {orderHistoryfilter.length > 0 ? (
+            orderHistoryfilter.map((order) => (
               <CardHistory
                 product_id={order.product_id}
                 price={order.price}
                 size={order.size}
                 total_price={order.total_price}
                 key={order.id}
+                order_id={order.id}
+                rental_start={order.rental_start}
+                rental_end={order.rental_end}
+                date={order.created_at}
+                status={order.status}
               />
             ))
           ) : (
@@ -78,7 +87,10 @@ export default function HistoryPage() {
           <CardHistory /> */}
 
           <button
-            onClick={() => console.log(orderHistory)}
+            onClick={() => {
+              console.log(orders);
+              console.log(orderHistory);
+            }}
             className="bg-[#BB8360] px-4 py-2  text-[20px] rounded-[6px] text-white"
           >
             Debugging
@@ -87,9 +99,41 @@ export default function HistoryPage() {
       )}
       {!isHistory && (
         <div className="flex flex-col gap-5 mb-8">
-          <CardKeranjang />
-          <CardKeranjang />
-          <CardKeranjang />
+          {orderfilter.length > 0 ? (
+            orderfilter.map((order) => (
+              <CardKeranjang
+                product_id={order.product_id}
+                price={order.price}
+                size={order.size}
+                total_price={order.total_price}
+                key={order.id}
+                order_id={order.id}
+                rental_start={order.rental_start}
+                rental_end={order.rental_end}
+                date={order.created_at}
+                status={order.status}
+              />
+              // <CardKeranjang />
+            ))
+          ) : (
+            <div>
+              <h1>Belum ada history</h1>
+            </div>
+          )}
+
+          {/* <CardHistory />
+          <CardHistory />
+          <CardHistory /> */}
+
+          <button
+            onClick={() => {
+              console.log(orders);
+              console.log(orderHistory);
+            }}
+            className="bg-[#BB8360] px-4 py-2  text-[20px] rounded-[6px] text-white"
+          >
+            Debugging
+          </button>
         </div>
       )}
     </div>

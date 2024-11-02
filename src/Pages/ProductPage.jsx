@@ -9,10 +9,11 @@ export default function CategoryPage() {
   const [count, setCount] = useState(1);
   const [selectedStartDate, setSelectedStartDate] = useState("");
   const [selectedEndDate, setSelectedEndDate] = useState("");
-  const { fetchProductById, product, products } = useProductManagementStore();
+  const { fetchProductById, product, products, loading } =
+    useProductManagementStore();
   const { id } = useParams();
   const [activeSize, setActiveSize] = useState(null); // State untuk menyimpan ukuran yang dipilih
-  const { createOrder, isOrder, error, setIsOrder, setError, loading } =
+  const { createOrder, isOrder, error, setIsOrder, setError, loadingorder } =
     useOrderManagementStore();
 
   const handleSizeClick = (size) => {
@@ -312,7 +313,7 @@ export default function CategoryPage() {
                   onClick={handleRentalNow}
                   className="flex items-center bg-[#BB8360] h-full w-fit p-[1px] rounded-[5px] text-[8px] md:text-[14px] text-white px-[6px] hover:bg-[#9e6d50] active:border-solid active:border-[1px] active:border-[#BB8360] active:bg-white active:text-[#BB8360] active:scale-95 transition duration-100 ease-in-out"
                 >
-                  {loading ? "Loading..." : "Rental Sekarang"}
+                  {loadingorder ? "Loading..." : "Rental Sekarang"}
                   {/* Rental Sekarang */}
                 </button>
                 <div className=" px-[3px] py-[2px] md:p-[6px] text-[16px] md:text-[30px] top-0 -right-1 md:-top-4 md:-right-3 bg-white rounded-[6px] md:rounded-[0px] border-black border-[1px]">
@@ -327,12 +328,15 @@ export default function CategoryPage() {
       <div className="py-6 font-montserrat">
         <div className="text-[12px] md:text-[14px]  ">
           <span>Semua Tanggapan</span>{" "}
-          <span className="text-[#000000] text-opacity-50 ">{"(20)"}</span>
+          <span className="text-[#000000] text-opacity-50 ">
+            ({selectedProduct.reviews.length})
+          </span>
         </div>
         <div className="relative grid grid-cols-1 md:grid-cols-2 gap-3  md:gap-6 mt-[12px]">
           {selectedProduct.reviews.map((review) => (
             <SectionComment
               id={review.id}
+              name={review.user.name}
               comment={review.comment}
               rating={review.rating}
             />
@@ -343,6 +347,8 @@ export default function CategoryPage() {
           <SectionComment />
           <SectionComment /> */}
         </div>
+
+        <button onClick={() => console.log(selectedProduct)}>debugging</button>
       </div>
     </div>
   );

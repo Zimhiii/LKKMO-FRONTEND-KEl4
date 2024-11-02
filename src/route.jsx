@@ -36,6 +36,7 @@ import SearchPage from "./Pages/SearchPage";
 import { Container } from "postcss";
 import ContainerSearch from "./Components/AdminComponents/SearchCom/ContainerSearch";
 import EditSubCategory from "./Pages/EditSubCategory";
+import DaftarOrder from "./Pages/DaftarOrder";
 
 export const route = createBrowserRouter([
   {
@@ -234,6 +235,10 @@ export const route = createBrowserRouter([
       {
         path: "/admin/editsubcategory/:id",
         element: <EditSubCategory />,
+      },
+      {
+        path: "/admin/daftarorder",
+        element: <DaftarOrder />,
       },
     ],
   },
