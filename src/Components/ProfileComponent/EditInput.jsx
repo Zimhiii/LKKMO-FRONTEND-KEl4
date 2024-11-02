@@ -1,18 +1,7 @@
 import React, { forwardRef } from "react";
 
 const InputSetting = forwardRef(
-  (
-    {
-      type,
-      placeholder,
-      name,
-      onKeyDown,
-      onChange,
-      value = "",
-      className = "",
-    },
-    ref
-  ) => {
+  ({ type, placeholder, name, onKeyDown, onChange, value, className }, ref) => {
     return (
       <div className="mb-2 w-full">
         <label
@@ -28,8 +17,8 @@ const InputSetting = forwardRef(
           id={name}
           ref={ref}
           onKeyDown={onKeyDown}
-          //   onChange={onChange} // Mendukung onChange untuk input nilai
-          //   value={value} // Mendukung value untuk kontrol input
+          onChange={onChange} // Mendukung onChange untuk input nilai
+          value={value} // Mendukung value untuk kontrol input
         />
       </div>
     );

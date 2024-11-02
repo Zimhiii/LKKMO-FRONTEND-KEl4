@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import FormTambahProduct from "../Components/AdminComponents/FormTambahProduct";
 
 export default function TambahProduct() {

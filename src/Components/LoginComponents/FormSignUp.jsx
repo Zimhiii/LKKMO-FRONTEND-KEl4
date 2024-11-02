@@ -42,7 +42,7 @@ const FormSignUp = () => {
     try {
       // Permintaan API menggunakan Axios
       const response = await axios.post(
-        "https://lkkmo-backend-production.up.railway.app/api/v1/register",
+        "https://lkkmo-backend-production-3ab2.up.railway.app/api/v1/register",
         {
           name,
           email,

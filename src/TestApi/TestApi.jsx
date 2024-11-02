@@ -11,11 +11,14 @@ const TestApi = () => {
 
     // Melakukan GET request menggunakan Axios dengan header Authorization
     axios
-      .get("https://lkkmo-backend-production.up.railway.app/api/v1/products", {
-        headers: {
-          Authorization: `Bearer ${token}`, // Tambahkan token ke header
-        },
-      })
+      .get(
+        "https://lkkmo-backend-production-3ab2.up.railway.app/api/v1/products",
+        {
+          headers: {
+            Authorization: `Bearer ${token}`, // Tambahkan token ke header
+          },
+        }
+      )
       .then((response) => {
         console.log("Data fetched successfully:", response.data);
         setData(response.data); // Menyimpan data dari API ke state

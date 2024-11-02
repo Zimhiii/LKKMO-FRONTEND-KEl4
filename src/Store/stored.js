@@ -22,7 +22,7 @@ export const useUserStore = create((set) => ({
   fetchUser: async (credentials) => {
     try {
       const response = await axios.post(
-        "https://lkkmo-backend-production.up.railway.app/api/v1/login",
+        "https://lkkmo-backend-production-3ab2.up.railway.app/api/v1/login",
         credentials
       );
 

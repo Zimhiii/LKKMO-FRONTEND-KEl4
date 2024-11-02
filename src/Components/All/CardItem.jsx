@@ -111,7 +111,7 @@ export default function CardItem({
 
           <div className="flex text-[10px] text-wrap justify-center items-center">
             <img
-              src={`https://lkkmo-backend-production.up.railway.app/storage/${image}`}
+              src={`https://lkkmo-backend-production-3ab2.up.railway.app/storage/${image}`}
               alt={truncateText(name, 13)}
               className="w-[82px] h-[99px] md:w-[231px] md:h-[278px] object-cover object-center"
             />

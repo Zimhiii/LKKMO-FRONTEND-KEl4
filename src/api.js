@@ -4,7 +4,7 @@ import { useAuthUserStore } from "./stores/authStore";
 
 // Buat instance Axios dengan konfigurasi dasar
 const api = axios.create({
-  baseURL: "https://lkkmo-backend-production.up.railway.app/api/v1", // Ganti dengan base URL API-mu
+  baseURL: "https://lkkmo-backend-production-3ab2.up.railway.app/api/v1", // Ganti dengan base URL API-mu
   timeout: 3000, // Timeout request (opsional)
 });
 

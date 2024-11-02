@@ -74,12 +74,12 @@ export default function CardHistory({
       <div>
         <div className="img p-[7px] bg-white rounded-[6px] flex justify-center items-center">
           <img
-            src={`https://lkkmo-backend-production.up.railway.app/storage/${selectedProduct.image}`}
+            src={`https://lkkmo-backend-production-3ab2.up.railway.app/storage/${selectedProduct.image}`}
             alt="img"
             className="md:hidden"
           />
           <img
-            src={`https://lkkmo-backend-production.up.railway.app/storage/${selectedProduct.image}`}
+            src={`https://lkkmo-backend-production-3ab2.up.railway.app/storage/${selectedProduct.image}`}
             alt="img"
             className="hidden md:block w-[250px] h-[250px] object-cover"
           />

@@ -8,7 +8,7 @@ const DaftarCategory = () => {
   });
   const { categories, deleteCategory, loading, error } =
     useCategoryManagementStore();
-  const baseUrl = "https://lkkmo-backend-production.up.railway.app/api/v1";
+  const baseUrl = "https://lkkmo-backend-production-3ab2.up.railway.app/api/v1";
 
   const handleDelete = async (id) => {
     if (window.confirm("Are you sure you want to delete this product?")) {

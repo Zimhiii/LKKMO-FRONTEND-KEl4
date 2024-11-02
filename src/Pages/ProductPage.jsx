@@ -19,7 +19,6 @@ export default function CategoryPage() {
     setActiveSize(size); // Menyetel ukuran yang dipilih sebagai active
   };
 
-  const selectedProduct = product?.products;
   // const selectedProduct = products
   //   ? products.find((product) => product.id == id)
   //   : null;
@@ -31,6 +30,7 @@ export default function CategoryPage() {
     setError(null);
   }, [id, fetchProductById]);
 
+  const selectedProduct = product?.products;
   useEffect(() => {
     document.title = "Page-Product-" + selectedProduct.name; // Set document title on component mount
   }, []);
@@ -86,6 +86,13 @@ export default function CategoryPage() {
     }
   };
   if (!selectedProduct) {
+    return (
+      <div className="flex justify-center items-center h-[500px]">
+        <p className="text-4xl font-cerotta ">Loading...</p>;
+      </div>
+    );
+  }
+  if (selectedProduct === undefined) {
     return (
       <div className="flex justify-center items-center h-[500px]">
         <p className="text-4xl font-cerotta ">Loading...</p>;
@@ -323,7 +330,7 @@ export default function CategoryPage() {
           <span className="text-[#000000] text-opacity-50 ">{"(20)"}</span>
         </div>
         <div className="relative grid grid-cols-1 md:grid-cols-2 gap-3  md:gap-6 mt-[12px]">
-          {product.review.map((review) => (
+          {selectedProduct.reviews.map((review) => (
             <SectionComment />
           ))}
           {/* <SectionComment />

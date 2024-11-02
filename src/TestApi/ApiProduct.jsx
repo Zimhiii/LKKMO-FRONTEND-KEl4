@@ -9,11 +9,14 @@ const TestApi = () => {
     const token = localStorage.getItem("token");
 
     axios
-      .get("https://lkkmo-backend-production.up.railway.app/api/v1/products", {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
+      .get(
+        "https://lkkmo-backend-production-3ab2.up.railway.app/api/v1/products",
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      )
       .then((response) => {
         console.log("Data fetched successfully:", response.data);
         // Pastikan mengambil array yang tepat dari response

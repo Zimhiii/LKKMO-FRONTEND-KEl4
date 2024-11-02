@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Select from "./Select";
 import EditAkun from "./EditAkun";
 import useProductManagementStore from "../../stores/productManagementStore";
@@ -28,7 +28,7 @@ export default function FormEditProduct() {
   const [description, setDescription] = useState(selectedProduct.description);
   const [preview, setPreview] = useState(
     selectedProduct.image
-      ? `https://lkkmo-backend-production.up.railway.app/storage/${selectedProduct.image}`
+      ? `https://lkkmo-backend-production-3ab2.up.railway.app/storage/${selectedProduct.image}`
       : ""
   );
   const [file, setFile] = useState(selectedProduct.image || null);
@@ -69,7 +69,7 @@ export default function FormEditProduct() {
   //   const updateProducts = async (id, formData) => {
   //     try {
   //       const response = await fetch(
-  //         `https://lkkmo-backend-production.up.railway.app/api/v1/products/${id}`,
+  //         `https://lkkmo-backend-production-3ab2.up.railway.app/api/v1/products/${id}`,
   //         {
   //           method: "PUT",
   //           body: JSON.stringify(formData),
@@ -121,7 +121,7 @@ export default function FormEditProduct() {
     const updateProducts = async (id, formData) => {
       try {
         const response = await fetch(
-          `https://lkkmo-backend-production.up.railway.app/api/v1/products/${id}`,
+          `https://lkkmo-backend-production-3ab2.up.railway.app/api/v1/products/${id}`,
           {
             method: "PUT",
             body: formData, // Kirim objek formData
