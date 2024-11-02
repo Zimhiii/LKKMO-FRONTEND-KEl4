@@ -6,7 +6,11 @@ import useProductManagementStore from "../../stores/productManagementStore";
 export default function Content({ category = "Koleksi", id }) {
   const urlcategory = category.toLowerCase();
   const idCategory = id;
-  const { products } = useProductManagementStore();
+  const { products, fetchProducts } = useProductManagementStore();
+
+  useEffect(() => {
+    fetchProducts();
+  }, [fetchProducts, products.length]);
 
   // Filter products based on category_id
   const productsCategory = products.filter(

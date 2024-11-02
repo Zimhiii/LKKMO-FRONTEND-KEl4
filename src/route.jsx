@@ -32,6 +32,10 @@ import EditCategory from "./Pages/EditCategory";
 import TambahSubCategory from "./Components/AdminComponents/TambahSubCategory";
 import AllProduct from "./Pages/AllProduct";
 import RedirectToWA from "./Pages/RedirectToWA";
+import SearchPage from "./Pages/SearchPage";
+import { Container } from "postcss";
+import ContainerSearch from "./Components/AdminComponents/SearchCom/ContainerSearch";
+import EditSubCategory from "./Pages/EditSubCategory";
 
 export const route = createBrowserRouter([
   {
@@ -103,6 +107,10 @@ export const route = createBrowserRouter([
         path: "wa",
         element: <RedirectToWA />,
       },
+      // {
+      //   path: "/search-results",
+      //   element: <SearchResultsPage />, // Buat komponen SearchResultsPage
+      // },
       {
         path: "settinguser",
         element: <SettingLayout />,
@@ -114,6 +122,17 @@ export const route = createBrowserRouter([
           {
             path: "/settinguser/passwordsetting",
             element: <PasswordPage />,
+          },
+        ],
+      },
+
+      {
+        path: "search",
+        element: <SearchPage />,
+        children: [
+          {
+            path: ":search",
+            element: <ContainerSearch />,
           },
         ],
       },
@@ -211,6 +230,10 @@ export const route = createBrowserRouter([
       {
         path: "/admin/tambahsubcategory/:id",
         element: <TambahSubCategory />,
+      },
+      {
+        path: "/admin/editsubcategory/:id",
+        element: <EditSubCategory />,
       },
     ],
   },

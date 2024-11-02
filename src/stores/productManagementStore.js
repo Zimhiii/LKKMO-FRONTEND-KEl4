@@ -9,6 +9,7 @@ const useProductManagementStore = create(
       products: [],
       productsByCategory: [],
       productsBySubCategory: [],
+      productsBySearch: [],
       product: null,
       loading: false,
       error: null,
@@ -118,6 +119,26 @@ const useProductManagementStore = create(
           });
         }
       },
+
+      searchProducts: async (query) => {
+        set({ loading: true, error: null });
+        const { token } = useAuthUserStore.getState(); // Ambil token dari auth store
+        try {
+          const response = await api.get(`/products/search/${query}`, {
+            headers: { Authorization: `Bearer ${token}` },
+          });
+          set({
+            productsBySearch: response.data.data[0], // Sesuaikan sesuai dengan respons API
+            loading: false,
+          });
+        } catch (error) {
+          set({
+            error: error.response?.data?.message || "Error searching products",
+            loading: false,
+          });
+        }
+      },
+
       // fetchProductsBySubCategory: async (subcategoryId) => {
       //   if (!subcategoryId) return;
       //   // Hentikan jika subcategoryId tidak valid
@@ -189,7 +210,7 @@ const useProductManagementStore = create(
         set({ loading: true, error: null });
         const { token } = useAuthUserStore.getState(); // Ambil token dari auth store
         try {
-          const response = await api.put(`/products/${id}`, productData, {
+          const response = await api.post(`/products/${id}`, productData, {
             headers: {
               Authorization: `Bearer ${token}`,
               "Content-Type": "multipart/form-data",

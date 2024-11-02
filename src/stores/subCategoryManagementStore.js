@@ -21,7 +21,7 @@ const useSubcategoryManagementStore = create(
           const response = await api.get(`/subcategories/${id}`, {
             headers: { Authorization: `Bearer ${token}` },
           });
-          set({ subcategory: response.data.data, loading: false });
+          set({ subcategory: response.data.data[0], loading: false });
         } catch (error) {
           set({
             error:

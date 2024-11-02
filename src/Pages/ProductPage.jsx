@@ -331,7 +331,11 @@ export default function CategoryPage() {
         </div>
         <div className="relative grid grid-cols-1 md:grid-cols-2 gap-3  md:gap-6 mt-[12px]">
           {selectedProduct.reviews.map((review) => (
-            <SectionComment />
+            <SectionComment
+              id={review.id}
+              comment={review.comment}
+              rating={review.rating}
+            />
           ))}
           {/* <SectionComment />
           <SectionComment />

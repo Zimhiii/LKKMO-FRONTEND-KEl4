@@ -29,7 +29,12 @@ export default function FormEdit() {
       setEmail(profile.email || "");
       setPhone(profile.phone || "");
       setAddress(profile.alamat || "");
-      setPreview(profile.profilePicture || null);
+      // Cek apakah profilePicture ada dan set preview dengan URL lengkap
+      setPreview(
+        profile.profile_photo_path
+          ? `https://lkkmo-backend-production-3ab2.up.railway.app/storage/${profile.profile_photo_path}`
+          : null
+      );
     }
   }, [profile]);
 
@@ -40,11 +45,6 @@ export default function FormEdit() {
     }
   };
 
-  // const handleImageChange = (event) => {
-  //   event.preventDefault();
-  //   setProfilePicture(event.target.files[0]);
-  //   setImagePreview(URL.createObjectURL(event.target.files[0]));
-  // };
   const handleFileChange = (event) => {
     const selectedFile = event.target.files[0];
     setFile(selectedFile);
@@ -59,19 +59,12 @@ export default function FormEdit() {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    // const formData = {
-    //   name,
-    //   phone,
-    //   alamat: address,
-    //   image: profilePicture,
-    // };
-
     const formData = new FormData();
     formData.append("name", name);
     formData.append("phone", phone);
     formData.append("alamat", address);
     if (file) {
-      formData.append("image", file);
+      formData.append("image", file); // Hanya menambahkan gambar baru jika ada
     }
 
     console.log(
@@ -123,8 +116,6 @@ export default function FormEdit() {
           <button
             type="button"
             onClick={() => {
-              // setProfilePicture(null);
-              // setImagePreview(null);
               setFile(null);
               setPreview(null);
             }}
@@ -188,6 +179,14 @@ export default function FormEdit() {
           </button>
         </div>
       </form>
+      <div>
+        <button
+          onClick={() => console.log("profile", profile)}
+          className="mt-10 text-[50px]"
+        >
+          debuggin
+        </button>
+      </div>
     </div>
   );
 }

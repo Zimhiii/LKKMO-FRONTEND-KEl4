@@ -71,7 +71,7 @@ const DaftarProduct = () => {
               uct.size}</td> */}
               <td className="border border-gray-300 p-2 flex justify-center">
                 <img
-                  src={`http://lkkmo-backend-production.up.railway.app/storage/${product.image}`}
+                  src={`https://lkkmo-backend-production-3ab2.up.railway.app/storage/${product.image}`}
                   alt={product.name}
                   className="h-16 w-16 object-cover"
                 />

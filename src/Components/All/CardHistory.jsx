@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
-import img from "../../assets/HistoryImageEx.jpg";
-import imgMD from "../../assets/CardkategoriMD.png";
 import useProductManagementStore from "../../stores/productManagementStore";
+// import ReviewPopup from "./ReviewPopup"; // Import the popup component
+import api from "../../api"; // Import your API configuration
+import ReviewPopup from "../ReviewComp/ReviewPopUp";
 
 export default function CardHistory({
   product_id,
@@ -10,8 +11,7 @@ export default function CardHistory({
   total_price,
   size,
 }) {
-  const { fetchProducts, products, fetchProductById } =
-    useProductManagementStore();
+  const { fetchProducts, products } = useProductManagementStore();
   const rupiah = (number) => {
     return new Intl.NumberFormat("id-ID", {
       style: "currency",
@@ -19,6 +19,7 @@ export default function CardHistory({
     }).format(number);
   };
 
+  const [isModalOpen, setIsModalOpen] = useState(false); // State to control the popup visibility
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -28,7 +29,7 @@ export default function CardHistory({
       setLoading(true);
       try {
         const response = await api.get(`/products/${product_id}`, {
-          headers: { Authorization: `Bearer YOUR_TOKEN` }, // Sesuaikan token
+          headers: { Authorization: `Bearer YOUR_TOKEN` }, // Update with your token logic
         });
         setProduct(response.data.data[0]);
         setLoading(false);
@@ -45,29 +46,18 @@ export default function CardHistory({
     if (!products) {
       fetchProducts();
     }
-  });
-
-  useEffect(() => {
-    if (product_id) {
-      fetchProductById(product_id);
-    }
-  }, [product_id]);
+  }, [fetchProducts, products]);
 
   const selectedProduct = products.find((product) => product.id == product_id);
 
   if (!selectedProduct) {
     return (
       <div>
-        {/* Loading... */}
         <h1>{product_id}</h1>
-        <h1>product telah dihapus</h1>
-        {/* <h1>{products}</h1> */}
+        <h1>Product telah dihapus</h1>
       </div>
     );
   }
-  // const selectedProduct = products
-  //   ? products.find((product) => product.id == product_id)
-  //   : null;
 
   return (
     <div className="bg-[#D9D9D9] p-[5px] md:px-[35px] md:py-[12px] font-montserrat flex rounded-[10px] gap-[5px] md:gap-[75px]">
@@ -84,9 +74,6 @@ export default function CardHistory({
             className="hidden md:block w-[250px] h-[250px] object-cover"
           />
         </div>
-        <p className="text-[4px] md:text-[14px] md:pt-[12px] mt-[3px] text-[#6B6B6B]">
-          {/* Pesanan dibatalkan */}
-        </p>
       </div>
       <div className="w-full">
         <h1 className="text-[9px] md:text-[20px] font-semibold mb-[9px]">
@@ -98,7 +85,12 @@ export default function CardHistory({
           <h2 className="">{selectedProduct.size}</h2>
           <h2>{total_price / selectedProduct.price} hari</h2>
           <h2>{rupiah(total_price)}</h2>
-          <button className="text-[#ffffff] text-opacity-100 bg-[#BB8360] rounded-[4px] px-[4px] py-[2px]">
+
+          {/* Button to open the review popup */}
+          <button
+            onClick={() => setIsModalOpen(true)}
+            className="text-[#ffffff] bg-[#BB8360] rounded-[4px] px-[4px] py-[2px]"
+          >
             {selectedProduct.review ? "Lihat Penilaian" : "Tambah Penilaian"}
           </button>
 
@@ -107,12 +99,20 @@ export default function CardHistory({
               console.log("product", product);
               console.log("product_id", product_id);
             }}
-            className="text-[#000000] text-opacity-100 border border-[#BB8360] rounded-[4px] px-[4px] py-[2px]"
+            className="text-[#000000] border border-[#BB8360] rounded-[4px] px-[4px] py-[2px]"
           >
             Sewa Lagi
           </button>
         </div>
       </div>
+
+      {/* Review Popup Component */}
+      {isModalOpen && (
+        <ReviewPopup
+          productId={selectedProduct.id}
+          onClose={() => setIsModalOpen(false)}
+        />
+      )}
     </div>
   );
 }

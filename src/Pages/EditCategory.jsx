@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import useCategoryManagementStore from "../stores/categoryManagementStore";
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, useNavigate } from "react-router-dom";
 
 export default function EditCategory() {
   const { category, updateCategory, loading, error } =
@@ -9,6 +9,7 @@ export default function EditCategory() {
   const { id } = useParams();
   const subcategories = category?.subcategories ?? [];
   console.log(category);
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -21,7 +22,8 @@ export default function EditCategory() {
 
     // Clear input field setelah submit
     setName("");
-    window.location.href = "/admin/daftarcategory";
+    // window.location.href = "/admin/daftarcategory";
+    navigate("/admin/daftarcategory");
   };
 
   return (

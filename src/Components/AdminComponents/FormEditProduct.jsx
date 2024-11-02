@@ -123,7 +123,7 @@ export default function FormEditProduct() {
         const response = await fetch(
           `https://lkkmo-backend-production-3ab2.up.railway.app/api/v1/products/${id}`,
           {
-            method: "PUT",
+            method: "POST",
             body: formData, // Kirim objek formData
             headers: {
               Authorization: `Bearer ${token}`,

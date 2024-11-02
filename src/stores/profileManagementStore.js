@@ -32,7 +32,7 @@ const useProfileStore = create(
         set({ loading: true, error: null });
         const { token } = useAuthUserStore.getState(); // Mengambil token dari auth store
         try {
-          const response = await api.put("/profile/update", updatedData, {
+          const response = await api.post("/profile/update", updatedData, {
             headers: {
               Authorization: `Bearer ${token}`,
               "Content-Type": "multipart/form-data",

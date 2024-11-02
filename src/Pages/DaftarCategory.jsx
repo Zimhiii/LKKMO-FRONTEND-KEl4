@@ -6,8 +6,11 @@ const DaftarCategory = () => {
   useEffect(() => {
     document.title = "Daftar Category";
   });
-  const { categories, deleteCategory, loading, error } =
+  const { categories, deleteCategory, loading, error, fetchCategories } =
     useCategoryManagementStore();
+  // useEffect(() => {
+  //   fetchCategories();
+  // }, [categories, fetchCategories]);
   const baseUrl = "https://lkkmo-backend-production-3ab2.up.railway.app/api/v1";
 
   const handleDelete = async (id) => {
