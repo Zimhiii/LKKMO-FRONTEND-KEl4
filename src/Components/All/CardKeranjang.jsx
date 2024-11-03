@@ -69,12 +69,7 @@ export default function CardKeranjang({
   const selectedProduct = products.find((product) => product.id == product_id);
 
   if (!selectedProduct) {
-    return (
-      <div>
-        <h1>{product_id}</h1>
-        <h1>Product telah dihapus</h1>
-      </div>
-    );
+    return <div></div>;
   }
 
   return (

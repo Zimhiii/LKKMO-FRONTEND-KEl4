@@ -27,12 +27,12 @@ export default function Sidebar() {
         >
           Produk
         </Link>
-        <Link
+        {/* <Link
           to="manajemenakun"
           className="py-[11px] px-[20px] text-[14px] hover:bg-[#8d6349]"
         >
           Manajemen Akun
-        </Link>
+        </Link> */}
         <Link
           to="daftarorder"
           className="py-[11px] px-[20px] text-[14px] hover:bg-[#8d6349]"

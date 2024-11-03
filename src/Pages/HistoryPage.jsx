@@ -84,8 +84,8 @@ export default function HistoryPage() {
               />
             ))
           ) : (
-            <div>
-              <h1>Belum ada history</h1>
+            <div className="flex justify-center text-2xl items-center font-cerotta">
+              <h1>Belum ada History</h1>
             </div>
           )}
           {/* <CardHistory />
@@ -122,8 +122,8 @@ export default function HistoryPage() {
               // <CardKeranjang />
             ))
           ) : (
-            <div>
-              <h1>Belum ada history</h1>
+            <div className="flex justify-center text-2xl items-center font-cerotta">
+              <h1>Belum ada order</h1>
             </div>
           )}
 

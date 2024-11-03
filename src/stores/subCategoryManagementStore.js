@@ -105,6 +105,7 @@ const useSubcategoryManagementStore = create(
             ),
             loading: false,
           }));
+          window.location.reload();
         } catch (error) {
           set({
             error:

@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from "react";
 import useCategoryManagementStore from "../stores/categoryManagementStore";
 import { useParams, Link, useNavigate } from "react-router-dom";
+import useSubcategoryManagementStore from "../stores/subCategoryManagementStore";
 
 export default function EditCategory() {
   const { category, updateCategory, loading, error } =
     useCategoryManagementStore();
   const [name, setName] = useState(category?.name ?? ""); // State untuk nama kategori
   const { id } = useParams();
+  const { deleteSubcategory } = useSubcategoryManagementStore();
   const subcategories = category?.subcategories ?? [];
   // console.log(category);
   const navigate = useNavigate();
@@ -24,6 +26,12 @@ export default function EditCategory() {
     setName("");
     // window.location.href = "/admin/daftarcategory";
     navigate("/admin/daftarcategory");
+  };
+
+  const handleDeleteSubcategory = async (id) => {
+    if (window.confirm("Are you sure you want to delete this subcategory?")) {
+      await deleteSubcategory(id);
+    }
   };
 
   return (

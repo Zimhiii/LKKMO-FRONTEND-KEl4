@@ -24,6 +24,7 @@ export default function ReviewPopup({ productId, onClose }) {
       setComment("");
       onClose();
     }
+    onClose();
   };
 
   return (

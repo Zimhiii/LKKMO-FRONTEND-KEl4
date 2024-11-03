@@ -134,6 +134,7 @@ const useOrderManagementStore = create(
             orders: state.orders.filter((order) => order.id !== id),
             loading: false,
           }));
+          window.location.reload();
         } catch (error) {
           set({
             error: error.response?.data?.message || "Error deleting order",

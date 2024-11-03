@@ -61,15 +61,15 @@ export default function DaftarOrder() {
     if (order) {
       const newStatus = order.status === "Belum" ? "Selesai" : "Belum";
       updateOrder(id, { ...order, status: newStatus });
-      if (newStatus === "Selesai") {
-        const targetphone = order.user.phone;
-        const message = `Halo ${order.user.name},
+    }
+    // if (newStatus === "Selesai") {
+    const targetphone = order.user.phone;
+    const message = `Halo ${order.user.name},
 Terimakasih telah membayar pesanan Anda, jangan lupa untuk mengambil produk yang anda sewa di Renturstyle pada tanggal *${order.rental_start}*.
 Jika ada pertanyaan lebih lanjut, jangan ragu untuk menghubungi kami! Terima kasih sudah mempercayakan kami untuk kebutuhan Anda.!`;
-        sendMessage(targetphone, message);
-        // console.log(targetphone, message);
-      }
-    }
+    sendMessage(targetphone, message);
+    // console.log(targetphone, message);
+    // }
   };
 
   const handleDeleteOrder = (id) => {
@@ -117,7 +117,9 @@ Jika ada pertanyaan lebih lanjut, jangan ragu untuk menghubungi kami! Terima kas
                     {order.user.name}
                   </td>
                   <td className="flex-1 py-[10px] ring-1 text-[14px] ring-slate-200 flex justify-center items-center min-w-[150px]">
-                    {order.product.name}
+                    {order.product !== null
+                      ? order.product.name
+                      : "Telah di Hapus"}
                   </td>
                   <td className="flex-1 py-[10px] ring-1 text-[14px] ring-slate-200 flex justify-center items-center min-w-[200px]">
                     {order.rental_start}
