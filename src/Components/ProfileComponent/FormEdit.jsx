@@ -180,7 +180,7 @@ export default function FormEdit() {
         </div>
       </form>
       <div>
-        <button
+        {/* <button
           onClick={
             () => console.log("profile", profile.profile_photo_path)
             // console.log("profile",  )
@@ -188,7 +188,7 @@ export default function FormEdit() {
           className="mt-10 text-[50px]"
         >
           debuggin
-        </button>
+        </button> */}
       </div>
     </div>
   );
