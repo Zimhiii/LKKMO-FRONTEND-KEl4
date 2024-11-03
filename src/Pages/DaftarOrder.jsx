@@ -108,47 +108,51 @@ Jika ada pertanyaan lebih lanjut, jangan ragu untuk menghubungi kami! Terima kas
           </thead>
           <tbody className="w-full flex flex-col">
             {ordersall && ordersall.length > 0 ? (
-              ordersall.map((order, index) => (
-                <tr key={order.id} className="flex w-full ">
-                  <td className="flex-1 py-[10px] ring-1 text-[14px] ring-slate-200 flex justify-center items-center max-w-[50px] text-center">
-                    {index + 1}
-                  </td>
-                  <td className="flex-1 py-[10px] ring-1 text-[14px] ring-slate-200 flex justify-center items-center min-w-[150px]">
-                    {order.user.name}
-                  </td>
-                  <td className="flex-1 py-[10px] ring-1 text-[14px] ring-slate-200 flex justify-center items-center min-w-[150px]">
-                    {order.product !== null
-                      ? order.product.name
-                      : "Telah di Hapus"}
-                  </td>
-                  <td className="flex-1 py-[10px] ring-1 text-[14px] ring-slate-200 flex justify-center items-center min-w-[200px]">
-                    {order.rental_start}
-                  </td>
-                  <td className="flex-1 py-[10px] ring-1 text-[14px] ring-slate-200 flex justify-center items-center min-w-[200px]">
-                    {order.rental_end}
-                  </td>
-                  <td className="flex-1 py-[10px]  ring-1 text-[14px] ring-slate-200 flex justify-center items-center max-w-[100px]">
-                    {order.status}
-                  </td>
-                  <td className="flex-1 py-[10px] px-[10px] ring-1 text-[14px] ring-slate-200 flex justify-center items-center gap-3 min-w-[100px]">
-                    <button
-                      onClick={() => handleUpdateOrder(order.id)}
-                      //   to={`/admin/editakun/${order.id}`} // Ubah ke rute edit yang sesuai
-                      className="bg-[#BB8360] text-[10px] px-4 text-white py-2 rounded"
-                    >
-                      {order.status === "Belum"
-                        ? "Tandai Sebagai Selesai"
-                        : "Tandai Sebagai Belum"}
-                    </button>
-                    <button
-                      onClick={() => handleDeleteOrder(order.id)}
-                      className="ring-1 ring-red-500 px-4 text-red-500 py-2 rounded"
-                    >
-                      Hapus
-                    </button>
-                  </td>
-                </tr>
-              ))
+              ordersall.map((order, index) =>
+                order.product !== null ? (
+                  <tr key={order.id} className="flex w-full ">
+                    <td className="flex-1 py-[10px] ring-1 text-[14px] ring-slate-200 flex justify-center items-center max-w-[50px] text-center">
+                      {index + 1}
+                    </td>
+                    <td className="flex-1 py-[10px] ring-1 text-[14px] ring-slate-200 flex justify-center items-center min-w-[150px]">
+                      {order.user.name}
+                    </td>
+                    <td className="flex-1 py-[10px] ring-1 text-[14px] ring-slate-200 flex justify-center items-center min-w-[150px]">
+                      {order.product !== null
+                        ? order.product.name
+                        : "Telah di Hapus"}
+                    </td>
+                    <td className="flex-1 py-[10px] ring-1 text-[14px] ring-slate-200 flex justify-center items-center min-w-[200px]">
+                      {order.rental_start}
+                    </td>
+                    <td className="flex-1 py-[10px] ring-1 text-[14px] ring-slate-200 flex justify-center items-center min-w-[200px]">
+                      {order.rental_end}
+                    </td>
+                    <td className="flex-1 py-[10px]  ring-1 text-[14px] ring-slate-200 flex justify-center items-center max-w-[100px]">
+                      {order.status}
+                    </td>
+                    <td className="flex-1 py-[10px] px-[10px] ring-1 text-[14px] ring-slate-200 flex justify-center items-center gap-3 min-w-[100px]">
+                      <button
+                        onClick={() => handleUpdateOrder(order.id)}
+                        //   to={`/admin/editakun/${order.id}`} // Ubah ke rute edit yang sesuai
+                        className="bg-[#BB8360] text-[10px] px-4 text-white py-2 rounded"
+                      >
+                        {order.status === "Belum"
+                          ? "Tandai Sebagai Selesai"
+                          : "Tandai Sebagai Belum"}
+                      </button>
+                      <button
+                        onClick={() => handleDeleteOrder(order.id)}
+                        className="ring-1 ring-red-500 px-4 text-red-500 py-2 rounded"
+                      >
+                        Hapus
+                      </button>
+                    </td>
+                  </tr>
+                ) : (
+                  ""
+                )
+              )
             ) : (
               <tr>
                 <td colSpan="5" className="text-center py-4">

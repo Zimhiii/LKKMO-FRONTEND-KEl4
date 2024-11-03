@@ -4,7 +4,7 @@ import { BiArrowBack } from "react-icons/bi";
 
 export default function Sidebar() {
   return (
-    <div className="w-full h-full py-[24px] bg-[#BB8360] text-white font-inter">
+    <div className="sticky top-0 w-full h-full py-[24px] bg-[#BB8360] text-white font-inter">
       <h1 className="text-[24px] mb-[24px] px-[10px] font-semibold">Admin</h1>
       <div className="self-start  flex flex-col">
         <Link

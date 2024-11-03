@@ -15,7 +15,7 @@ export default function FormTambahProduct() {
   const nameProductRef = useRef(null);
   const priceRef = useRef(null);
   const stockRef = useRef(null);
-  const sizeRef = useRef(null);
+  // const sizeRef = useRef(null);
   const { addProduct } = useProductManagementStore();
 
   const handleKeyDown = (event, nextInputRef) => {
@@ -51,7 +51,7 @@ export default function FormTambahProduct() {
     nameProductRef.current.value = null;
     priceRef.current.value = null;
     stockRef.current.value = null;
-    sizeRef.current.value = null;
+    // sizeRef.current.value = null;
 
     // Reset form
   };
@@ -63,7 +63,7 @@ export default function FormTambahProduct() {
     const name = nameProductRef.current.value;
     const price = parseFloat(priceRef.current.value);
     const stock = parseInt(stockRef.current.value);
-    const size = sizeRef.current.value;
+    // const size = sizeRef.current.value;
 
     // Buat form data untuk mengirim file
     const formData = new FormData();
@@ -152,6 +152,7 @@ export default function FormTambahProduct() {
         <div className="flex gap-6 mt-[40px]">
           <button
             type="submit"
+            onClick={handleSubmit}
             className="bg-[#BB8360] px-6 py-2 rounded-[6px] text-[14px] text-white"
           >
             Tambah

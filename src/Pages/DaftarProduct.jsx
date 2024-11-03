@@ -70,11 +70,13 @@ const DaftarProduct = () => {
               {/* <td className="border border-gray-300 p-2">{prod
               uct.size}</td> */}
               <td className="border border-gray-300 p-2 flex justify-center">
-                <img
-                  src={`https://lkkmo-backend-production-3ab2.up.railway.app/storage/${product.image}`}
-                  alt={product.name}
-                  className="h-16 w-16 object-cover"
-                />
+                <div className="flex justify-center items-center">
+                  <img
+                    src={`https://lkkmo-backend-production-3ab2.up.railway.app/storage/${product.image}`}
+                    alt={product.name}
+                    className="h-full w- object-cover"
+                  />
+                </div>
               </td>
               <td className="border border-gray-300 p-2 ">
                 <div className="flex justify-evenly items-center">
