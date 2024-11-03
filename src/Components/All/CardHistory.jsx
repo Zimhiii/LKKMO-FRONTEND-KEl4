@@ -3,6 +3,7 @@ import useProductManagementStore from "../../stores/productManagementStore";
 // import ReviewPopup from "./ReviewPopup"; // Import the popup component
 import api from "../../api"; // Import your API configuration
 import ReviewPopup from "../ReviewComp/ReviewPopup";
+import { Link } from "react-router-dom";
 // import ReviewPopup from "../ReviewComp/ReviewPopUp";
 
 export default function CardHistory({
@@ -80,16 +81,16 @@ export default function CardHistory({
           <img
             src={`https://lkkmo-backend-production-3ab2.up.railway.app/storage/${selectedProduct.image}`}
             alt="img"
-            className="md:hidden"
+            className="md:hidden w-[100px] h-[100px] object-cover object-center"
           />
           <img
             src={`https://lkkmo-backend-production-3ab2.up.railway.app/storage/${selectedProduct.image}`}
             alt="img"
-            className="hidden md:block w-[250px] h-[250px] object-cover"
+            className="hidden md:block w-[250px] h-[250px] object-cover object-center"
           />
         </div>
       </div>
-      <div className="w-full">
+      <div className="w-full ">
         <div>
           <h1 className="text-[9px] md:text-[20px] font-semibold mb-[9px]">
             {selectedProduct.name}
@@ -116,16 +117,18 @@ export default function CardHistory({
               Sewa Lagi
             </Link>
           </div>
-          <div>
+
+          <div className="flex justify-between flex-col gap-[10px]">
             <h1 className="text-[6px] md:text-[20px] text-[#000000] text-opacity-70">
               Rental Start: {rental_start}
             </h1>
             <h1 className="text-[6px] md:text-[20px] text-[#000000] text-opacity-70">
               Rental End: {rental_end}
             </h1>
-          </div>
-          <div>
-            <h1>{status}</h1>
+
+            <div className="text-[6px] md:text-[20px] text-[#000000] text-opacity-70">
+              <h1>{status}</h1>
+            </div>
           </div>
         </div>
       </div>

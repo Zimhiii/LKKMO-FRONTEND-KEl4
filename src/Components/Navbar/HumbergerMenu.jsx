@@ -142,7 +142,14 @@ export default function HumbergerMenu() {
           </Link>
         </div>
         {login ? (
-          <div className="font-montserrat flex flex-col  items-center gap-4">
+          <div className="font-montserrat flex flex-col  items-center gap-3">
+            <Link
+              to={"/history"}
+              className="text-[20px] text-white rounded-[10px] px-[70px] py-[10px] text-center hover:bg-[#96694d] hover:text-white"
+              onClick={toggleMenu}
+            >
+              History
+            </Link>
             <Link
               to={"/wishlist"}
               className="text-[20px] text-white rounded-[10px] px-[70px] py-[10px] text-center hover:bg-[#96694d] hover:text-white"

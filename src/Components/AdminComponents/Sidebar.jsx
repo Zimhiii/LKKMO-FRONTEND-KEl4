@@ -40,12 +40,6 @@ export default function Sidebar() {
           Transaksi
         </Link>
         {}
-        <Link
-          to="daftarorder"
-          className="py-[11px] px-[20px] text-[14px] hover:bg-[#8d6349]"
-        >
-          Transaksi
-        </Link>
       </div>
     </div>
   );

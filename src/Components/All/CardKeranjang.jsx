@@ -81,7 +81,11 @@ export default function CardKeranjang({
     <div className=" p-[5px] font-montserrat  rounded-[10px]  ring-2 ring-[#D9D9D9] flex justify-between">
       <div className="flex gap-[5px]">
         <div className="img p-[7px] bg-white rounded-[6px] flex justify-center items-center ">
-          <img src={img} alt="img" className=" md:hidden" />
+          <img
+            src={`https://lkkmo-backend-production-3ab2.up.railway.app/storage/${selectedProduct.image}`}
+            alt="img"
+            className=" md:hidden w-[100px] h-[100px] object-cover object-center "
+          />
           <img
             src={`https://lkkmo-backend-production-3ab2.up.railway.app/storage/${selectedProduct.image}`}
             alt="img"

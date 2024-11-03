@@ -13,6 +13,8 @@ export default function CategoryPage() {
   const { fetchProductById, product, products, loading } =
     useProductManagementStore();
 
+  // const [selectedProduct, setSelectedProduct] = useState(null);
+
   const { profile, fetchProfile } = useProfileStore();
   const { id } = useParams();
   const [activeSize, setActiveSize] = useState(null); // State untuk menyimpan ukuran yang dipilih
@@ -65,6 +67,11 @@ export default function CategoryPage() {
       setError(null);
     }
   }, [error]);
+  useEffect(() => {
+    if (selectedProduct.length < 1) {
+      fetchProductById(id);
+    }
+  }, [product]);
 
   // const
 
@@ -119,6 +126,14 @@ export default function CategoryPage() {
     return (
       <div className="flex justify-center items-center h-[500px]">
         <p className="text-4xl font-cerotta ">Loading...</p>;
+      </div>
+    );
+  }
+
+  if (!selectedProduct || loading || loadingorder) {
+    return (
+      <div className="flex justify-center items-center h-[500px]">
+        <p className="text-4xl font-cerotta">Loading...</p>
       </div>
     );
   }

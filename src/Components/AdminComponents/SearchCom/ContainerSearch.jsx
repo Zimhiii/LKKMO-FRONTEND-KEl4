@@ -47,12 +47,12 @@ export default function ContainerSearch() {
                 ))}
               </div>
               <div className="flex justify-center mt-6">
-                <button
+                {/* <button
                   onClick={() => console.log(productsBySearch)}
                   className="px-4 py-2 bg-blue-500 text-white rounded-md shadow hover:bg-blue-600"
                 >
                   DEBUGGING
-                </button>
+                </button> */}
               </div>
             </div>
           ) : (
