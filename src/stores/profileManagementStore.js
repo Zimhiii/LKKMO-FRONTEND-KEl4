@@ -40,7 +40,7 @@ const useProfileStore = create(
           });
           set({ profile: response.data.data, loading: false });
           //   alert("Profile updated successfully");
-          window.location.reload();
+          // window.location.reload();
         } catch (error) {
           set({
             error: error.response?.data?.message || "Error updating profile",

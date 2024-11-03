@@ -181,10 +181,11 @@ export default function FormEdit() {
       </form>
       <div>
         {/* <button
-          onClick={
-            () => console.log("profile", profile.profile_photo_path)
-            // console.log("profile",  )
-          }
+          onClick={() => {
+            console.log(
+              `https://lkkmo-backend-production-3ab2.up.railway.app/storage/${profile.profile_photo_path}`
+            );
+          }}
           className="mt-10 text-[50px]"
         >
           debuggin

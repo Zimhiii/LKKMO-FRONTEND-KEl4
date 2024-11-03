@@ -31,6 +31,7 @@ export default function CategoryPage() {
 
   useEffect(() => {
     fetchProfile();
+    fetchProductById(id);
   }, [fetchProfile]);
 
   useEffect(() => {
