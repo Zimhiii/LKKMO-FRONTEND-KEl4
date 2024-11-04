@@ -1,3 +1,145 @@
+// import React, { useEffect, useState } from "react";
+// import { CiHeart } from "react-icons/ci";
+// import SectionComment from "../Components/ProductComponents/SectionComment";
+// import { useNavigate, useParams } from "react-router-dom";
+// import useProductManagementStore from "../stores/productManagementStore";
+// import useOrderManagementStore from "../stores/orderManagementStore";
+// import useProfileStore from "../stores/profileManagementStore";
+
+// export default function CategoryPage() {
+//   const [count, setCount] = useState(1);
+//   const [selectedStartDate, setSelectedStartDate] = useState("");
+//   const [selectedEndDate, setSelectedEndDate] = useState("");
+//   const { fetchProductById, product, products, loading } =
+//     useProductManagementStore();
+
+//   // const [selectedProduct, setSelectedProduct] = useState(null);
+
+//   const { profile, fetchProfile } = useProfileStore();
+//   const { id } = useParams();
+//   const [activeSize, setActiveSize] = useState(null); // State untuk menyimpan ukuran yang dipilih
+//   const { createOrder, isOrder, error, setIsOrder, setError, loadingorder } =
+//     useOrderManagementStore();
+
+//   const handleSizeClick = (size) => {
+//     setActiveSize(size); // Menyetel ukuran yang dipilih sebagai active
+//   };
+
+//   // const selectedProduct = products
+//   //   ? products.find((product) => product.id == id)
+//   //   : null;
+
+//   useEffect(() => {
+//     fetchProfile();
+//     fetchProductById(id);
+//   }, [fetchProfile]);
+
+//   useEffect(() => {
+//     if (id) {
+//       fetchProductById(id); // Fetch product based on the ID from the URL
+//     }
+
+//     setError(null);
+//   }, [id, fetchProductById]);
+
+//   useEffect(() => {
+//     document.title = "Page-Product-" + selectedProduct.name; // Set document title on component mount
+//   }, []);
+
+//   const countPlus = () => {
+//     setCount(count + 1);
+//   };
+
+//   const countMinus = () => {
+//     if (count > 1) {
+//       setCount((prevCount) => Math.max(prevCount - 1, 0));
+//     }
+//   };
+
+//   const handdleError = setTimeout(() => {
+//     setError(null);
+//   }, 5000);
+
+//   useEffect(() => {
+//     if (error) {
+//       handdleError;
+//     } else {
+//       setError(null);
+//     }
+//   }, [error]);
+
+//   const selectedProduct = product ? product?.products : null;
+//   useEffect(() => {
+//     if (selectedProduct.length < 1) {
+//       fetchProductById(id);
+//     }
+//   });
+
+//   // const
+
+//   const handleRentalNow = async () => {
+//     // Hitung total harga
+//     const totalPrice = count * selectedProduct.price;
+
+//     // Data order yang akan dikirim
+//     const orderData = {
+//       quantity: count,
+//       product_id: id,
+//       size: activeSize,
+//       rental_start: selectedStartDate,
+//       rental_end: selectedEndDate,
+//       total_price: totalPrice,
+//       status: "Belum",
+//     };
+
+//     // const navigate = useNavigate();
+
+//     // console.log(orderData);
+//     if (profile.phone == null) {
+//       alert("Silahkan isikan nomor handphone terlebih dahulu");
+//     } else {
+//       try {
+//         await createOrder(orderData); // Panggil fungsi createOrder
+//         if (isOrder) {
+//           setIsOrder(false);
+//           // window.location.href = "/history";
+//         }
+//       } catch (error) {
+//         // console.log(error);
+//       }
+//     }
+//   };
+//   const rupiah = (number) => {
+//     return new Intl.NumberFormat("id-ID", {
+//       style: "currency",
+//       currency: "IDR",
+//     }).format(number);
+//   };
+
+//   if (!selectedProduct) {
+//     return (
+//       <div className="flex justify-center items-center h-[500px]">
+//         <p className="text-4xl font-cerotta ">Loading...</p>;
+//       </div>
+//     );
+//   }
+
+//   if (loading) {
+//     return (
+//       <div className="flex justify-center items-center h-[500px]">
+//         <p className="text-4xl font-cerotta ">Loading...</p>;
+//       </div>
+//     );
+//   }
+
+//   if (!selectedProduct || loading || loadingorder) {
+//     return (
+//       <div className="flex justify-center items-center h-[500px]">
+//         <p className="text-4xl font-cerotta">Loading...</p>
+//       </div>
+//     );
+//   }
+
 import React, { useEffect, useState } from "react";
 import { CiHeart } from "react-icons/ci";
 import SectionComment from "../Components/ProductComponents/SectionComment";
@@ -10,46 +152,24 @@ export default function CategoryPage() {
   const [count, setCount] = useState(1);
   const [selectedStartDate, setSelectedStartDate] = useState("");
   const [selectedEndDate, setSelectedEndDate] = useState("");
-  const { fetchProductById, product, products, loading } =
-    useProductManagementStore();
-
-  // const [selectedProduct, setSelectedProduct] = useState(null);
+  const { fetchProductById, product, loading } = useProductManagementStore();
 
   const { profile, fetchProfile } = useProfileStore();
   const { id } = useParams();
-  const [activeSize, setActiveSize] = useState(null); // State untuk menyimpan ukuran yang dipilih
+  const [activeSize, setActiveSize] = useState(null);
   const { createOrder, isOrder, error, setIsOrder, setError, loadingorder } =
     useOrderManagementStore();
-
-  const handleSizeClick = (size) => {
-    setActiveSize(size); // Menyetel ukuran yang dipilih sebagai active
-  };
-
-  // const selectedProduct = products
-  //   ? products.find((product) => product.id == id)
-  //   : null;
 
   useEffect(() => {
     fetchProfile();
     fetchProductById(id);
-  }, [fetchProfile]);
+  }, [fetchProfile, fetchProductById, id]);
 
   useEffect(() => {
-    if (id) {
-      fetchProductById(id); // Fetch product based on the ID from the URL
-    }
+    document.title = `Page-Product-${product?.name || "Loading..."}`;
+  }, [product]);
 
-    setError(null);
-  }, [id, fetchProductById]);
-
-  const selectedProduct = product ? product?.products : null;
-  useEffect(() => {
-    document.title = "Page-Product-" + selectedProduct.name; // Set document title on component mount
-  }, []);
-
-  const countPlus = () => {
-    setCount(count + 1);
-  };
+  const countPlus = () => setCount(count + 1);
 
   const countMinus = () => {
     if (count > 1) {
@@ -57,30 +177,21 @@ export default function CategoryPage() {
     }
   };
 
-  const handdleError = setTimeout(() => {
-    setError(null);
-  }, 5000);
+  const handleSizeClick = (size) => setActiveSize(size);
 
   useEffect(() => {
     if (error) {
-      handdleError;
-    } else {
-      setError(null);
+      const timer = setTimeout(() => setError(null), 5000);
+      return () => clearTimeout(timer);
     }
-  }, [error]);
-  useEffect(() => {
-    if (selectedProduct.length < 1) {
-      fetchProductById(id);
-    }
-  }, [product]);
+  }, [error, setError]);
 
-  // const
+  const selectedProduct = product ? product?.products : null;
 
   const handleRentalNow = async () => {
-    // Hitung total harga
-    const totalPrice = count * selectedProduct.price;
+    if (!selectedProduct) return;
 
-    // Data order yang akan dikirim
+    const totalPrice = count * selectedProduct.price;
     const orderData = {
       quantity: count,
       product_id: id,
@@ -91,45 +202,26 @@ export default function CategoryPage() {
       status: "Belum",
     };
 
-    // const navigate = useNavigate();
-
-    // console.log(orderData);
-    if (profile.phone == null) {
+    if (!profile.phone) {
       alert("Silahkan isikan nomor handphone terlebih dahulu");
     } else {
       try {
-        await createOrder(orderData); // Panggil fungsi createOrder
+        await createOrder(orderData);
         if (isOrder) {
           setIsOrder(false);
-          // window.location.href = "/history";
         }
       } catch (error) {
-        // console.log(error);
+        console.error(error);
       }
     }
   };
+
   const rupiah = (number) => {
     return new Intl.NumberFormat("id-ID", {
       style: "currency",
       currency: "IDR",
     }).format(number);
   };
-
-  if (!selectedProduct) {
-    return (
-      <div className="flex justify-center items-center h-[500px]">
-        <p className="text-4xl font-cerotta ">Loading...</p>;
-      </div>
-    );
-  }
-
-  if (loading) {
-    return (
-      <div className="flex justify-center items-center h-[500px]">
-        <p className="text-4xl font-cerotta ">Loading...</p>;
-      </div>
-    );
-  }
 
   if (!selectedProduct || loading || loadingorder) {
     return (
