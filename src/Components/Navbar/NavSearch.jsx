@@ -32,7 +32,7 @@ export default function NavSearch() {
           value={search}
           onChange={(e) => setSearch(e.target.value)}
           className=" bg-transparent text-[10px] md:text-[20px] placeholder:text-white focus:outline-none focus:ring-0"
-          type="text"
+          type="search"
           onKeyDown={(e) => {
             if (e.key === "Enter") {
               handdleSearch();

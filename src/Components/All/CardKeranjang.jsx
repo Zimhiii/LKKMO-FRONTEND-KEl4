@@ -10,6 +10,7 @@ export default function CardKeranjang({
   product_id,
   price,
   size,
+  quantity,
   total_price,
   key,
   order_id,
@@ -92,13 +93,24 @@ export default function CardKeranjang({
             {selectedProduct?.name}
           </h1>
           <div className="text-[6px] md:text-[14px] text-[#000000] text-opacity-70 flex flex-col gap-[10px]">
-            <h2 className="">
-              Ukuran :{" "}
-              <span className="text-[#000000] text-opacity-50">{size}</span>{" "}
-            </h2>
+            <div className="flex gap-4">
+              <h2 className="">
+                Ukuran :{" "}
+                <span className="text-[#000000] text-opacity-50">{size}</span>{" "}
+              </h2>
+              <h2 className="">
+                Jumlah :{" "}
+                <span className="text-[#000000] text-opacity-50">
+                  {quantity}
+                </span>{" "}
+              </h2>
+            </div>
 
             <h2 className="text-[8px] md:text-[20px] font-semibold ">
               {rupiah(selectedProduct?.price)} / hari
+            </h2>
+            <h2 className="text-[8px] md:text-[20px] font-semibold ">
+              Total Price : {rupiah(total_price)}
             </h2>
             <h2 className="text-[8px] md:text-[20px] font-semibold ">
               Rental Start : {rental_start}

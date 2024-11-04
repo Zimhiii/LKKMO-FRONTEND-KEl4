@@ -3,6 +3,7 @@ import { CiHeart } from "react-icons/ci";
 import { BiSolidCart } from "react-icons/bi";
 import { Link, useNavigate } from "react-router-dom";
 import useWishlistStore from "../../stores/wishlistManagementStore";
+import useProductManagementStore from "../../stores/productManagementStore";
 
 export default function CardItem({
   classname = "",
@@ -17,6 +18,58 @@ export default function CardItem({
 }) {
   const { addToWishlist, removeFromWishlist, wishlist, fetchWishlist } =
     useWishlistStore();
+
+  // const { product, fetchProductById, loading } = useProductManagementStore();
+
+  // useEffect(() => {
+  //   fetchProductById(id);
+  // }, [fetchProductById, id]);
+  const [product, setProduct] = useState(null); // State untuk menyimpan data produk
+  const [loading, setLoading] = useState(true);
+
+  const token = localStorage.getItem("token");
+
+  useEffect(() => {
+    const fetchProduct = async () => {
+      try {
+        setLoading(true);
+        const response = await fetch(
+          `https://lkkmo-backend-production-3ab2.up.railway.app/api/v1/products/${id}`,
+          {
+            method: "GET",
+            headers: {
+              Authorization: `Bearer ${token}`, // Menambahkan token di sini
+              "Content-Type": "application/json",
+            },
+          }
+        );
+        const data = await response.json();
+        setProduct(data); // Menyimpan data produk di state
+      } catch (error) {
+        console.error("Error fetching product:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchProduct();
+  }, [id]);
+
+  const selectedProduct = product ? product.products : {};
+
+  const sumRating = selectedProduct?.reviews
+    ? selectedProduct.reviews.reduce(
+        (acc, review) => acc + (review.rating || 0),
+        0
+      )
+    : 0;
+
+  // Menghitung rata-rata rating
+  const avgRating =
+    selectedProduct?.reviews && selectedProduct.reviews.length > 0
+      ? parseFloat((sumRating / selectedProduct.reviews.length).toFixed(1))
+      : 0;
+
   const navigate = useNavigate();
 
   const [isProductInWishlist, setIsProductInWishlist] = useState(false);
@@ -76,6 +129,10 @@ export default function CardItem({
     return text.length > maxLength ? text.slice(0, maxLength) + "..." : text;
   }
 
+  // if (loading || !selectedProduct) {
+  //   return <div>Loading...</div>;
+  // }
+
   return (
     <div
       typeof="button"
@@ -119,10 +176,11 @@ export default function CardItem({
         </div>
         <div className="relative font-montserrat text-[10px] md:text-[20px]">
           <h2 className="font-semibold">{truncateText(name, 13)}</h2>
-          <div className="flex gap-2">
-            <span>⭐⭐⭐⭐⭐</span>
+          <div className="flex gap-2 items-center">
+            <span>⭐</span>
             <p className="md:text-[15px]">
-              5/<span className="text-[#000000] text-opacity-60">5</span>
+              {loading ? "..." : selectedProduct?.rating ? avgRating : 0}/
+              <span className="text-[#000000] text-opacity-60">5</span>
             </p>
           </div>
           <h2 className="text-[#000000] md:text-[17px] text-opacity-60 font-semibold">

@@ -37,7 +37,7 @@ export default function HeroBody() {
         <div className="w-full flex justify-center items-center mt-[42px]">
           <Link
             to="/allproduct"
-            className="px-6 py-2 mb-[45px] md:text-[16px] bg-[#BB8360] rounded-lg text-[#255255255] font-normal font-montserrat text-[13px] shadow-md shadow-slate-400 hover:bg-[#a97758] hover:text-white transition-all duration-100 hover:ring-1 hover:ring-[#BB8360] active:bg-white active:text-[#BB8360] active:ring-1 active:ring-[#BB8360]"
+            className="px-6 py-2 mb-[45px] md:text-[16px] bg-[#BB8360] rounded-lg text-[#ffffff] font-normal font-montserrat text-[13px] shadow-md shadow-slate-400 hover:bg-[#a97758] hover:text-white transition-all hover:ring-0 duration-100 hover:ring-[#BB8360] active:bg-white active:text-[#BB8360] active:ring-1 active:ring-[#BB8360]"
           >
             Sewa Sekarang
           </Link>

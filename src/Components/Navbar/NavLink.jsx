@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { FaCaretRight } from "react-icons/fa";
 import { useLoginStore } from "../../Store/stored";
 import { useAuthUserStore } from "../../stores/authStore";
@@ -47,7 +47,7 @@ export default function NavLinkComponent() {
             <FaCaretRight className="text-[25px] group-hover:rotate-90 transition-all duration-300" />
           </div>
 
-          <div className="bg-[#D6D6D6] text-[20px] ring-1 ring-slate-950 hidden absolute z-99 group-hover:flex group-hover:flex-col group-hover:gap-[2px] shadow-md shadow-slate-400 w-[200px]">
+          <div className="bg-[#D6D6D6] text-[20px] ring-1 ring-slate-950 hidden absolute z-99 group-hover:flex group-hover:flex-col group-hover:gap-[2px] shadow-md shadow-slate-400 w-[250px]">
             {categories[0]?.map((category) => (
               <NavLink
                 to={`/category/${category.name.toLowerCase()}`}
@@ -63,6 +63,21 @@ export default function NavLinkComponent() {
                 </div>
               </NavLink>
             ))}
+
+            {!categories[0] && (
+              <div className="py-[5px] px-[5px]">
+                <p>
+                  Tidak ada kategori, Silahkan
+                  <Link
+                    className="text-[#BB8360] font-medium hover:text-black"
+                    to="/login"
+                  >
+                    Login
+                  </Link>
+                  Terlebih dahulu
+                </p>
+              </div>
+            )}
             {/* <NavLink
               to="/category/cosplay"
               className={({ isActive }) =>

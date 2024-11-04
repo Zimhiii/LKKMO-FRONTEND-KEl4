@@ -3,7 +3,7 @@ import HeroBody from "./HeroBody";
 
 export default function Hero() {
   return (
-    <div className="bg-[#F2F2F2] w-full md:rounded-b-[80px] mb-[35px] md:mb-[80px]">
+    <div className="bg-[#F2F2F2] w-full md:rounded-b-[80px] mb-[35px] md:mb-[80px] shadow-[0px_4px_30px_rgba(0,0,0,0.25)]">
       <div className="w-full flex  justify-center items-center rounded-b-md">
         <div className="w-7/12 flex flex-col items-center ">
           <h1 className="text-[16px] lg:text-[53px] md:text-[43px] font-cerotta">

@@ -187,18 +187,42 @@ export default function CategoryPage() {
   }, [error, setError]);
 
   const selectedProduct = product ? product?.products : null;
+  const handleStartDateChange = (e) => {
+    const startDate = e.target.value;
+    setSelectedStartDate(startDate);
+
+    // Set tanggal minimum untuk tanggal akhir agar tidak sebelum tanggal awal
+    if (selectedEndDate < startDate) {
+      setSelectedEndDate(""); // reset end date jika sudah dipilih sebelumnya
+    }
+  };
+
+  const handleEndDateChange = (e) => {
+    setSelectedEndDate(e.target.value);
+  };
+
+  const rupiah = (number) => {
+    return new Intl.NumberFormat("id-ID", {
+      style: "currency",
+      currency: "IDR",
+    }).format(number);
+  };
 
   const handleRentalNow = async () => {
     if (!selectedProduct) return;
 
-    const totalPrice = count * selectedProduct.price;
+    const totalPrice =
+      count *
+      ((selectedProduct.price *
+        (new Date(selectedEndDate) - new Date(selectedStartDate))) /
+        (1000 * 60 * 60 * 24));
     const orderData = {
       quantity: count,
       product_id: id,
       size: activeSize,
       rental_start: selectedStartDate,
       rental_end: selectedEndDate,
-      total_price: totalPrice,
+      total_price: totalPrice, // Menggunakan fungsi rupiah untuk menghitung totalPrice,
       status: "Belum",
     };
 
@@ -216,12 +240,19 @@ export default function CategoryPage() {
     }
   };
 
-  const rupiah = (number) => {
-    return new Intl.NumberFormat("id-ID", {
-      style: "currency",
-      currency: "IDR",
-    }).format(number);
-  };
+  // Menghitung total rating
+  const sumRating = selectedProduct?.reviews
+    ? selectedProduct.reviews.reduce(
+        (acc, review) => acc + (review.rating || 0),
+        0
+      )
+    : 0;
+
+  // Menghitung rata-rata rating
+  const avgRating =
+    selectedProduct?.reviews && selectedProduct.reviews.length > 0
+      ? parseFloat((sumRating / selectedProduct.reviews.length).toFixed(1))
+      : 0;
 
   if (!selectedProduct || loading || loadingorder) {
     return (
@@ -258,12 +289,17 @@ export default function CategoryPage() {
               </h1>
               <p>
                 <span className="text-[7px] md:text-[12px] ">
-                  4.5/ <span className="opacity-60 md:text-[12px]">5</span>{" "}
+                  {avgRating} /{" "}
+                  <span className="opacity-60 md:text-[12px]">5</span>{" "}
                 </span>
 
                 <span className="text-[6px] opacity-60 md:text-[12px]">
                   {" "}
-                  (20 Tanggapan){" "}
+                  (
+                  {selectedProduct.reviews <= 0
+                    ? 0
+                    : selectedProduct.reviews.length}{" "}
+                  Tanggapan){" "}
                 </span>
 
                 <span className="text-[6px] text-[#00C838] md:text-[12px]">
@@ -382,7 +418,7 @@ export default function CategoryPage() {
                 </div>
               </div>
               {/* Tambahkan input tanggal di sini */}
-              <div className="mt-4">
+              {/* <div className="mt-4">
                 <label className="text-[12px] md:text-[18px] font-semibold">
                   Pilih Tanggal Awal:
                 </label>
@@ -402,6 +438,33 @@ export default function CategoryPage() {
                   type="date"
                   value={selectedEndDate}
                   onChange={(e) => setSelectedEndDate(e.target.value)}
+                  className="ml-2 px-2 py-1 border border-gray-300 rounded cursor-pointer"
+                  required
+                />
+              </div> */}
+
+              <div className="mt-4">
+                <label className="text-[12px] md:text-[18px] font-semibold">
+                  Pilih Tanggal Awal:
+                </label>
+                <input
+                  type="date"
+                  min={new Date().toISOString().split("T")[0]} // Set tanggal minimal sebagai hari ini
+                  value={selectedStartDate}
+                  onChange={handleStartDateChange}
+                  className="ml-2 px-2 py-1 border border-gray-300 rounded cursor-pointer"
+                  required
+                />
+              </div>
+              <div className="mt-4">
+                <label className="text-[12px] md:text-[18px] font-semibold">
+                  Pilih Tanggal Akhir:
+                </label>
+                <input
+                  type="date"
+                  min={selectedStartDate} // Set tanggal minimum untuk tanggal akhir
+                  value={selectedEndDate}
+                  onChange={handleEndDateChange}
                   className="ml-2 px-2 py-1 border border-gray-300 rounded cursor-pointer"
                   required
                 />
@@ -479,7 +542,7 @@ export default function CategoryPage() {
           <SectionComment /> */}
         </div>
 
-        {/* <button onClick={() => console.log(profile)}>debugging</button> */}
+        {/* <button onClick={() => console.log(selectedProduct)}>debugging</button> */}
       </div>
     </div>
   );

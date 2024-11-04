@@ -111,6 +111,7 @@ export default function HistoryPage() {
                 product_id={order.product_id}
                 price={order.price}
                 size={order.size}
+                quantity={order.quantity}
                 total_price={order.total_price}
                 key={order.id}
                 order_id={order.id}
